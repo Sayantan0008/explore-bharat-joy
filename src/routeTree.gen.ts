@@ -9,38 +9,263 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StatesRouteImport } from './routes/states'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SearchRouteImport } from './routes/search'
+import { Route as FoodsRouteImport } from './routes/foods'
+import { Route as FestivalsRouteImport } from './routes/festivals'
+import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as StatesSlugRouteImport } from './routes/states.$slug'
+import { Route as InterestsSlugRouteImport } from './routes/interests.$slug'
+import { Route as FoodsSlugRouteImport } from './routes/foods.$slug'
+import { Route as FestivalsSlugRouteImport } from './routes/festivals.$slug'
+import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
 
+const StatesRoute = StatesRouteImport.update({
+  id: '/states',
+  path: '/states',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodsRoute = FoodsRouteImport.update({
+  id: '/foods',
+  path: '/foods',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FestivalsRoute = FestivalsRouteImport.update({
+  id: '/festivals',
+  path: '/festivals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsRoute = DestinationsRouteImport.update({
+  id: '/destinations',
+  path: '/destinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatesSlugRoute = StatesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => StatesRoute,
+} as any)
+const InterestsSlugRoute = InterestsSlugRouteImport.update({
+  id: '/interests/$slug',
+  path: '/interests/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodsSlugRoute = FoodsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FoodsRoute,
+} as any)
+const FestivalsSlugRoute = FestivalsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => FestivalsRoute,
+} as any)
+const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => DestinationsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/destinations': typeof DestinationsRouteWithChildren
+  '/festivals': typeof FestivalsRouteWithChildren
+  '/foods': typeof FoodsRouteWithChildren
+  '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/states': typeof StatesRouteWithChildren
+  '/destinations/$slug': typeof DestinationsSlugRoute
+  '/festivals/$slug': typeof FestivalsSlugRoute
+  '/foods/$slug': typeof FoodsSlugRoute
+  '/interests/$slug': typeof InterestsSlugRoute
+  '/states/$slug': typeof StatesSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/destinations': typeof DestinationsRouteWithChildren
+  '/festivals': typeof FestivalsRouteWithChildren
+  '/foods': typeof FoodsRouteWithChildren
+  '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/states': typeof StatesRouteWithChildren
+  '/destinations/$slug': typeof DestinationsSlugRoute
+  '/festivals/$slug': typeof FestivalsSlugRoute
+  '/foods/$slug': typeof FoodsSlugRoute
+  '/interests/$slug': typeof InterestsSlugRoute
+  '/states/$slug': typeof StatesSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/destinations': typeof DestinationsRouteWithChildren
+  '/festivals': typeof FestivalsRouteWithChildren
+  '/foods': typeof FoodsRouteWithChildren
+  '/search': typeof SearchRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/states': typeof StatesRouteWithChildren
+  '/destinations/$slug': typeof DestinationsSlugRoute
+  '/festivals/$slug': typeof FestivalsSlugRoute
+  '/foods/$slug': typeof FoodsSlugRoute
+  '/interests/$slug': typeof InterestsSlugRoute
+  '/states/$slug': typeof StatesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/destinations'
+    | '/festivals'
+    | '/foods'
+    | '/search'
+    | '/sitemap.xml'
+    | '/states'
+    | '/destinations/$slug'
+    | '/festivals/$slug'
+    | '/foods/$slug'
+    | '/interests/$slug'
+    | '/states/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/destinations'
+    | '/festivals'
+    | '/foods'
+    | '/search'
+    | '/sitemap.xml'
+    | '/states'
+    | '/destinations/$slug'
+    | '/festivals/$slug'
+    | '/foods/$slug'
+    | '/interests/$slug'
+    | '/states/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/destinations'
+    | '/festivals'
+    | '/foods'
+    | '/search'
+    | '/sitemap.xml'
+    | '/states'
+    | '/destinations/$slug'
+    | '/festivals/$slug'
+    | '/foods/$slug'
+    | '/interests/$slug'
+    | '/states/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DestinationsRoute: typeof DestinationsRouteWithChildren
+  FestivalsRoute: typeof FestivalsRouteWithChildren
+  FoodsRoute: typeof FoodsRouteWithChildren
+  SearchRoute: typeof SearchRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  StatesRoute: typeof StatesRouteWithChildren
+  InterestsSlugRoute: typeof InterestsSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/states': {
+      id: '/states'
+      path: '/states'
+      fullPath: '/states'
+      preLoaderRoute: typeof StatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/foods': {
+      id: '/foods'
+      path: '/foods'
+      fullPath: '/foods'
+      preLoaderRoute: typeof FoodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/festivals': {
+      id: '/festivals'
+      path: '/festivals'
+      fullPath: '/festivals'
+      preLoaderRoute: typeof FestivalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations': {
+      id: '/destinations'
+      path: '/destinations'
+      fullPath: '/destinations'
+      preLoaderRoute: typeof DestinationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +273,100 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/states/$slug': {
+      id: '/states/$slug'
+      path: '/$slug'
+      fullPath: '/states/$slug'
+      preLoaderRoute: typeof StatesSlugRouteImport
+      parentRoute: typeof StatesRoute
+    }
+    '/interests/$slug': {
+      id: '/interests/$slug'
+      path: '/interests/$slug'
+      fullPath: '/interests/$slug'
+      preLoaderRoute: typeof InterestsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/foods/$slug': {
+      id: '/foods/$slug'
+      path: '/$slug'
+      fullPath: '/foods/$slug'
+      preLoaderRoute: typeof FoodsSlugRouteImport
+      parentRoute: typeof FoodsRoute
+    }
+    '/festivals/$slug': {
+      id: '/festivals/$slug'
+      path: '/$slug'
+      fullPath: '/festivals/$slug'
+      preLoaderRoute: typeof FestivalsSlugRouteImport
+      parentRoute: typeof FestivalsRoute
+    }
+    '/destinations/$slug': {
+      id: '/destinations/$slug'
+      path: '/$slug'
+      fullPath: '/destinations/$slug'
+      preLoaderRoute: typeof DestinationsSlugRouteImport
+      parentRoute: typeof DestinationsRoute
+    }
   }
 }
 
+interface DestinationsRouteChildren {
+  DestinationsSlugRoute: typeof DestinationsSlugRoute
+}
+
+const DestinationsRouteChildren: DestinationsRouteChildren = {
+  DestinationsSlugRoute: DestinationsSlugRoute,
+}
+
+const DestinationsRouteWithChildren = DestinationsRoute._addFileChildren(
+  DestinationsRouteChildren,
+)
+
+interface FestivalsRouteChildren {
+  FestivalsSlugRoute: typeof FestivalsSlugRoute
+}
+
+const FestivalsRouteChildren: FestivalsRouteChildren = {
+  FestivalsSlugRoute: FestivalsSlugRoute,
+}
+
+const FestivalsRouteWithChildren = FestivalsRoute._addFileChildren(
+  FestivalsRouteChildren,
+)
+
+interface FoodsRouteChildren {
+  FoodsSlugRoute: typeof FoodsSlugRoute
+}
+
+const FoodsRouteChildren: FoodsRouteChildren = {
+  FoodsSlugRoute: FoodsSlugRoute,
+}
+
+const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
+
+interface StatesRouteChildren {
+  StatesSlugRoute: typeof StatesSlugRoute
+}
+
+const StatesRouteChildren: StatesRouteChildren = {
+  StatesSlugRoute: StatesSlugRoute,
+}
+
+const StatesRouteWithChildren =
+  StatesRoute._addFileChildren(StatesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DestinationsRoute: DestinationsRouteWithChildren,
+  FestivalsRoute: FestivalsRouteWithChildren,
+  FoodsRoute: FoodsRouteWithChildren,
+  SearchRoute: SearchRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  StatesRoute: StatesRouteWithChildren,
+  InterestsSlugRoute: InterestsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
