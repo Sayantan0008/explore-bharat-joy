@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { MapPin, ExternalLink } from "lucide-react";
+import type { InterestSlug } from "@/lib/constants";
 import { Container } from "@/components/layout/Container";
 import { SmartImage } from "@/components/media/SmartImage";
 import { DestinationCard } from "@/components/cards/Cards";
@@ -135,7 +136,7 @@ function DestinationDetail() {
             <div className="rounded-2xl border border-border bg-card p-5">
               <div className="text-xs uppercase tracking-wider text-muted-foreground">Interests</div>
               <div className="mt-2 flex flex-wrap gap-1.5">
-                {dest.interests.map((i: string) => (
+                {(dest.interests as InterestSlug[]).map((i) => (
                   <Link
                     key={i}
                     to="/interests/$slug"
