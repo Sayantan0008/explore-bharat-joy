@@ -1,0 +1,100 @@
+import type { Festival } from "@/content/types";
+
+export const FESTIVALS: Festival[] = [
+  // Rajasthan
+  { id: "fest-pushkar-fair", slug: "pushkar-camel-fair", name: "Pushkar Camel Fair", stateSlug: "rajasthan", month: "November", type: "Cultural", image: "", featured: true,
+    description: "A week-long livestock fair turned music festival in the desert outside Pushkar.",
+    significance: "Once purely a trading event for camels, horses and cattle, it now draws international visitors for the folk music, balloon rides and full-moon bathing at the sacred lake." },
+  { id: "fest-teej", slug: "teej", name: "Teej", stateSlug: "rajasthan", month: "August", type: "Religious", image: "",
+    description: "A monsoon festival of swings, henna and processions celebrating the goddess Parvati.",
+    significance: "Married women fast for marital happiness; Jaipur's royal Teej procession winds through the old city." },
+  { id: "fest-gangaur", slug: "gangaur", name: "Gangaur", stateSlug: "rajasthan", month: "April", type: "Religious", image: "",
+    description: "An 18-day spring festival honouring Gauri, the consort of Shiva.",
+    significance: "Particularly grand in Udaipur, where idols are taken on boat processions across Lake Pichola." },
+  { id: "fest-desert-festival", slug: "jaisalmer-desert-festival", name: "Jaisalmer Desert Festival", stateSlug: "rajasthan", month: "February", type: "Cultural", image: "",
+    description: "Three days of camel races, turban-tying contests and folk music in the Thar.",
+    significance: "Held under a full moon on the dunes at Sam, with Manganiar musicians and a sunset concert." },
+
+  // Kerala
+  { id: "fest-onam", slug: "onam", name: "Onam", stateSlug: "kerala", month: "September", type: "Harvest", image: "", featured: true,
+    description: "Kerala's biggest festival — ten days of flower carpets, snake-boat races and the elaborate sadya feast.",
+    significance: "Commemorates the mythical homecoming of the just king Mahabali; celebrated across all religions." },
+  { id: "fest-thrissur-pooram", slug: "thrissur-pooram", name: "Thrissur Pooram", stateSlug: "kerala", month: "April", type: "Religious", image: "",
+    description: "A grand temple festival with 30 caparisoned elephants, percussion ensembles and an all-night fireworks display.",
+    significance: "Considered the 'mother of all poorams' — Kerala's most spectacular temple event." },
+  { id: "fest-theyyam", slug: "theyyam", name: "Theyyam Season", stateSlug: "kerala", month: "December", type: "Religious", image: "",
+    description: "Trance-based ritual performances in northern Kerala where dancers become living deities.",
+    significance: "Performed in family shrines from December to April; a rare living folk tradition over 1,500 years old." },
+
+  // Goa
+  { id: "fest-carnival", slug: "goa-carnival", name: "Goa Carnival", stateSlug: "goa", month: "February", type: "Cultural", image: "", featured: true,
+    description: "Four days of parades, floats and street dancing led by King Momo through Panaji and other towns.",
+    significance: "A Portuguese-era pre-Lenten festival, the only one of its kind in India." },
+  { id: "fest-sao-joao", slug: "sao-joao", name: "São João", stateSlug: "goa", month: "June", type: "Religious", image: "",
+    description: "The feast of St John the Baptist, celebrated by jumping into wells and ponds with flower crowns.",
+    significance: "A monsoon Catholic festival unique to Goa, with feni-fuelled parties in villages like Siolim." },
+  { id: "fest-shigmo", slug: "shigmo", name: "Shigmo", stateSlug: "goa", month: "March", type: "Cultural", image: "",
+    description: "Goa's spring festival of folk dance troupes and colour, the Hindu counterpart to Carnival.",
+    significance: "Float parades and traditional dances like Ghode Modni run through villages and towns for two weeks." },
+
+  // West Bengal
+  { id: "fest-durga-puja", slug: "durga-puja", name: "Durga Puja", stateSlug: "west-bengal", month: "October", type: "Religious", image: "", featured: true,
+    description: "Five days during which Kolkata becomes one giant open-air gallery of themed pandals.",
+    significance: "UNESCO-recognised intangible cultural heritage. Hundreds of community pandals (puja themes range from political to abstract art) draw millions." },
+  { id: "fest-poush-mela", slug: "poush-mela", name: "Poush Mela", stateSlug: "west-bengal", month: "December", type: "Cultural", image: "",
+    description: "A three-day winter fair in Shantiniketan, mixing Baul folk music with tribal craft.",
+    significance: "Started by Tagore's father in 1894 to celebrate the spirit of universal brotherhood." },
+  { id: "fest-rath-yatra", slug: "rath-yatra-mahesh", name: "Mahesh Rath Yatra", stateSlug: "west-bengal", month: "July", type: "Religious", image: "",
+    description: "India's second-oldest chariot festival, held at Mahesh near Serampore for over 600 years.",
+    significance: "An immense wooden chariot carrying Jagannath is hauled through the streets by thousands of devotees." },
+  { id: "fest-kali-puja", slug: "kali-puja", name: "Kali Puja", stateSlug: "west-bengal", month: "October", type: "Religious", image: "",
+    description: "Bengal's distinctive Diwali — the night honours the goddess Kali rather than Lakshmi.",
+    significance: "Kalighat temple in Kolkata sees all-night queues; firecrackers light up the city skyline." },
+
+  // Himachal
+  { id: "fest-kullu-dussehra", slug: "kullu-dussehra", name: "Kullu Dussehra", stateSlug: "himachal-pradesh", month: "October", type: "Religious", image: "", featured: true,
+    description: "A week-long international festival starting the day mainland India's Dussehra ends.",
+    significance: "Over 200 village deities are carried in palanquins to Kullu's Dhalpur ground to pay respects to Lord Raghunath." },
+  { id: "fest-losar", slug: "losar", name: "Losar", stateSlug: "himachal-pradesh", month: "February", type: "Religious", image: "",
+    description: "Tibetan and Spitian New Year, celebrated for three days with monastery dances and family feasts.",
+    significance: "Marks the new lunar year for Tibetan Buddhist communities; most visible in Spiti, Lahaul and Dharamshala." },
+  { id: "fest-shivratri-mandi", slug: "mandi-shivratri", name: "Mandi Shivratri Fair", stateSlug: "himachal-pradesh", month: "March", type: "Religious", image: "",
+    description: "A week-long international fair where over 200 deities are carried into Mandi to greet Lord Madho Rai.",
+    significance: "Recognised as one of India's grandest international fairs." },
+
+  // Tamil Nadu
+  { id: "fest-pongal", slug: "pongal", name: "Pongal", stateSlug: "tamil-nadu", month: "January", type: "Harvest", image: "", featured: true,
+    description: "Four-day Tamil harvest festival ending with cattle-honouring Mattu Pongal.",
+    significance: "The most important non-religious festival in Tamil Nadu, marking the sun's transition into Capricorn." },
+  { id: "fest-chithirai", slug: "chithirai-festival", name: "Chithirai Festival", stateSlug: "tamil-nadu", month: "April", type: "Religious", image: "",
+    description: "A 12-day Madurai temple festival re-enacting the celestial wedding of Meenakshi and Lord Sundareswarar.",
+    significance: "One of India's largest temple festivals — millions converge on Madurai." },
+  { id: "fest-natyanjali", slug: "natyanjali", name: "Natyanjali Dance Festival", stateSlug: "tamil-nadu", month: "February", type: "Cultural", image: "",
+    description: "Five days of Bharatanatyam, Odissi and Kathak performances at the Chidambaram Nataraja temple.",
+    significance: "Dancers consider performing here a once-in-a-lifetime devotional offering to Shiva as the cosmic dancer." },
+  { id: "fest-music-season", slug: "chennai-music-season", name: "Chennai Music Season", stateSlug: "tamil-nadu", month: "December", type: "Cultural", image: "",
+    description: "December–January concerts across hundreds of Chennai sabhas: the largest classical-music festival in the world.",
+    significance: "Carnatic music and Bharatanatyam, plus the legendary 'canteen circuit' at the venues." },
+
+  // Maharashtra
+  { id: "fest-ganesh-chaturthi", slug: "ganesh-chaturthi", name: "Ganesh Chaturthi", stateSlug: "maharashtra", month: "September", type: "Religious", image: "", featured: true,
+    description: "Ten-day festival when Mumbai installs millions of Ganesha idols at home and in public mandals.",
+    significance: "Public celebration revived by Lokmanya Tilak as a unifying movement during the freedom struggle. Visarjan day at Girgaum Chowpatty is unforgettable." },
+  { id: "fest-pandharpur-wari", slug: "pandharpur-wari", name: "Pandharpur Wari", stateSlug: "maharashtra", month: "July", type: "Religious", image: "",
+    description: "A 21-day pilgrimage on foot from Alandi/Dehu to Pandharpur — hundreds of thousands of warkaris walk together.",
+    significance: "One of India's oldest unbroken religious processions, sustained for over 800 years." },
+  { id: "fest-gudi-padwa", slug: "gudi-padwa", name: "Gudi Padwa", stateSlug: "maharashtra", month: "April", type: "Religious", image: "",
+    description: "Marathi New Year — bamboo gudis with brocade flags raised at every home, plus a famous Girgaum bike rally.",
+    significance: "Marks the start of the Hindu lunar new year and the spring harvest." },
+
+  // Uttar Pradesh
+  { id: "fest-kumbh-mela", slug: "kumbh-mela-prayagraj", name: "Kumbh Mela", stateSlug: "uttar-pradesh", month: "January", type: "Religious", image: "", featured: true,
+    description: "Held every 12 years at Prayagraj, the world's largest religious gathering.",
+    significance: "Tens of millions bathe at the Sangam — the confluence of the Ganga, Yamuna and mythical Saraswati." },
+  { id: "fest-dev-deepawali", slug: "dev-deepawali", name: "Dev Deepawali", stateSlug: "uttar-pradesh", month: "November", type: "Religious", image: "",
+    description: "Fifteen days after Diwali, Varanasi lights every step of every ghat with diyas.",
+    significance: "The 'Diwali of the Gods' — a single evening when the entire Ganges riverfront glows." },
+  { id: "fest-lath-mar-holi", slug: "lath-mar-holi", name: "Lath Mar Holi", stateSlug: "uttar-pradesh", month: "March", type: "Cultural", image: "",
+    description: "The Holi played at Barsana and Nandgaon, where women playfully beat men with bamboo sticks.",
+    significance: "A re-enactment of Radha's playful response to Krishna's teasing — held a week before mainstream Holi." },
+];
