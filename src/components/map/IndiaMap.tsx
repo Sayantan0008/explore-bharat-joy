@@ -216,8 +216,8 @@ export function IndiaMap() {
               <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodOpacity="0.18" />
             </filter>
             <radialGradient id="state-fill" cx="50%" cy="40%" r="80%">
-              <stop offset="0%" stopColor="hsl(var(--card))" />
-              <stop offset="100%" stopColor="hsl(var(--secondary))" />
+              <stop offset="0%" stopColor="var(--card)" />
+              <stop offset="100%" stopColor="var(--secondary)" />
             </radialGradient>
           </defs>
 
@@ -230,8 +230,8 @@ export function IndiaMap() {
                 <path
                   key={g.slug}
                   d={g.d}
-                  fill={isSel ? "hsl(var(--accent))" : isHov ? "hsl(var(--accent) / 0.55)" : "url(#state-fill)"}
-                  stroke={isSel ? "hsl(var(--accent-foreground))" : "hsl(var(--border))"}
+                  fill={isSel ? "var(--accent)" : isHov ? "color-mix(in oklab, var(--accent) calc(0.55 * 100%), transparent)" : "url(#state-fill)"}
+                  stroke={isSel ? "var(--accent-foreground)" : "var(--border)"}
                   strokeWidth={isSel ? 1.4 : isHov ? 1.1 : 0.7}
                   strokeLinejoin="round"
                   className="cursor-pointer transition-[fill,stroke,opacity] duration-200"
@@ -256,8 +256,8 @@ export function IndiaMap() {
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
               >
-                <circle r={5} fill="hsl(var(--primary))" stroke="hsl(var(--background))" strokeWidth={1.5} />
-                <circle r={9} fill="hsl(var(--primary) / 0.25)" />
+                <circle r={5} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.5} />
+                <circle r={9} fill="color-mix(in oklab, var(--primary) calc(0.25 * 100%), transparent)" />
               </g>
             ))}
 
@@ -271,13 +271,13 @@ export function IndiaMap() {
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
               >
-                <circle r={4} fill="hsl(var(--primary))" stroke="hsl(var(--background))" strokeWidth={1.2} />
+                <circle r={4} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.2} />
                 <text
                   x={6}
                   y={3}
                   fontSize={9}
                   className="pointer-events-none fill-foreground"
-                  style={{ paintOrder: "stroke", stroke: "hsl(var(--background))", strokeWidth: 2.5 }}
+                  style={{ paintOrder: "stroke", stroke: "var(--background)", strokeWidth: 2.5 }}
                 >
                   {name}
                 </text>
@@ -287,7 +287,7 @@ export function IndiaMap() {
           {/* Hover tooltip */}
           {hoveredState && tip && !selected && (
             <g transform={`translate(${tip.x + 10} ${tip.y + 10})`} className="pointer-events-none">
-              <rect width={170} height={90} rx={6} fill="hsl(var(--popover))" stroke="hsl(var(--border))" />
+              <rect width={170} height={90} rx={6} fill="var(--popover)" stroke="var(--border)" />
               <text x={10} y={20} fontSize={11} fontWeight={600} className="fill-foreground">
                 {hoveredState.name}
               </text>
@@ -308,7 +308,7 @@ export function IndiaMap() {
 
           {hoveredDestObj && (
             <g transform={`translate(${hoveredDestObj.x + 8} ${hoveredDestObj.y + 8})`} className="pointer-events-none">
-              <rect width={150} height={28} rx={5} fill="hsl(var(--popover))" stroke="hsl(var(--border))" />
+              <rect width={150} height={28} rx={5} fill="var(--popover)" stroke="var(--border)" />
               <text x={8} y={18} fontSize={11} className="fill-foreground">
                 {hoveredDestObj.dest.name}
               </text>
