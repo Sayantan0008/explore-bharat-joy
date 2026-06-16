@@ -1,0 +1,90 @@
+// Approx lng/lat for every destination in src/data/destinations.ts.
+// Used to render markers on the interactive India map.
+
+export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = {
+  // Rajasthan
+  "jaipur": { lng: 75.7873, lat: 26.9124 },
+  "udaipur": { lng: 73.7125, lat: 24.5854 },
+  "jaisalmer": { lng: 70.9083, lat: 26.9157 },
+  "jodhpur": { lng: 73.0243, lat: 26.2389 },
+  "pushkar": { lng: 74.5511, lat: 26.4892 },
+  "ranthambore": { lng: 76.5026, lat: 26.0173 },
+  // Kerala
+  "alleppey": { lng: 76.3388, lat: 9.4981 },
+  "munnar": { lng: 77.0595, lat: 10.0889 },
+  "kochi": { lng: 76.2673, lat: 9.9658 },
+  "thekkady": { lng: 77.1681, lat: 9.5938 },
+  "varkala": { lng: 76.7163, lat: 8.7333 },
+  "wayanad": { lng: 76.1320, lat: 11.6854 },
+  // Goa
+  "old-goa": { lng: 73.9116, lat: 15.5031 },
+  "panaji": { lng: 73.8278, lat: 15.4909 },
+  "anjuna": { lng: 73.7400, lat: 15.5736 },
+  "palolem": { lng: 74.0233, lat: 15.0099 },
+  "dudhsagar": { lng: 74.3145, lat: 15.3144 },
+  // West Bengal
+  "kolkata": { lng: 88.3639, lat: 22.5726 },
+  "darjeeling": { lng: 88.2627, lat: 27.0410 },
+  "sundarbans": { lng: 88.8000, lat: 21.9497 },
+  "shantiniketan": { lng: 87.6850, lat: 23.6803 },
+  "bishnupur": { lng: 87.3169, lat: 23.0746 },
+  // Himachal Pradesh
+  "shimla": { lng: 77.1734, lat: 31.1048 },
+  "manali": { lng: 77.1892, lat: 32.2396 },
+  "spiti": { lng: 78.0413, lat: 32.2464 },
+  "dharamshala": { lng: 76.3234, lat: 32.2190 },
+  "kasol": { lng: 77.3148, lat: 32.0099 },
+  // Tamil Nadu
+  "madurai": { lng: 78.1198, lat: 9.9252 },
+  "thanjavur": { lng: 79.1378, lat: 10.7870 },
+  "mahabalipuram": { lng: 80.1992, lat: 12.6269 },
+  "chennai": { lng: 80.2707, lat: 13.0827 },
+  "ooty": { lng: 76.6950, lat: 11.4064 },
+  "pondicherry": { lng: 79.8083, lat: 11.9416 },
+  // Maharashtra
+  "mumbai": { lng: 72.8777, lat: 19.0760 },
+  "ajanta-ellora": { lng: 75.7033, lat: 20.5519 },
+  "pune": { lng: 73.8567, lat: 18.5204 },
+  "tarkarli": { lng: 73.4667, lat: 16.0167 },
+  "lonavala": { lng: 73.4060, lat: 18.7546 },
+  // Uttar Pradesh
+  "agra": { lng: 78.0081, lat: 27.1767 },
+  "varanasi": { lng: 82.9739, lat: 25.3176 },
+  "lucknow": { lng: 80.9462, lat: 26.8467 },
+  "ayodhya": { lng: 82.1998, lat: 26.7922 },
+  "mathura": { lng: 77.6735, lat: 27.4924 },
+  "fatehpur-sikri": { lng: 77.6611, lat: 27.0937 },
+};
+
+// State-capital fallback coords used when a state has no destinations yet.
+export const STATE_CAPITAL_COORDS: Record<string, { lng: number; lat: number; capital: string }> = {
+  "andhra-pradesh": { lng: 80.2186, lat: 16.5062, capital: "Amaravati" },
+  "arunachal-pradesh": { lng: 93.6053, lat: 27.0844, capital: "Itanagar" },
+  "assam": { lng: 91.7898, lat: 26.1445, capital: "Dispur" },
+  "bihar": { lng: 85.1376, lat: 25.5941, capital: "Patna" },
+  "chhattisgarh": { lng: 81.6296, lat: 21.2514, capital: "Raipur" },
+  "gujarat": { lng: 72.6369, lat: 23.2156, capital: "Gandhinagar" },
+  "haryana": { lng: 76.7794, lat: 30.7333, capital: "Chandigarh" },
+  "jharkhand": { lng: 85.3240, lat: 23.3441, capital: "Ranchi" },
+  "karnataka": { lng: 77.5946, lat: 12.9716, capital: "Bengaluru" },
+  "madhya-pradesh": { lng: 77.4126, lat: 23.2599, capital: "Bhopal" },
+  "manipur": { lng: 93.9368, lat: 24.8170, capital: "Imphal" },
+  "meghalaya": { lng: 91.8933, lat: 25.5788, capital: "Shillong" },
+  "mizoram": { lng: 92.9376, lat: 23.7271, capital: "Aizawl" },
+  "nagaland": { lng: 94.1086, lat: 25.6701, capital: "Kohima" },
+  "odisha": { lng: 85.8245, lat: 20.2961, capital: "Bhubaneswar" },
+  "punjab": { lng: 76.7794, lat: 30.7333, capital: "Chandigarh" },
+  "sikkim": { lng: 88.6065, lat: 27.3389, capital: "Gangtok" },
+  "telangana": { lng: 78.4867, lat: 17.3850, capital: "Hyderabad" },
+  "tripura": { lng: 91.2868, lat: 23.8315, capital: "Agartala" },
+  "uttarakhand": { lng: 78.0322, lat: 30.3165, capital: "Dehradun" },
+  // UTs
+  "andaman-and-nicobar-islands": { lng: 92.7265, lat: 11.7401, capital: "Port Blair" },
+  "chandigarh": { lng: 76.7794, lat: 30.7333, capital: "Chandigarh" },
+  "dadra-and-nagar-haveli-and-daman-and-diu": { lng: 72.8328, lat: 20.3974, capital: "Daman" },
+  "delhi": { lng: 77.2090, lat: 28.6139, capital: "New Delhi" },
+  "jammu-and-kashmir": { lng: 74.7973, lat: 34.0837, capital: "Srinagar" },
+  "ladakh": { lng: 77.5770, lat: 34.1526, capital: "Leh" },
+  "lakshadweep": { lng: 72.6358, lat: 10.5667, capital: "Kavaratti" },
+  "puducherry": { lng: 79.8083, lat: 11.9416, capital: "Puducherry" },
+};
