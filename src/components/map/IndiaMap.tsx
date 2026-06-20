@@ -186,6 +186,44 @@ export function IndiaMap() {
       .filter(Boolean) as { dest: Destination; x: number; y: number; name: string }[];
   }, [selected]);
 
+  // Major-city allowlist shown at the India-wide view; the rest reveal on state zoom.
+  const MAJOR_CITY_SLUGS = new Set([
+    "delhi", "mumbai", "kolkata", "chennai", "jaipur", "agra",
+    "varanasi", "kochi", "panaji", "shimla", "darjeeling", "udaipur",
+    "madurai", "pune",
+  ]);
+
+  // Apparent zoom factor: <1 when zoomed in, so we scale markers/labels to stay constant in CSS px.
+  const scale = view.w / INDIA_VIEW_W;
+
+  // Which markers to render + greedy label placement to avoid overlap.
+  const visibleMarkers = (() => {
+    let pool: { dest: Destination; x: number; y: number; name: string }[] = [];
+    if (selected) {
+      pool = stateDestMarkers;
+    } else if (mode === "destinations") {
+      pool = allDestMarkers
+        .filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
+        .map((m) => ({ ...m, name: m.dest.name }));
+    }
+    const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
+    const fs = 11 * scale;          // ~11px on screen regardless of zoom
+    const charW = fs * 0.55;
+    const offset = 5 * scale;
+    return pool.map((m) => {
+      const w = m.name.length * charW + 3 * scale;
+      const h = fs + 2 * scale;
+      const lx = m.x + offset;
+      const ly = m.y - h / 2;
+      const box = { x1: lx, y1: ly, x2: lx + w, y2: ly + h };
+      const collides = placed.some(
+        (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
+      );
+      if (!collides) placed.push(box);
+      return { ...m, showLabel: !collides, fs, lx, ly: m.y + fs * 0.35 };
+    });
+  })();
+
   const hoveredState = hovered ? stateBySlug.get(hovered) ?? null : null;
 
   function handlePathMove(e: React.MouseEvent, slug: string) {
@@ -200,9 +238,7 @@ export function IndiaMap() {
   }
 
   const hoveredDestObj = hoveredDest
-    ? (mode === "destinations" ? allDestMarkers : stateDestMarkers).find(
-        (m) => m.dest.slug === hoveredDest,
-      ) ?? null
+    ? visibleMarkers.find((m) => m.dest.slug === hoveredDest) ?? null
     : null;
 
   return (
@@ -303,76 +339,88 @@ export function IndiaMap() {
           </g>
 
 
-          {/* Destination markers */}
-          {mode === "destinations" &&
-            allDestMarkers.map(({ dest, x, y }) => (
+          {/* Destination markers — unified, scale-aware, with overlap-safe labels */}
+          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly }) => {
+            const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
+            const r = (isActive ? 3.2 : 2.2) * scale;
+            const haloR = r * 2.2;
+            return (
               <g
                 key={dest.id}
-                transform={`translate(${x} ${y})`}
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
                 onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
               >
-                <circle r={5} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.5} />
-                <circle r={9} fill="color-mix(in oklab, var(--primary) calc(0.25 * 100%), transparent)" />
+                <circle
+                  cx={x} cy={y} r={haloR}
+                  fill="color-mix(in oklab, var(--primary) 22%, transparent)"
+                  style={{ transition: "r 150ms ease" }}
+                />
+                <circle
+                  cx={x} cy={y} r={r}
+                  fill="var(--primary)"
+                  stroke="var(--background)"
+                  strokeWidth={1.1 * scale}
+                  style={{ transition: "r 150ms ease" }}
+                />
+                {showLabel && (
+                  <text
+                    x={lx}
+                    y={ly}
+                    fontSize={fs}
+                    fontWeight={isActive ? 600 : 500}
+                    className="pointer-events-none fill-foreground"
+                    style={{
+                      paintOrder: "stroke",
+                      stroke: "rgba(255,255,255,0.92)",
+                      strokeWidth: 3 * scale,
+                      strokeLinejoin: "round",
+                    }}
+                  >
+                    {name}
+                  </text>
+                )}
               </g>
-            ))}
+            );
+          })}
 
-          {mode === "states" &&
-            selected &&
-            stateDestMarkers.map(({ dest, x, y, name }) => (
-              <g
-                key={dest.id}
-                transform={`translate(${x} ${y})`}
-                className="cursor-pointer"
-                onMouseEnter={() => setHoveredDest(dest.slug)}
-                onMouseLeave={() => setHoveredDest(null)}
-                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
-              >
-                <circle r={4} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.2} />
-                <text
-                  x={6}
-                  y={3}
-                  fontSize={9}
-                  className="pointer-events-none fill-foreground"
-                  style={{ paintOrder: "stroke", stroke: "var(--background)", strokeWidth: 2.5 }}
-                >
-                  {name}
+          {/* Hover tooltip — scaled so it stays a consistent size on screen */}
+          {hoveredState && tip && !selected && (() => {
+            const s = scale;
+            return (
+              <g transform={`translate(${tip.x + 10 * s} ${tip.y + 10 * s})`} className="pointer-events-none">
+                <rect width={170 * s} height={90 * s} rx={6 * s} fill="var(--popover)" stroke="var(--border)" />
+                <text x={10 * s} y={20 * s} fontSize={11 * s} fontWeight={600} className="fill-foreground">
+                  {hoveredState.name}
+                </text>
+                <text x={10 * s} y={36 * s} fontSize={9 * s} className="fill-muted-foreground">
+                  Capital · {hoveredState.capital}
+                </text>
+                <text x={10 * s} y={52 * s} fontSize={9 * s} className="fill-muted-foreground">
+                  {hoveredState.stats.attractions} attractions · {hoveredState.stats.foods} foods
+                </text>
+                <text x={10 * s} y={66 * s} fontSize={9 * s} className="fill-muted-foreground">
+                  {hoveredState.stats.festivals} festivals
+                </text>
+                <text x={10 * s} y={80 * s} fontSize={9 * s} className="fill-muted-foreground">
+                  Best · {hoveredState.bestTimeToVisit}
                 </text>
               </g>
-            ))}
+            );
+          })()}
 
-          {/* Hover tooltip */}
-          {hoveredState && tip && !selected && (
-            <g transform={`translate(${tip.x + 10} ${tip.y + 10})`} className="pointer-events-none">
-              <rect width={170} height={90} rx={6} fill="var(--popover)" stroke="var(--border)" />
-              <text x={10} y={20} fontSize={11} fontWeight={600} className="fill-foreground">
-                {hoveredState.name}
-              </text>
-              <text x={10} y={36} fontSize={9} className="fill-muted-foreground">
-                Capital · {hoveredState.capital}
-              </text>
-              <text x={10} y={52} fontSize={9} className="fill-muted-foreground">
-                {hoveredState.stats.attractions} attractions · {hoveredState.stats.foods} foods
-              </text>
-              <text x={10} y={66} fontSize={9} className="fill-muted-foreground">
-                {hoveredState.stats.festivals} festivals
-              </text>
-              <text x={10} y={80} fontSize={9} className="fill-muted-foreground">
-                Best · {hoveredState.bestTimeToVisit}
-              </text>
-            </g>
-          )}
-
-          {hoveredDestObj && (
-            <g transform={`translate(${hoveredDestObj.x + 8} ${hoveredDestObj.y + 8})`} className="pointer-events-none">
-              <rect width={150} height={28} rx={5} fill="var(--popover)" stroke="var(--border)" />
-              <text x={8} y={18} fontSize={11} className="fill-foreground">
-                {hoveredDestObj.dest.name}
-              </text>
-            </g>
-          )}
+          {hoveredDestObj && !hoveredDestObj.showLabel && (() => {
+            const s = scale;
+            return (
+              <g transform={`translate(${hoveredDestObj.x + 8 * s} ${hoveredDestObj.y + 8 * s})`} className="pointer-events-none">
+                <rect width={150 * s} height={28 * s} rx={5 * s} fill="var(--popover)" stroke="var(--border)" />
+                <text x={8 * s} y={18 * s} fontSize={11 * s} className="fill-foreground">
+                  {hoveredDestObj.dest.name}
+                </text>
+              </g>
+            );
+          })()}
         </svg>
 
         <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex items-end justify-between text-[11px] text-muted-foreground">
