@@ -235,15 +235,14 @@ export function IndiaMap() {
           role="img"
           aria-label="Interactive map of India — click a state to explore"
         >
-          {/* Subtle drop shadow for ocean */}
+        {/* Subtle drop shadow for ocean */}
           <defs>
             <filter id="india-shadow" x="-5%" y="-5%" width="110%" height="110%">
-              <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodOpacity="0.18" />
+              <feDropShadow dx="0" dy="1" stdDeviation="1.2" floodOpacity="0.18" />
             </filter>
-            <radialGradient id="state-fill" cx="50%" cy="40%" r="80%">
-              <stop offset="0%" stopColor="var(--card)" />
-              <stop offset="100%" stopColor="var(--secondary)" />
-            </radialGradient>
+            <filter id="state-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#ff9933" floodOpacity="0.55" />
+            </filter>
           </defs>
 
           <g filter="url(#india-shadow)">
@@ -251,16 +250,28 @@ export function IndiaMap() {
               const isSel = selected === g.slug;
               const isHov = hovered === g.slug;
               const dim = (selected && !isSel) || (mode === "destinations" && !isSel && !isHov);
+              const meta = stateBySlug.get(g.slug);
+              const baseFill = regionFill(meta?.region, meta?.isUT, g.slug);
               return (
                 <path
                   key={g.slug}
                   d={g.d}
-                  fill={isSel ? "var(--accent)" : isHov ? "color-mix(in oklab, var(--accent) calc(0.55 * 100%), transparent)" : "url(#state-fill)"}
-                  stroke={isSel ? "var(--accent-foreground)" : "var(--border)"}
-                  strokeWidth={isSel ? 1.4 : isHov ? 1.1 : 0.7}
+                  fill={isSel ? "#ff9933" : baseFill}
+                  stroke="rgba(255,255,255,0.92)"
+                  strokeWidth={isSel ? 1.8 : isHov ? 1.6 : 1.4}
                   strokeLinejoin="round"
-                  className="cursor-pointer transition-[fill,stroke,opacity] duration-200"
-                  style={{ opacity: dim ? 0.45 : 1 }}
+                  className="cursor-pointer transition-[fill,stroke,opacity,filter,transform] duration-200"
+                  style={{
+                    opacity: dim ? 0.55 : 1,
+                    filter: isSel
+                      ? "url(#state-glow) brightness(1.05)"
+                      : isHov
+                        ? "brightness(1.08) drop-shadow(0 2px 4px rgba(0,0,0,0.12))"
+                        : "drop-shadow(0 1px 2px rgba(0,0,0,0.08))",
+                    transformBox: "fill-box",
+                    transformOrigin: "center",
+                    transform: isHov && !isSel ? "scale(1.015)" : "scale(1)",
+                  }}
                   onMouseEnter={(e) => handlePathMove(e, g.slug)}
                   onMouseMove={(e) => handlePathMove(e, g.slug)}
                   onClick={(e) => { e.stopPropagation(); handleStateClick(g.slug); }}
@@ -270,6 +281,7 @@ export function IndiaMap() {
               );
             })}
           </g>
+
 
           {/* Destination markers */}
           {mode === "destinations" &&
