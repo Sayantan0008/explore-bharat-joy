@@ -238,9 +238,7 @@ export function IndiaMap() {
   }
 
   const hoveredDestObj = hoveredDest
-    ? (mode === "destinations" ? allDestMarkers : stateDestMarkers).find(
-        (m) => m.dest.slug === hoveredDest,
-      ) ?? null
+    ? visibleMarkers.find((m) => m.dest.slug === hoveredDest) ?? null
     : null;
 
   return (
