@@ -186,6 +186,44 @@ export function IndiaMap() {
       .filter(Boolean) as { dest: Destination; x: number; y: number; name: string }[];
   }, [selected]);
 
+  // Major-city allowlist shown at the India-wide view; the rest reveal on state zoom.
+  const MAJOR_CITY_SLUGS = new Set([
+    "delhi", "mumbai", "kolkata", "chennai", "jaipur", "agra",
+    "varanasi", "kochi", "panaji", "shimla", "darjeeling", "udaipur",
+    "madurai", "pune",
+  ]);
+
+  // Apparent zoom factor: <1 when zoomed in, so we scale markers/labels to stay constant in CSS px.
+  const scale = view.w / INDIA_VIEW_W;
+
+  // Which markers to render + greedy label placement to avoid overlap.
+  const visibleMarkers = (() => {
+    let pool: { dest: Destination; x: number; y: number; name: string }[] = [];
+    if (selected) {
+      pool = stateDestMarkers;
+    } else if (mode === "destinations") {
+      pool = allDestMarkers
+        .filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
+        .map((m) => ({ ...m, name: m.dest.name }));
+    }
+    const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
+    const fs = 11 * scale;          // ~11px on screen regardless of zoom
+    const charW = fs * 0.55;
+    const offset = 5 * scale;
+    return pool.map((m) => {
+      const w = m.name.length * charW + 3 * scale;
+      const h = fs + 2 * scale;
+      const lx = m.x + offset;
+      const ly = m.y - h / 2;
+      const box = { x1: lx, y1: ly, x2: lx + w, y2: ly + h };
+      const collides = placed.some(
+        (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
+      );
+      if (!collides) placed.push(box);
+      return { ...m, showLabel: !collides, fs, lx, ly: m.y + fs * 0.35 };
+    });
+  })();
+
   const hoveredState = hovered ? stateBySlug.get(hovered) ?? null : null;
 
   function handlePathMove(e: React.MouseEvent, slug: string) {
