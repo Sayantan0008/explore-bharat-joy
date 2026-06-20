@@ -106,18 +106,16 @@ export function IndiaMap() {
   }
 
   function zoom(factor: number) {
-    setView((v) => {
-      const cx = v.x + v.w / 2;
-      const cy = v.y + v.h / 2;
-      const w = Math.max(80, Math.min(INDIA_VIEW_W * 1.2, v.w * factor));
-      const h = Math.max(80, Math.min(INDIA_VIEW_H * 1.2, v.h * factor));
-      return { x: cx - w / 2, y: cy - h / 2, w, h };
-    });
+    const cx = view.x + view.w / 2;
+    const cy = view.y + view.h / 2;
+    const w = Math.max(80, Math.min(INDIA_VIEW_W * 1.2, view.w * factor));
+    const h = Math.max(80, Math.min(INDIA_VIEW_H * 1.2, view.h * factor));
+    animateTo({ x: cx - w / 2, y: cy - h / 2, w, h }, 350);
   }
 
   function reset() {
     setSelected(null);
-    setView(FULL_VIEW);
+    animateTo(FULL_VIEW, 600);
   }
 
   // Pan via drag
