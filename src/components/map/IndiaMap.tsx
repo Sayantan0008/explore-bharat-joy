@@ -188,7 +188,13 @@ export function IndiaMap() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)]">
       {/* Map */}
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary/60 to-card">
+      <div
+        className="relative overflow-hidden rounded-2xl border border-border shadow-sm"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(255,255,255,0.95), rgba(245,241,232,0.95))",
+        }}
+      >
         {/* Top bar */}
         <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full border border-border bg-card/90 p-1 text-xs shadow-sm backdrop-blur">
           <button
