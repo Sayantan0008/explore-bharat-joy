@@ -15,7 +15,7 @@ import {
   DESTINATION_COORDS,
   STATE_CAPITAL_COORDS,
 } from "@/data/destinationCoords";
-import type { State, Destination, Food, Festival } from "@/content/types";
+import type { State, Destination } from "@/content/types";
 import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
