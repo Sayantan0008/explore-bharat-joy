@@ -16,6 +16,7 @@ import {
   STATE_CAPITAL_COORDS,
 } from "@/data/destinationCoords";
 import type { State, Destination } from "@/content/types";
+import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
@@ -62,6 +63,7 @@ export function IndiaMap() {
   const [selected, setSelected] = useState<string | null>(null);
   const [view, setView] = useState<ViewBox>(FULL_VIEW);
   const [hoveredDest, setHoveredDest] = useState<string | null>(null);
+  const [modalDest, setModalDest] = useState<Destination | null>(null);
 
   // Tooltip position (svg user coords)
   const [tip, setTip] = useState<{ x: number; y: number } | null>(null);
@@ -72,13 +74,31 @@ export function IndiaMap() {
     : null;
   const selectedState = selected ? stateBySlug.get(selected) ?? null : null;
 
-  // Compute target view when selection changes
+  // Smoothly animate the viewBox to a new target whenever selection changes.
+  const rafRef = useRef<number | null>(null);
+  const animateTo = (target: ViewBox, duration = 650) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    const start = performance.now();
+    const from = view;
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const k = ease(t);
+      setView({
+        x: from.x + (target.x - from.x) * k,
+        y: from.y + (target.y - from.y) * k,
+        w: from.w + (target.w - from.w) * k,
+        h: from.h + (target.h - from.h) * k,
+      });
+      if (t < 1) rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(step);
+  };
+
   useEffect(() => {
-    if (!selectedGeo) {
-      setView(FULL_VIEW);
-      return;
-    }
-    setView(bboxFromPath(selectedGeo.d));
+    animateTo(selectedGeo ? bboxFromPath(selectedGeo.d) : FULL_VIEW);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGeo]);
 
   function handleStateClick(slug: string) {
@@ -86,24 +106,23 @@ export function IndiaMap() {
   }
 
   function zoom(factor: number) {
-    setView((v) => {
-      const cx = v.x + v.w / 2;
-      const cy = v.y + v.h / 2;
-      const w = Math.max(80, Math.min(INDIA_VIEW_W * 1.2, v.w * factor));
-      const h = Math.max(80, Math.min(INDIA_VIEW_H * 1.2, v.h * factor));
-      return { x: cx - w / 2, y: cy - h / 2, w, h };
-    });
+    const cx = view.x + view.w / 2;
+    const cy = view.y + view.h / 2;
+    const w = Math.max(80, Math.min(INDIA_VIEW_W * 1.2, view.w * factor));
+    const h = Math.max(80, Math.min(INDIA_VIEW_H * 1.2, view.h * factor));
+    animateTo({ x: cx - w / 2, y: cy - h / 2, w, h }, 350);
   }
 
   function reset() {
     setSelected(null);
-    setView(FULL_VIEW);
+    animateTo(FULL_VIEW, 600);
   }
 
   // Pan via drag
   const dragRef = useRef<{ x: number; y: number; view: ViewBox } | null>(null);
   function onMouseDown(e: React.MouseEvent) {
     if ((e.target as SVGElement).tagName === "path") return; // let path clicks through
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     dragRef.current = { x: e.clientX, y: e.clientY, view };
   }
   function onMouseMove(e: React.MouseEvent) {
@@ -201,7 +220,7 @@ export function IndiaMap() {
           ref={svgRef}
           viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
           preserveAspectRatio="xMidYMid meet"
-          className="block h-[560px] w-full cursor-grab touch-none select-none active:cursor-grabbing sm:h-[680px] lg:h-[820px]"
+          className="block h-[520px] w-full cursor-grab touch-none select-none active:cursor-grabbing sm:h-[640px] md:h-[760px] lg:h-[860px]"
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
@@ -255,6 +274,7 @@ export function IndiaMap() {
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
+                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
               >
                 <circle r={5} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.5} />
                 <circle r={9} fill="color-mix(in oklab, var(--primary) calc(0.25 * 100%), transparent)" />
@@ -270,6 +290,7 @@ export function IndiaMap() {
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
+                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
               >
                 <circle r={4} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.2} />
                 <text
@@ -340,9 +361,192 @@ export function IndiaMap() {
           )
         }
       />
+
+      {modalDest && (
+        <CityModal
+          dest={modalDest}
+          state={stateBySlug.get(modalDest.stateSlug) ?? null}
+          onClose={() => setModalDest(null)}
+        />
+      )}
     </div>
   );
 }
+
+function CityModal({
+  dest,
+  state,
+  onClose,
+}: {
+  dest: Destination;
+  state: State | null;
+  onClose: () => void;
+}) {
+  const foods = getFoodsByState(dest.stateSlug).slice(0, 6);
+  const fests = getFestivalsByState(dest.stateSlug).slice(0, 6);
+  const coord =
+    DESTINATION_COORDS[dest.slug] ??
+    STATE_CAPITAL_COORDS[dest.stateSlug] ??
+    null;
+  const mapsHref = coord
+    ? `https://www.google.com/maps/search/?api=1&query=${coord.lat},${coord.lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dest.name + ", India")}`;
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${dest.name} details`}
+    >
+      <div
+        className="relative w-full max-w-2xl overflow-hidden rounded-t-2xl border border-border bg-card shadow-2xl sm:rounded-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative h-44 w-full overflow-hidden bg-secondary sm:h-56">
+          {dest.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={dest.image}
+              alt={dest.name}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-card/90 text-foreground shadow hover:bg-card"
+          >
+            ×
+          </button>
+          <div className="absolute bottom-3 left-4 right-4 text-white">
+            <div className="text-[11px] uppercase tracking-wide opacity-80">
+              {state?.name ?? dest.stateSlug} · {dest.category}
+            </div>
+            <h3 className="font-display text-2xl font-semibold leading-tight">{dest.name}</h3>
+          </div>
+        </div>
+
+        <div className="max-h-[70vh] overflow-y-auto px-5 py-4 sm:px-6 sm:py-5">
+          <p className="text-sm leading-relaxed text-muted-foreground">{dest.description}</p>
+
+          {dest.interests.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {dest.interests.map((slug) => {
+                const meta = INTERESTS.find((i) => i.slug === slug);
+                return (
+                  <span
+                    key={slug}
+                    className="rounded-full border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+                  >
+                    {meta?.label ?? slug}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          <ModalSection title="Top attractions">
+            {dest.highlights.length > 0 ? (
+              <ul className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">
+                {dest.highlights.slice(0, 8).map((h) => (
+                  <li key={h} className="flex gap-2 text-foreground">
+                    <span className="text-accent-foreground">•</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint text="Attractions guide coming soon." />
+            )}
+          </ModalSection>
+
+          <ModalSection title="Regional foods">
+            {foods.length > 0 ? (
+              <ul className="flex flex-wrap gap-1.5">
+                {foods.map((f) => (
+                  <ModalChip key={f.id} label={f.name} />
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint text="No food guides yet for this state." />
+            )}
+          </ModalSection>
+
+          <ModalSection title="Festivals nearby">
+            {fests.length > 0 ? (
+              <ul className="flex flex-wrap gap-1.5">
+                {fests.map((f) => (
+                  <ModalChip key={f.id} label={`${f.name} · ${f.month}`} />
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint text="No festival guides yet for this state." />
+            )}
+          </ModalSection>
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-border bg-background/60 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <a
+            href={mapsHref}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-sm font-medium hover:bg-accent/30"
+          >
+            <span aria-hidden>📍</span> Open in Google Maps
+          </a>
+          <Link
+            to="/destinations/$slug"
+            params={{ slug: dest.slug }}
+            onClick={onClose}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            Open full guide →
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ModalSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-4">
+      <div className="mb-1.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+        {title}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function ModalChip({ label }: { label: string }) {
+  return (
+    <li className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px]">
+      {label}
+    </li>
+  );
+}
+
+function EmptyHint({ text }: { text: string }) {
+  return <p className="text-xs text-muted-foreground">{text}</p>;
+}
+
 
 function SidePanel({
   state,
