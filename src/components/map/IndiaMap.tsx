@@ -20,6 +20,26 @@ import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
+// Region-based pastel travel palette. Two tones per region so neighbors differ.
+const REGION_PALETTE: Record<string, [string, string]> = {
+  north:     ["#cfe3c8", "#dbe9c6"], // sage green
+  south:     ["#bfded8", "#cfe8e1"], // pale teal
+  east:      ["#f6d3b8", "#fadfc4"], // warm peach
+  west:      ["#f6d9a8", "#fbe4bc"], // soft saffron / sand
+  central:   ["#e7d8b6", "#efe2c2"], // light olive / beige
+  northeast: ["#dccfe8", "#e6d9ef"], // mist lavender
+};
+const UT_FILL: [string, string] = ["#d6dfea", "#e1e9f1"]; // gray-blue
+const FALLBACK_FILL: [string, string] = ["#e7e1d4", "#efe9dc"];
+
+function regionFill(region: string | undefined, isUT: boolean | undefined, slug: string): string {
+  const pair = isUT ? UT_FILL : region ? REGION_PALETTE[region] ?? FALLBACK_FILL : FALLBACK_FILL;
+  // Deterministic alternation between the two tones so adjacent states differ.
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return pair[h % 2];
+}
+
 type ViewBox = { x: number; y: number; w: number; h: number };
 const FULL_VIEW: ViewBox = { x: 0, y: 0, w: INDIA_VIEW_W, h: INDIA_VIEW_H };
 
@@ -188,7 +208,13 @@ export function IndiaMap() {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)]">
       {/* Map */}
-      <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-secondary/60 to-card">
+      <div
+        className="relative overflow-hidden rounded-2xl border border-border shadow-sm"
+        style={{
+          background:
+            "radial-gradient(circle at center, rgba(255,255,255,0.95), rgba(245,241,232,0.95))",
+        }}
+      >
         {/* Top bar */}
         <div className="absolute left-3 top-3 z-10 flex items-center gap-1 rounded-full border border-border bg-card/90 p-1 text-xs shadow-sm backdrop-blur">
           <button
@@ -229,15 +255,14 @@ export function IndiaMap() {
           role="img"
           aria-label="Interactive map of India — click a state to explore"
         >
-          {/* Subtle drop shadow for ocean */}
+        {/* Subtle drop shadow for ocean */}
           <defs>
             <filter id="india-shadow" x="-5%" y="-5%" width="110%" height="110%">
-              <feDropShadow dx="0" dy="2" stdDeviation="2.5" floodOpacity="0.18" />
+              <feDropShadow dx="0" dy="1" stdDeviation="1.2" floodOpacity="0.18" />
             </filter>
-            <radialGradient id="state-fill" cx="50%" cy="40%" r="80%">
-              <stop offset="0%" stopColor="var(--card)" />
-              <stop offset="100%" stopColor="var(--secondary)" />
-            </radialGradient>
+            <filter id="state-glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#ff9933" floodOpacity="0.55" />
+            </filter>
           </defs>
 
           <g filter="url(#india-shadow)">
@@ -245,16 +270,28 @@ export function IndiaMap() {
               const isSel = selected === g.slug;
               const isHov = hovered === g.slug;
               const dim = (selected && !isSel) || (mode === "destinations" && !isSel && !isHov);
+              const meta = stateBySlug.get(g.slug);
+              const baseFill = regionFill(meta?.region, meta?.isUT, g.slug);
               return (
                 <path
                   key={g.slug}
                   d={g.d}
-                  fill={isSel ? "var(--accent)" : isHov ? "color-mix(in oklab, var(--accent) calc(0.55 * 100%), transparent)" : "url(#state-fill)"}
-                  stroke={isSel ? "var(--accent-foreground)" : "var(--border)"}
-                  strokeWidth={isSel ? 1.4 : isHov ? 1.1 : 0.7}
+                  fill={isSel ? "#ff9933" : baseFill}
+                  stroke="rgba(255,255,255,0.92)"
+                  strokeWidth={isSel ? 1.8 : isHov ? 1.6 : 1.4}
                   strokeLinejoin="round"
-                  className="cursor-pointer transition-[fill,stroke,opacity] duration-200"
-                  style={{ opacity: dim ? 0.45 : 1 }}
+                  className="cursor-pointer transition-[fill,stroke,opacity,filter,transform] duration-200"
+                  style={{
+                    opacity: dim ? 0.55 : 1,
+                    filter: isSel
+                      ? "url(#state-glow) brightness(1.05)"
+                      : isHov
+                        ? "brightness(1.08) drop-shadow(0 2px 4px rgba(0,0,0,0.12))"
+                        : "drop-shadow(0 1px 2px rgba(0,0,0,0.08))",
+                    transformBox: "fill-box",
+                    transformOrigin: "center",
+                    transform: isHov && !isSel ? "scale(1.015)" : "scale(1)",
+                  }}
                   onMouseEnter={(e) => handlePathMove(e, g.slug)}
                   onMouseMove={(e) => handlePathMove(e, g.slug)}
                   onClick={(e) => { e.stopPropagation(); handleStateClick(g.slug); }}
@@ -264,6 +301,7 @@ export function IndiaMap() {
               );
             })}
           </g>
+
 
           {/* Destination markers */}
           {mode === "destinations" &&
