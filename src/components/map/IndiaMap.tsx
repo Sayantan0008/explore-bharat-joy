@@ -122,6 +122,7 @@ export function IndiaMap() {
   const dragRef = useRef<{ x: number; y: number; view: ViewBox } | null>(null);
   function onMouseDown(e: React.MouseEvent) {
     if ((e.target as SVGElement).tagName === "path") return; // let path clicks through
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     dragRef.current = { x: e.clientX, y: e.clientY, view };
   }
   function onMouseMove(e: React.MouseEvent) {
