@@ -20,6 +20,26 @@ import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
+// Region-based pastel travel palette. Two tones per region so neighbors differ.
+const REGION_PALETTE: Record<string, [string, string]> = {
+  north:     ["#cfe3c8", "#dbe9c6"], // sage green
+  south:     ["#bfded8", "#cfe8e1"], // pale teal
+  east:      ["#f6d3b8", "#fadfc4"], // warm peach
+  west:      ["#f6d9a8", "#fbe4bc"], // soft saffron / sand
+  central:   ["#e7d8b6", "#efe2c2"], // light olive / beige
+  northeast: ["#dccfe8", "#e6d9ef"], // mist lavender
+};
+const UT_FILL: [string, string] = ["#d6dfea", "#e1e9f1"]; // gray-blue
+const FALLBACK_FILL: [string, string] = ["#e7e1d4", "#efe9dc"];
+
+function regionFill(region: string | undefined, isUT: boolean | undefined, slug: string): string {
+  const pair = isUT ? UT_FILL : region ? REGION_PALETTE[region] ?? FALLBACK_FILL : FALLBACK_FILL;
+  // Deterministic alternation between the two tones so adjacent states differ.
+  let h = 0;
+  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
+  return pair[h % 2];
+}
+
 type ViewBox = { x: number; y: number; w: number; h: number };
 const FULL_VIEW: ViewBox = { x: 0, y: 0, w: INDIA_VIEW_W, h: INDIA_VIEW_H };
 
