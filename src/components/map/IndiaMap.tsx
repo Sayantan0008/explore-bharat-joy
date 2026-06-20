@@ -221,7 +221,7 @@ export function IndiaMap() {
           ref={svgRef}
           viewBox={`${view.x} ${view.y} ${view.w} ${view.h}`}
           preserveAspectRatio="xMidYMid meet"
-          className="block h-[560px] w-full cursor-grab touch-none select-none active:cursor-grabbing sm:h-[680px] lg:h-[820px]"
+          className="block h-[520px] w-full cursor-grab touch-none select-none active:cursor-grabbing sm:h-[640px] md:h-[760px] lg:h-[860px]"
           onMouseDown={onMouseDown}
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
@@ -275,6 +275,7 @@ export function IndiaMap() {
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
+                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
               >
                 <circle r={5} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.5} />
                 <circle r={9} fill="color-mix(in oklab, var(--primary) calc(0.25 * 100%), transparent)" />
@@ -290,6 +291,7 @@ export function IndiaMap() {
                 className="cursor-pointer"
                 onMouseEnter={() => setHoveredDest(dest.slug)}
                 onMouseLeave={() => setHoveredDest(null)}
+                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
               >
                 <circle r={4} fill="var(--primary)" stroke="var(--background)" strokeWidth={1.2} />
                 <text
