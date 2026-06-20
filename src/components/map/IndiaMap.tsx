@@ -15,7 +15,8 @@ import {
   DESTINATION_COORDS,
   STATE_CAPITAL_COORDS,
 } from "@/data/destinationCoords";
-import type { State, Destination } from "@/content/types";
+import type { State, Destination, Food, Festival } from "@/content/types";
+import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
@@ -62,6 +63,7 @@ export function IndiaMap() {
   const [selected, setSelected] = useState<string | null>(null);
   const [view, setView] = useState<ViewBox>(FULL_VIEW);
   const [hoveredDest, setHoveredDest] = useState<string | null>(null);
+  const [modalDest, setModalDest] = useState<Destination | null>(null);
 
   // Tooltip position (svg user coords)
   const [tip, setTip] = useState<{ x: number; y: number } | null>(null);
@@ -72,13 +74,31 @@ export function IndiaMap() {
     : null;
   const selectedState = selected ? stateBySlug.get(selected) ?? null : null;
 
-  // Compute target view when selection changes
+  // Smoothly animate the viewBox to a new target whenever selection changes.
+  const rafRef = useRef<number | null>(null);
+  const animateTo = (target: ViewBox, duration = 650) => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    const start = performance.now();
+    const from = view;
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+    const step = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const k = ease(t);
+      setView({
+        x: from.x + (target.x - from.x) * k,
+        y: from.y + (target.y - from.y) * k,
+        w: from.w + (target.w - from.w) * k,
+        h: from.h + (target.h - from.h) * k,
+      });
+      if (t < 1) rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(step);
+  };
+
   useEffect(() => {
-    if (!selectedGeo) {
-      setView(FULL_VIEW);
-      return;
-    }
-    setView(bboxFromPath(selectedGeo.d));
+    animateTo(selectedGeo ? bboxFromPath(selectedGeo.d) : FULL_VIEW);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGeo]);
 
   function handleStateClick(slug: string) {
