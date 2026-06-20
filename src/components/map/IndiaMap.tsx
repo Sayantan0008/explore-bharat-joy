@@ -361,9 +361,192 @@ export function IndiaMap() {
           )
         }
       />
+
+      {modalDest && (
+        <CityModal
+          dest={modalDest}
+          state={stateBySlug.get(modalDest.stateSlug) ?? null}
+          onClose={() => setModalDest(null)}
+        />
+      )}
     </div>
   );
 }
+
+function CityModal({
+  dest,
+  state,
+  onClose,
+}: {
+  dest: Destination;
+  state: State | null;
+  onClose: () => void;
+}) {
+  const foods = getFoodsByState(dest.stateSlug).slice(0, 6);
+  const fests = getFestivalsByState(dest.stateSlug).slice(0, 6);
+  const coord =
+    DESTINATION_COORDS[dest.slug] ??
+    STATE_CAPITAL_COORDS[dest.stateSlug] ??
+    null;
+  const mapsHref = coord
+    ? `https://www.google.com/maps/search/?api=1&query=${coord.lat},${coord.lng}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(dest.name + ", India")}`;
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/50 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${dest.name} details`}
+    >
+      <div
+        className="relative w-full max-w-2xl overflow-hidden rounded-t-2xl border border-border bg-card shadow-2xl sm:rounded-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="relative h-44 w-full overflow-hidden bg-secondary sm:h-56">
+          {dest.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={dest.image}
+              alt={dest.name}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-card/90 text-foreground shadow hover:bg-card"
+          >
+            ×
+          </button>
+          <div className="absolute bottom-3 left-4 right-4 text-white">
+            <div className="text-[11px] uppercase tracking-wide opacity-80">
+              {state?.name ?? dest.stateSlug} · {dest.category}
+            </div>
+            <h3 className="font-display text-2xl font-semibold leading-tight">{dest.name}</h3>
+          </div>
+        </div>
+
+        <div className="max-h-[70vh] overflow-y-auto px-5 py-4 sm:px-6 sm:py-5">
+          <p className="text-sm leading-relaxed text-muted-foreground">{dest.description}</p>
+
+          {dest.interests.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {dest.interests.map((slug) => {
+                const meta = INTERESTS.find((i) => i.slug === slug);
+                return (
+                  <span
+                    key={slug}
+                    className="rounded-full border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+                  >
+                    {meta?.label ?? slug}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          <ModalSection title="Top attractions">
+            {dest.highlights.length > 0 ? (
+              <ul className="grid grid-cols-1 gap-1 text-sm sm:grid-cols-2">
+                {dest.highlights.slice(0, 8).map((h) => (
+                  <li key={h} className="flex gap-2 text-foreground">
+                    <span className="text-accent-foreground">•</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint text="Attractions guide coming soon." />
+            )}
+          </ModalSection>
+
+          <ModalSection title="Regional foods">
+            {foods.length > 0 ? (
+              <ul className="flex flex-wrap gap-1.5">
+                {foods.map((f) => (
+                  <ModalChip key={f.id} label={f.name} />
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint text="No food guides yet for this state." />
+            )}
+          </ModalSection>
+
+          <ModalSection title="Festivals nearby">
+            {fests.length > 0 ? (
+              <ul className="flex flex-wrap gap-1.5">
+                {fests.map((f) => (
+                  <ModalChip key={f.id} label={`${f.name} · ${f.month}`} />
+                ))}
+              </ul>
+            ) : (
+              <EmptyHint text="No festival guides yet for this state." />
+            )}
+          </ModalSection>
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-border bg-background/60 px-5 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <a
+            href={mapsHref}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-card px-3 py-2 text-sm font-medium hover:bg-accent/30"
+          >
+            <span aria-hidden>📍</span> Open in Google Maps
+          </a>
+          <Link
+            to="/destinations/$slug"
+            params={{ slug: dest.slug }}
+            onClick={onClose}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          >
+            Open full guide →
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ModalSection({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-4">
+      <div className="mb-1.5 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+        {title}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function ModalChip({ label }: { label: string }) {
+  return (
+    <li className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px]">
+      {label}
+    </li>
+  );
+}
+
+function EmptyHint({ text }: { text: string }) {
+  return <p className="text-xs text-muted-foreground">{text}</p>;
+}
+
 
 function SidePanel({
   state,
