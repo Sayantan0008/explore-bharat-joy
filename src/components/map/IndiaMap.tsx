@@ -351,10 +351,10 @@ export function IndiaMap() {
 
 
           {/* Destination markers — unified, scale-aware, with overlap-safe labels */}
-          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly }) => {
+          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly, anchor }) => {
             const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
-            const r = (isActive ? 3.2 : 2.2) * scale;
-            const haloR = r * 2.2;
+            const r = (isActive ? 6.5 : 5.5) * scale;
+            const haloR = r * 1.9;
             return (
               <g
                 key={dest.id}
@@ -371,8 +371,8 @@ export function IndiaMap() {
                 <circle
                   cx={x} cy={y} r={r}
                   fill="var(--primary)"
-                  stroke="var(--background)"
-                  strokeWidth={1.1 * scale}
+                  stroke="#ffffff"
+                  strokeWidth={1.6 * scale}
                   style={{ transition: "r 150ms ease" }}
                 />
                 {showLabel && (
@@ -380,12 +380,13 @@ export function IndiaMap() {
                     x={lx}
                     y={ly}
                     fontSize={fs}
-                    fontWeight={isActive ? 600 : 500}
+                    fontWeight={isActive ? 700 : 600}
+                    textAnchor={anchor}
                     className="pointer-events-none fill-foreground"
                     style={{
                       paintOrder: "stroke",
-                      stroke: "rgba(255,255,255,0.92)",
-                      strokeWidth: 3 * scale,
+                      stroke: "rgba(255,255,255,0.95)",
+                      strokeWidth: 3.2 * scale,
                       strokeLinejoin: "round",
                     }}
                   >
