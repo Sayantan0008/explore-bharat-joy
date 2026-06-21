@@ -20,6 +20,33 @@ import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
+/**
+ * Tunables — adjust how many city markers/labels appear at each zoom level.
+ * `scale` = view.w / INDIA_VIEW_W. 1.0 = full India view; smaller = zoomed in.
+ */
+const CITY_VISIBILITY = {
+  /** When scale >= this, only `MAJOR_CITY_SLUGS` are rendered. Below, all show. */
+  majorOnlyAboveScale: 0.7,
+  /** Hard cap on markers at the full India view (destinations mode). */
+  maxAtIndiaView: 14,
+  /** Hard cap on markers once a state is selected (zoomed in). */
+  maxAtStateView: 40,
+};
+
+/** Responsive target sizes (CSS pixels) for markers + labels. */
+const SIZE_BREAKPOINTS = [
+  { maxWidth: 640,      markerR: 4.5, fontPx: 10,   strokePx: 1.4, haloFactor: 1.9 },
+  { maxWidth: 1024,     markerR: 5.5, fontPx: 11,   strokePx: 1.6, haloFactor: 1.9 },
+  { maxWidth: Infinity, markerR: 6.5, fontPx: 12.5, strokePx: 1.8, haloFactor: 2.0 },
+] as const;
+
+function sizingFor(containerWidth: number) {
+  return (
+    SIZE_BREAKPOINTS.find((b) => containerWidth <= b.maxWidth) ??
+    SIZE_BREAKPOINTS[SIZE_BREAKPOINTS.length - 1]
+  );
+}
+
 // Region-based pastel travel palette. Two tones per region so neighbors differ.
 const REGION_PALETTE: Record<string, [string, string]> = {
   north:     ["#cfe3c8", "#dbe9c6"], // sage green
