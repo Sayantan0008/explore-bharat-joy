@@ -232,47 +232,79 @@ export function IndiaMap() {
     "madurai", "pune",
   ]);
 
-  // Apparent zoom factor: <1 when zoomed in, so we scale markers/labels to stay constant in CSS px.
+  // Apparent zoom factor: <1 when zoomed in.
   const scale = view.w / INDIA_VIEW_W;
 
-  // Which markers to render + greedy label placement to avoid overlap.
+  // Responsive sizing. Convert CSS-px targets → SVG units so they stay constant on screen.
+  const sizing = sizingFor(containerWidth);
+  // svg-units-per-css-px at the current viewBox + container width.
+  const svgPerCssPx = view.w / Math.max(1, containerWidth);
+  const fs = sizing.fontPx * svgPerCssPx;
+  const markerR = sizing.markerR * svgPerCssPx;
+  const markerStroke = sizing.strokePx * svgPerCssPx;
+  const haloFactor = sizing.haloFactor;
+  const charW = fs * 0.55;
+  const labelOffset = markerR + 3 * svgPerCssPx;
+  const edgePad = 4 * svgPerCssPx;
+
+  // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
   const visibleMarkers = (() => {
     let pool: { dest: Destination; x: number; y: number; name: string }[] = [];
     if (selected) {
-      pool = stateDestMarkers;
+      pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
     } else if (mode === "destinations") {
-      pool = allDestMarkers
-        .filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
+      const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
+      const filtered = useMajorOnly
+        ? allDestMarkers.filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
+        : allDestMarkers;
+      pool = filtered
+        .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
         .map((m) => ({ ...m, name: m.dest.name }));
     }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
-    const fs = 11 * scale;          // ~12-13px CSS at typical render width
-    const charW = fs * 0.55;
-    const markerR = 5.5 * scale;
-    const offset = markerR + 3 * scale;
+    const h = fs + 2 * svgPerCssPx;
+    const fitText = (name: string, maxW: number): string => {
+      if (maxW <= charW * 2) return ""; // no room even for "A…"
+      const fullW = name.length * charW;
+      if (fullW <= maxW) return name;
+      const maxChars = Math.max(1, Math.floor(maxW / charW) - 1);
+      return name.slice(0, maxChars).trimEnd() + "…";
+    };
     return pool.map((m) => {
-      const w = m.name.length * charW + 3 * scale;
-      const h = fs + 2 * scale;
-      // Default label to the right; flip to the left if it would overflow the map.
-      let lx = m.x + offset;
-      let anchor: "start" | "end" = "start";
-      if (lx + w > INDIA_VIEW_W - 4) {
-        lx = m.x - offset;
-        anchor = "end";
+      const rightRoom = INDIA_VIEW_W - edgePad - (m.x + labelOffset);
+      const leftRoom = (m.x - labelOffset) - edgePad;
+      const desiredW = m.name.length * charW + 3 * svgPerCssPx;
+      // Pick the side with more room when the full label doesn't fit either side.
+      let anchor: "start" | "end";
+      let lx: number;
+      let maxW: number;
+      if (desiredW <= rightRoom) {
+        anchor = "start"; lx = m.x + labelOffset; maxW = rightRoom;
+      } else if (desiredW <= leftRoom) {
+        anchor = "end"; lx = m.x - labelOffset; maxW = leftRoom;
+      } else if (rightRoom >= leftRoom) {
+        anchor = "start"; lx = m.x + labelOffset; maxW = rightRoom;
+      } else {
+        anchor = "end"; lx = m.x - labelOffset; maxW = leftRoom;
       }
+      const label = fitText(m.name, maxW);
+      const labelW = Math.min(desiredW, Math.max(0, label.length * charW + 3 * svgPerCssPx));
       const box = anchor === "start"
-        ? { x1: lx, y1: m.y - h / 2, x2: lx + w, y2: m.y + h / 2 }
-        : { x1: lx - w, y1: m.y - h / 2, x2: lx, y2: m.y + h / 2 };
-      // Hide if label would still escape the map vertically/left.
-      const inBounds = box.x1 >= 4 && box.x2 <= INDIA_VIEW_W - 4 && box.y1 >= 4 && box.y2 <= INDIA_VIEW_H - 4;
+        ? { x1: lx, y1: m.y - h / 2, x2: lx + labelW, y2: m.y + h / 2 }
+        : { x1: lx - labelW, y1: m.y - h / 2, x2: lx, y2: m.y + h / 2 };
+      const inBounds =
+        label.length > 0 &&
+        box.x1 >= edgePad && box.x2 <= INDIA_VIEW_W - edgePad &&
+        box.y1 >= edgePad && box.y2 <= INDIA_VIEW_H - edgePad;
       const collides = placed.some(
         (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
       );
       const show = inBounds && !collides;
       if (show) placed.push(box);
-      return { ...m, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
+      return { ...m, label, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
     });
   })();
+
 
   const hoveredState = hovered ? stateBySlug.get(hovered) ?? null : null;
 
