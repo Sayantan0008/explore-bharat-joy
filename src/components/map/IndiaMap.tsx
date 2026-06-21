@@ -327,6 +327,7 @@ export function IndiaMap() {
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)]">
       {/* Map */}
       <div
+        ref={containerRef}
         className="relative overflow-hidden rounded-2xl border border-border shadow-sm"
         style={{
           background:
