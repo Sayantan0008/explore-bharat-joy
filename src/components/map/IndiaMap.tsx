@@ -116,6 +116,18 @@ export function IndiaMap() {
   const [tip, setTip] = useState<{ x: number; y: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
+  // Track container width so markers/labels scale across mobile/tablet/desktop.
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(1024);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const e of entries) setContainerWidth(e.contentRect.width);
+    });
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
+
   const selectedGeo = selected
     ? INDIA_STATE_GEOS.find((g) => g.slug === selected) ?? null
     : null;
