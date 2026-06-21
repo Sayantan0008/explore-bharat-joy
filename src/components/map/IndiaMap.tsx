@@ -207,20 +207,31 @@ export function IndiaMap() {
         .map((m) => ({ ...m, name: m.dest.name }));
     }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
-    const fs = 11 * scale;          // ~11px on screen regardless of zoom
+    const fs = 11 * scale;          // ~12-13px CSS at typical render width
     const charW = fs * 0.55;
-    const offset = 5 * scale;
+    const markerR = 5.5 * scale;
+    const offset = markerR + 3 * scale;
     return pool.map((m) => {
       const w = m.name.length * charW + 3 * scale;
       const h = fs + 2 * scale;
-      const lx = m.x + offset;
-      const ly = m.y - h / 2;
-      const box = { x1: lx, y1: ly, x2: lx + w, y2: ly + h };
+      // Default label to the right; flip to the left if it would overflow the map.
+      let lx = m.x + offset;
+      let anchor: "start" | "end" = "start";
+      if (lx + w > INDIA_VIEW_W - 4) {
+        lx = m.x - offset;
+        anchor = "end";
+      }
+      const box = anchor === "start"
+        ? { x1: lx, y1: m.y - h / 2, x2: lx + w, y2: m.y + h / 2 }
+        : { x1: lx - w, y1: m.y - h / 2, x2: lx, y2: m.y + h / 2 };
+      // Hide if label would still escape the map vertically/left.
+      const inBounds = box.x1 >= 4 && box.x2 <= INDIA_VIEW_W - 4 && box.y1 >= 4 && box.y2 <= INDIA_VIEW_H - 4;
       const collides = placed.some(
         (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
       );
-      if (!collides) placed.push(box);
-      return { ...m, showLabel: !collides, fs, lx, ly: m.y + fs * 0.35 };
+      const show = inBounds && !collides;
+      if (show) placed.push(box);
+      return { ...m, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
     });
   })();
 
