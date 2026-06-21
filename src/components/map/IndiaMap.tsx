@@ -20,6 +20,33 @@ import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
+/**
+ * Tunables — adjust how many city markers/labels appear at each zoom level.
+ * `scale` = view.w / INDIA_VIEW_W. 1.0 = full India view; smaller = zoomed in.
+ */
+const CITY_VISIBILITY = {
+  /** When scale >= this, only `MAJOR_CITY_SLUGS` are rendered. Below, all show. */
+  majorOnlyAboveScale: 0.7,
+  /** Hard cap on markers at the full India view (destinations mode). */
+  maxAtIndiaView: 14,
+  /** Hard cap on markers once a state is selected (zoomed in). */
+  maxAtStateView: 40,
+};
+
+/** Responsive target sizes (CSS pixels) for markers + labels. */
+const SIZE_BREAKPOINTS = [
+  { maxWidth: 640,      markerR: 4.5, fontPx: 10,   strokePx: 1.4, haloFactor: 1.9 },
+  { maxWidth: 1024,     markerR: 5.5, fontPx: 11,   strokePx: 1.6, haloFactor: 1.9 },
+  { maxWidth: Infinity, markerR: 6.5, fontPx: 12.5, strokePx: 1.8, haloFactor: 2.0 },
+] as const;
+
+function sizingFor(containerWidth: number) {
+  return (
+    SIZE_BREAKPOINTS.find((b) => containerWidth <= b.maxWidth) ??
+    SIZE_BREAKPOINTS[SIZE_BREAKPOINTS.length - 1]
+  );
+}
+
 // Region-based pastel travel palette. Two tones per region so neighbors differ.
 const REGION_PALETTE: Record<string, [string, string]> = {
   north:     ["#cfe3c8", "#dbe9c6"], // sage green
@@ -88,6 +115,18 @@ export function IndiaMap() {
   // Tooltip position (svg user coords)
   const [tip, setTip] = useState<{ x: number; y: number } | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+
+  // Track container width so markers/labels scale across mobile/tablet/desktop.
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(1024);
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const ro = new ResizeObserver((entries) => {
+      for (const e of entries) setContainerWidth(e.contentRect.width);
+    });
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
 
   const selectedGeo = selected
     ? INDIA_STATE_GEOS.find((g) => g.slug === selected) ?? null
@@ -193,47 +232,79 @@ export function IndiaMap() {
     "madurai", "pune",
   ]);
 
-  // Apparent zoom factor: <1 when zoomed in, so we scale markers/labels to stay constant in CSS px.
+  // Apparent zoom factor: <1 when zoomed in.
   const scale = view.w / INDIA_VIEW_W;
 
-  // Which markers to render + greedy label placement to avoid overlap.
+  // Responsive sizing. Convert CSS-px targets → SVG units so they stay constant on screen.
+  const sizing = sizingFor(containerWidth);
+  // svg-units-per-css-px at the current viewBox + container width.
+  const svgPerCssPx = view.w / Math.max(1, containerWidth);
+  const fs = sizing.fontPx * svgPerCssPx;
+  const markerR = sizing.markerR * svgPerCssPx;
+  const markerStroke = sizing.strokePx * svgPerCssPx;
+  const haloFactor = sizing.haloFactor;
+  const charW = fs * 0.55;
+  const labelOffset = markerR + 3 * svgPerCssPx;
+  const edgePad = 4 * svgPerCssPx;
+
+  // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
   const visibleMarkers = (() => {
     let pool: { dest: Destination; x: number; y: number; name: string }[] = [];
     if (selected) {
-      pool = stateDestMarkers;
+      pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
     } else if (mode === "destinations") {
-      pool = allDestMarkers
-        .filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
+      const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
+      const filtered = useMajorOnly
+        ? allDestMarkers.filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
+        : allDestMarkers;
+      pool = filtered
+        .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
         .map((m) => ({ ...m, name: m.dest.name }));
     }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
-    const fs = 11 * scale;          // ~12-13px CSS at typical render width
-    const charW = fs * 0.55;
-    const markerR = 5.5 * scale;
-    const offset = markerR + 3 * scale;
+    const h = fs + 2 * svgPerCssPx;
+    const fitText = (name: string, maxW: number): string => {
+      if (maxW <= charW * 2) return ""; // no room even for "A…"
+      const fullW = name.length * charW;
+      if (fullW <= maxW) return name;
+      const maxChars = Math.max(1, Math.floor(maxW / charW) - 1);
+      return name.slice(0, maxChars).trimEnd() + "…";
+    };
     return pool.map((m) => {
-      const w = m.name.length * charW + 3 * scale;
-      const h = fs + 2 * scale;
-      // Default label to the right; flip to the left if it would overflow the map.
-      let lx = m.x + offset;
-      let anchor: "start" | "end" = "start";
-      if (lx + w > INDIA_VIEW_W - 4) {
-        lx = m.x - offset;
-        anchor = "end";
+      const rightRoom = INDIA_VIEW_W - edgePad - (m.x + labelOffset);
+      const leftRoom = (m.x - labelOffset) - edgePad;
+      const desiredW = m.name.length * charW + 3 * svgPerCssPx;
+      // Pick the side with more room when the full label doesn't fit either side.
+      let anchor: "start" | "end";
+      let lx: number;
+      let maxW: number;
+      if (desiredW <= rightRoom) {
+        anchor = "start"; lx = m.x + labelOffset; maxW = rightRoom;
+      } else if (desiredW <= leftRoom) {
+        anchor = "end"; lx = m.x - labelOffset; maxW = leftRoom;
+      } else if (rightRoom >= leftRoom) {
+        anchor = "start"; lx = m.x + labelOffset; maxW = rightRoom;
+      } else {
+        anchor = "end"; lx = m.x - labelOffset; maxW = leftRoom;
       }
+      const label = fitText(m.name, maxW);
+      const labelW = Math.min(desiredW, Math.max(0, label.length * charW + 3 * svgPerCssPx));
       const box = anchor === "start"
-        ? { x1: lx, y1: m.y - h / 2, x2: lx + w, y2: m.y + h / 2 }
-        : { x1: lx - w, y1: m.y - h / 2, x2: lx, y2: m.y + h / 2 };
-      // Hide if label would still escape the map vertically/left.
-      const inBounds = box.x1 >= 4 && box.x2 <= INDIA_VIEW_W - 4 && box.y1 >= 4 && box.y2 <= INDIA_VIEW_H - 4;
+        ? { x1: lx, y1: m.y - h / 2, x2: lx + labelW, y2: m.y + h / 2 }
+        : { x1: lx - labelW, y1: m.y - h / 2, x2: lx, y2: m.y + h / 2 };
+      const inBounds =
+        label.length > 0 &&
+        box.x1 >= edgePad && box.x2 <= INDIA_VIEW_W - edgePad &&
+        box.y1 >= edgePad && box.y2 <= INDIA_VIEW_H - edgePad;
       const collides = placed.some(
         (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
       );
       const show = inBounds && !collides;
       if (show) placed.push(box);
-      return { ...m, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
+      return { ...m, label, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
     });
   })();
+
 
   const hoveredState = hovered ? stateBySlug.get(hovered) ?? null : null;
 
@@ -256,6 +327,7 @@ export function IndiaMap() {
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)]">
       {/* Map */}
       <div
+        ref={containerRef}
         className="relative overflow-hidden rounded-2xl border border-border shadow-sm"
         style={{
           background:
@@ -310,7 +382,12 @@ export function IndiaMap() {
             <filter id="state-glow" x="-20%" y="-20%" width="140%" height="140%">
               <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#ff9933" floodOpacity="0.55" />
             </filter>
+            {/* Hard clip: labels/markers can never escape the India viewport. */}
+            <clipPath id="india-bounds">
+              <rect x="0" y="0" width={INDIA_VIEW_W} height={INDIA_VIEW_H} />
+            </clipPath>
           </defs>
+
 
           <g filter="url(#india-shadow)">
             {INDIA_STATE_GEOS.map((g: StateGeo) => {
@@ -350,11 +427,12 @@ export function IndiaMap() {
           </g>
 
 
-          {/* Destination markers — unified, scale-aware, with overlap-safe labels */}
-          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly, anchor }) => {
+          {/* Destination markers — sized in CSS px, hard-clipped to the India bounds */}
+          <g clipPath="url(#india-bounds)">
+          {visibleMarkers.map(({ dest, x, y, label, showLabel, fs, lx, ly, anchor }) => {
             const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
-            const r = (isActive ? 6.5 : 5.5) * scale;
-            const haloR = r * 1.9;
+            const r = isActive ? markerR * 1.18 : markerR;
+            const haloR = r * haloFactor;
             return (
               <g
                 key={dest.id}
@@ -372,7 +450,7 @@ export function IndiaMap() {
                   cx={x} cy={y} r={r}
                   fill="var(--primary)"
                   stroke="#ffffff"
-                  strokeWidth={1.6 * scale}
+                  strokeWidth={markerStroke}
                   style={{ transition: "r 150ms ease" }}
                 />
                 {showLabel && (
@@ -386,16 +464,18 @@ export function IndiaMap() {
                     style={{
                       paintOrder: "stroke",
                       stroke: "rgba(255,255,255,0.95)",
-                      strokeWidth: 3.2 * scale,
+                      strokeWidth: 3.2 * svgPerCssPx,
                       strokeLinejoin: "round",
                     }}
                   >
-                    {name}
+                    {label}
                   </text>
                 )}
               </g>
             );
           })}
+          </g>
+
 
           {/* Hover tooltip — scaled so it stays a consistent size on screen */}
           {hoveredState && tip && !selected && (() => {
