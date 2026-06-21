@@ -427,11 +427,12 @@ export function IndiaMap() {
           </g>
 
 
-          {/* Destination markers — unified, scale-aware, with overlap-safe labels */}
-          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly, anchor }) => {
+          {/* Destination markers — sized in CSS px, hard-clipped to the India bounds */}
+          <g clipPath="url(#india-bounds)">
+          {visibleMarkers.map(({ dest, x, y, label, showLabel, fs, lx, ly, anchor }) => {
             const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
-            const r = (isActive ? 6.5 : 5.5) * scale;
-            const haloR = r * 1.9;
+            const r = isActive ? markerR * 1.18 : markerR;
+            const haloR = r * haloFactor;
             return (
               <g
                 key={dest.id}
@@ -449,7 +450,7 @@ export function IndiaMap() {
                   cx={x} cy={y} r={r}
                   fill="var(--primary)"
                   stroke="#ffffff"
-                  strokeWidth={1.6 * scale}
+                  strokeWidth={markerStroke}
                   style={{ transition: "r 150ms ease" }}
                 />
                 {showLabel && (
@@ -463,16 +464,18 @@ export function IndiaMap() {
                     style={{
                       paintOrder: "stroke",
                       stroke: "rgba(255,255,255,0.95)",
-                      strokeWidth: 3.2 * scale,
+                      strokeWidth: 3.2 * svgPerCssPx,
                       strokeLinejoin: "round",
                     }}
                   >
-                    {name}
+                    {label}
                   </text>
                 )}
               </g>
             );
           })}
+          </g>
+
 
           {/* Hover tooltip — scaled so it stays a consistent size on screen */}
           {hoveredState && tip && !selected && (() => {
