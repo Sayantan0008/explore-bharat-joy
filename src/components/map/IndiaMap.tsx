@@ -207,20 +207,31 @@ export function IndiaMap() {
         .map((m) => ({ ...m, name: m.dest.name }));
     }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
-    const fs = 11 * scale;          // ~11px on screen regardless of zoom
+    const fs = 11 * scale;          // ~12-13px CSS at typical render width
     const charW = fs * 0.55;
-    const offset = 5 * scale;
+    const markerR = 5.5 * scale;
+    const offset = markerR + 3 * scale;
     return pool.map((m) => {
       const w = m.name.length * charW + 3 * scale;
       const h = fs + 2 * scale;
-      const lx = m.x + offset;
-      const ly = m.y - h / 2;
-      const box = { x1: lx, y1: ly, x2: lx + w, y2: ly + h };
+      // Default label to the right; flip to the left if it would overflow the map.
+      let lx = m.x + offset;
+      let anchor: "start" | "end" = "start";
+      if (lx + w > INDIA_VIEW_W - 4) {
+        lx = m.x - offset;
+        anchor = "end";
+      }
+      const box = anchor === "start"
+        ? { x1: lx, y1: m.y - h / 2, x2: lx + w, y2: m.y + h / 2 }
+        : { x1: lx - w, y1: m.y - h / 2, x2: lx, y2: m.y + h / 2 };
+      // Hide if label would still escape the map vertically/left.
+      const inBounds = box.x1 >= 4 && box.x2 <= INDIA_VIEW_W - 4 && box.y1 >= 4 && box.y2 <= INDIA_VIEW_H - 4;
       const collides = placed.some(
         (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
       );
-      if (!collides) placed.push(box);
-      return { ...m, showLabel: !collides, fs, lx, ly: m.y + fs * 0.35 };
+      const show = inBounds && !collides;
+      if (show) placed.push(box);
+      return { ...m, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
     });
   })();
 
@@ -340,10 +351,10 @@ export function IndiaMap() {
 
 
           {/* Destination markers — unified, scale-aware, with overlap-safe labels */}
-          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly }) => {
+          {visibleMarkers.map(({ dest, x, y, name, showLabel, fs, lx, ly, anchor }) => {
             const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
-            const r = (isActive ? 3.2 : 2.2) * scale;
-            const haloR = r * 2.2;
+            const r = (isActive ? 6.5 : 5.5) * scale;
+            const haloR = r * 1.9;
             return (
               <g
                 key={dest.id}
@@ -360,8 +371,8 @@ export function IndiaMap() {
                 <circle
                   cx={x} cy={y} r={r}
                   fill="var(--primary)"
-                  stroke="var(--background)"
-                  strokeWidth={1.1 * scale}
+                  stroke="#ffffff"
+                  strokeWidth={1.6 * scale}
                   style={{ transition: "r 150ms ease" }}
                 />
                 {showLabel && (
@@ -369,12 +380,13 @@ export function IndiaMap() {
                     x={lx}
                     y={ly}
                     fontSize={fs}
-                    fontWeight={isActive ? 600 : 500}
+                    fontWeight={isActive ? 700 : 600}
+                    textAnchor={anchor}
                     className="pointer-events-none fill-foreground"
                     style={{
                       paintOrder: "stroke",
-                      stroke: "rgba(255,255,255,0.92)",
-                      strokeWidth: 3 * scale,
+                      stroke: "rgba(255,255,255,0.95)",
+                      strokeWidth: 3.2 * scale,
                       strokeLinejoin: "round",
                     }}
                   >
