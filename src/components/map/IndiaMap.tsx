@@ -382,7 +382,12 @@ export function IndiaMap() {
             <filter id="state-glow" x="-20%" y="-20%" width="140%" height="140%">
               <feDropShadow dx="0" dy="0" stdDeviation="6" floodColor="#ff9933" floodOpacity="0.55" />
             </filter>
+            {/* Hard clip: labels/markers can never escape the India viewport. */}
+            <clipPath id="india-bounds">
+              <rect x="0" y="0" width={INDIA_VIEW_W} height={INDIA_VIEW_H} />
+            </clipPath>
           </defs>
+
 
           <g filter="url(#india-shadow)">
             {INDIA_STATE_GEOS.map((g: StateGeo) => {
