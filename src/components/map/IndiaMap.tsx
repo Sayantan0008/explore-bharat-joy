@@ -36,8 +36,9 @@ const CITY_VISIBILITY = {
 /** Responsive target sizes (CSS pixels) for markers + labels. */
 const SIZE_BREAKPOINTS = [
   { maxWidth: 640,      markerR: 4.5, fontPx: 10,   strokePx: 1.4, haloFactor: 1.9 },
-  { maxWidth: 1024,     markerR: 5.5, fontPx: 11,   strokePx: 1.6, haloFactor: 1.9 },
-  { maxWidth: Infinity, markerR: 6.5, fontPx: 12.5, strokePx: 1.8, haloFactor: 2.0 },
+  { maxWidth: 1024,     markerR: 7.5, fontPx: 12.5, strokePx: 1.8, haloFactor: 2.0 },
+  { maxWidth: 1440,     markerR: 9,   fontPx: 13.5, strokePx: 2.0, haloFactor: 2.0 },
+  { maxWidth: Infinity, markerR: 10.5, fontPx: 14.5, strokePx: 2.2, haloFactor: 2.1 },
 ] as const;
 
 function sizingFor(containerWidth: number) {
