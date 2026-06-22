@@ -1,11 +1,22 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { Container } from "@/components/layout/Container";
 import { SmartImage } from "@/components/media/SmartImage";
-import { DestinationCard, FoodCard, FestivalCard, StatPill } from "@/components/cards/Cards";
-import { getStateBySlug } from "@/content/states";
-import { getDestinationsByState } from "@/content/destinations";
+import { DestinationCard, FoodCard, FestivalCard, StatPill, StateCard } from "@/components/cards/Cards";
+import { getStateBySlug, getAllStates } from "@/content/states";
+import { getDestinationsByState, getFeaturedDestinations } from "@/content/destinations";
 import { getFoodsByState } from "@/content/foods";
 import { getFestivalsByState } from "@/content/festivals";
+import { getStateExtras } from "@/data/stateExtras";
+import {
+  CitiesSection,
+  MustVisitSection,
+  ThingsToDoSection,
+  SeasonsSection,
+  TravelInfoSection,
+  NearbyStatesSection,
+  GallerySection,
+  FaqSection,
+} from "@/components/state/StateSections";
 
 export const Route = createFileRoute("/states/$slug")({
   loader: ({ params }) => {
@@ -55,6 +66,11 @@ function StateDetail() {
   const foods = getFoodsByState(state.slug);
   const fests = getFestivalsByState(state.slug);
   const isStub = state.status === "stub";
+  const extras = getStateExtras(state.slug, state.capital);
+  const allStates = getAllStates();
+  const popularStates = allStates.filter((s) => s.status === "showcase" && s.slug !== state.slug).slice(0, 4);
+  const popularDests = getFeaturedDestinations().filter((d) => d.stateSlug !== state.slug).slice(0, 4);
+  const mustVisit = dests.slice(0, 4);
 
   return (
     <>
@@ -128,6 +144,52 @@ function StateDetail() {
               <p className="text-base leading-relaxed text-foreground/85">{state.culture}</p>
             </section>
           )}
+
+          <CitiesSection cities={extras.cities} />
+          <MustVisitSection destinations={mustVisit} />
+          <ThingsToDoSection items={extras.experiences} />
+          <SeasonsSection seasons={extras.seasons} />
+          <TravelInfoSection travel={extras.travel} />
+          <NearbyStatesSection slugs={extras.neighbors} />
+          <GallerySection seeds={extras.gallerySeeds} stateName={state.name} />
+          <FaqSection items={extras.faqs} stateName={state.name} />
+
+          {/* Continue exploring */}
+          <section className="mt-16 border-t border-border pt-12">
+            <h2 className="mb-6 font-display text-2xl font-semibold">Continue exploring</h2>
+            {popularStates.length > 0 && (
+              <div className="mb-10">
+                <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-muted-foreground">Related states</h3>
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                  {popularStates.map((s) => <StateCard key={s.id} state={s} />)}
+                </div>
+              </div>
+            )}
+            {popularDests.length > 0 && (
+              <div className="mb-10">
+                <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-muted-foreground">Popular destinations</h3>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {popularDests.map((d) => <DestinationCard key={d.id} dest={d} />)}
+                </div>
+              </div>
+            )}
+            {foods.length > 0 && (
+              <div className="mb-10">
+                <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-muted-foreground">Famous foods</h3>
+                <div className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:grid-cols-5">
+                  {foods.slice(0, 5).map((f) => <FoodCard key={f.id} food={f} />)}
+                </div>
+              </div>
+            )}
+            {fests.length > 0 && (
+              <div>
+                <h3 className="mb-4 text-sm font-medium uppercase tracking-wider text-muted-foreground">Major festivals</h3>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                  {fests.slice(0, 4).map((f) => <FestivalCard key={f.id} festival={f} />)}
+                </div>
+              </div>
+            )}
+          </section>
         </Container>
       )}
 
@@ -145,6 +207,20 @@ function StateDetail() {
               Browse featured states
             </Link>
           </div>
+
+          <ThingsToDoSection items={extras.experiences} />
+          <SeasonsSection seasons={extras.seasons} />
+          <TravelInfoSection travel={extras.travel} />
+          <NearbyStatesSection slugs={extras.neighbors} />
+          <GallerySection seeds={extras.gallerySeeds} stateName={state.name} />
+          <FaqSection items={extras.faqs} stateName={state.name} />
+
+          <section className="mt-16 border-t border-border pt-12">
+            <h2 className="mb-6 font-display text-2xl font-semibold">Continue exploring</h2>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {popularStates.map((s) => <StateCard key={s.id} state={s} />)}
+            </div>
+          </section>
         </Container>
       )}
     </>
