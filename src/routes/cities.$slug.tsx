@@ -129,7 +129,7 @@ function CityDetail() {
           <section className="mt-14">
             <h2 className="mb-5 font-display text-2xl font-semibold">Things to do in {city.name}</h2>
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {city.thingsToDo.map((t) => (
+              {city.thingsToDo.map((t: string) => (
                 <li key={t} className="rounded-2xl border border-border bg-card p-4 text-sm text-foreground/85">
                   · {t}
                 </li>
