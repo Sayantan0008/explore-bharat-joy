@@ -90,4 +90,18 @@ export const FOODS: Food[] = [
     description: "Translucent ash-gourd candy from Agra — sold in dozens of varieties around the lanes near the Taj." },
   { id: "f-kachori-sabzi", slug: "kachori-sabzi", name: "Kachori Sabzi", stateSlug: "uttar-pradesh", category: "Breakfast", image: "", vegetarian: true,
     description: "Banarasi-style flaky kachoris with a spiced potato curry — the classic Varanasi street breakfast." },
+
+  // Goa — extended
+  { id: "f-prawn-balchao", slug: "prawn-balchao", name: "Prawn Balchão", stateSlug: "goa", category: "Pickle", image: "", vegetarian: false,
+    description: "Prawns preserved in a fiery red masala of dried Kashmiri chillies, vinegar and palm-feni — a Goan-Portuguese pickle that doubles as a side dish." },
+  { id: "f-sorpotel", slug: "sorpotel", name: "Sorpotel", stateSlug: "goa", category: "Main", image: "", vegetarian: false,
+    description: "A vinegar-sharp pork-and-offal stew that improves over three days — Goan Catholic festive food, traditionally served with sannas." },
+  { id: "f-sannas", slug: "sannas", name: "Sannas", stateSlug: "goa", category: "Bread", image: "", vegetarian: true,
+    description: "Steamed, lightly sweet rice cakes leavened with toddy or yeast — the traditional partner to sorpotel and vindaloo." },
+
+  // West Bengal — extended
+  { id: "f-kathi-roll", slug: "kathi-roll", name: "Kathi Roll", stateSlug: "west-bengal", category: "Snack", image: "", vegetarian: false,
+    description: "Skewered kebabs rolled inside a flaky egg-coated paratha with onions, chillies and lime — invented at Nizam's in Kolkata in the 1930s." },
+  { id: "f-chingri-malai", slug: "chingri-malai-curry", name: "Chingri Malai Curry", stateSlug: "west-bengal", category: "Main", image: "", vegetarian: false,
+    description: "Tiger prawns simmered in a delicate coconut-milk curry scented with green cardamom — the dish of a Bengali wedding lunch." },
 ];

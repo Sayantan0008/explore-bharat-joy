@@ -23,6 +23,7 @@ import { Route as InterestsSlugRouteImport } from './routes/interests.$slug'
 import { Route as FoodsSlugRouteImport } from './routes/foods.$slug'
 import { Route as FestivalsSlugRouteImport } from './routes/festivals.$slug'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
+import { Route as CitiesSlugRouteImport } from './routes/cities.$slug'
 
 const StatesRoute = StatesRouteImport.update({
   id: '/states',
@@ -94,6 +95,11 @@ const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => DestinationsRoute,
 } as any)
+const CitiesSlugRoute = CitiesSlugRouteImport.update({
+  id: '/cities/$slug',
+  path: '/cities/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRouteWithChildren
+  '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/foods/$slug': typeof FoodsSlugRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRouteWithChildren
+  '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/foods/$slug': typeof FoodsSlugRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRouteWithChildren
+  '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/foods/$slug': typeof FoodsSlugRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/states'
+    | '/cities/$slug'
     | '/destinations/$slug'
     | '/festivals/$slug'
     | '/foods/$slug'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/states'
+    | '/cities/$slug'
     | '/destinations/$slug'
     | '/festivals/$slug'
     | '/foods/$slug'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/states'
+    | '/cities/$slug'
     | '/destinations/$slug'
     | '/festivals/$slug'
     | '/foods/$slug'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatesRoute: typeof StatesRouteWithChildren
+  CitiesSlugRoute: typeof CitiesSlugRoute
   InterestsSlugRoute: typeof InterestsSlugRoute
 }
 
@@ -308,6 +321,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsSlugRouteImport
       parentRoute: typeof DestinationsRoute
     }
+    '/cities/$slug': {
+      id: '/cities/$slug'
+      path: '/cities/$slug'
+      fullPath: '/cities/$slug'
+      preLoaderRoute: typeof CitiesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -366,18 +386,9 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatesRoute: StatesRouteWithChildren,
+  CitiesSlugRoute: CitiesSlugRoute,
   InterestsSlugRoute: InterestsSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

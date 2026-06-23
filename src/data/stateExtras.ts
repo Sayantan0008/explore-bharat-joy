@@ -10,6 +10,9 @@ export interface CityInfo {
   famousFoods: string[];
   majorFestivals: string[];
   coords?: { lat: number; lng: number };
+  overview?: string;
+  thingsToDo?: string[];
+  nearbyAttractionSlugs?: string[];
 }
 
 export interface SeasonInfo {
@@ -141,9 +144,50 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
 
   goa: {
     cities: [
-      { slug: "panaji", name: "Panaji", stateSlug: "goa", shortDescription: "Goa's compact capital with the candy-coloured Fontainhas quarter.", attractionsCount: 5, famousFoods: ["Pork Vindaloo", "Bebinca", "Prawn Balchão"], majorFestivals: ["Goa Carnival", "Sao Joao"], coords: { lat: 15.4909, lng: 73.8278 } },
-      { slug: "old-goa", name: "Old Goa", stateSlug: "goa", shortDescription: "UNESCO ensemble of baroque Portuguese-era churches.", attractionsCount: 4, famousFoods: ["Sorpotel", "Sannas"], majorFestivals: ["Feast of St Francis Xavier"], coords: { lat: 15.5031, lng: 73.9116 } },
-      { slug: "margao", name: "Margao", stateSlug: "goa", shortDescription: "South Goa's market town and gateway to Palolem and Colva.", attractionsCount: 3, famousFoods: ["Xacuti", "Fish Curry Rice"], majorFestivals: ["Carnival", "Christmas"], coords: { lat: 15.2832, lng: 73.9862 } },
+      {
+        slug: "panaji", name: "Panaji", stateSlug: "goa",
+        shortDescription: "Goa's compact capital with the candy-coloured Fontainhas quarter.",
+        overview: "Panaji (Panjim) sits where the Mandovi meets the Arabian Sea. The Latin Quarter of Fontainhas, with ochre, blue and lime-green Portuguese houses, is a 15-minute walk that anchors any first visit. Across the river, casino boats glow at night; behind town, the white wedding-cake church of Our Lady of the Immaculate Conception steps down to 18th of June Road.",
+        thingsToDo: ["Fontainhas heritage walk", "Mandovi sunset cruise", "Bar-hop along 31st January Road", "Day ferry to Divar Island"],
+        attractionsCount: 6,
+        famousFoods: ["Pork Vindaloo", "Bebinca", "Prawn Balchão", "Fish Curry Rice"],
+        majorFestivals: ["Goa Carnival", "São João", "Feast of St Francis Xavier"],
+        nearbyAttractionSlugs: ["panaji", "old-goa", "fort-aguada", "mangueshi-temple", "anjuna"],
+        coords: { lat: 15.4909, lng: 73.8278 },
+      },
+      {
+        slug: "old-goa", name: "Old Goa", stateSlug: "goa",
+        shortDescription: "UNESCO ensemble of baroque Portuguese-era churches.",
+        overview: "Once larger than Lisbon, Old Goa is now a quiet cluster of monumental churches set among coconut groves. The Basilica of Bom Jesus holds the relics of St Francis Xavier; the Sé Cathedral is one of the largest churches in Asia. A morning is enough to see the highlights, ideally before the coach tours arrive.",
+        thingsToDo: ["Visit St Francis Xavier's relics", "Cycle between the churches", "Walk to the Viceroy's Arch on the river"],
+        attractionsCount: 5,
+        famousFoods: ["Sorpotel", "Sannas", "Bebinca"],
+        majorFestivals: ["Feast of St Francis Xavier"],
+        nearbyAttractionSlugs: ["old-goa", "panaji", "mangueshi-temple"],
+        coords: { lat: 15.5031, lng: 73.9116 },
+      },
+      {
+        slug: "margao", name: "Margao", stateSlug: "goa",
+        shortDescription: "South Goa's market town and gateway to Palolem and Colva.",
+        overview: "Margao (Madgaon) is south Goa's commercial centre and railway gateway. The covered Municipal Market is one of the best in the state for fish, fruit and spices; the Largo de Igreja square preserves an elegant whitewashed Portuguese church and a tight grid of nineteenth-century town houses.",
+        thingsToDo: ["Wander the Margao Municipal Market", "Heritage walk through Borda and Fontainhas-style lanes", "Day trip to Palolem or Cola"],
+        attractionsCount: 5,
+        famousFoods: ["Xacuti", "Fish Curry Rice", "Sorpotel"],
+        majorFestivals: ["Goa Carnival", "Christmas"],
+        nearbyAttractionSlugs: ["palolem", "cola-beach", "bhagwan-mahaveer-sanctuary", "dudhsagar"],
+        coords: { lat: 15.2832, lng: 73.9862 },
+      },
+      {
+        slug: "calangute", name: "Calangute & Baga", stateSlug: "goa",
+        shortDescription: "North Goa's beach hub — water sports, beach shacks and the Saturday Night Market nearby.",
+        overview: "The five-kilometre stretch from Candolim through Calangute to Baga is north Goa's busiest beach belt. Days revolve around shacks and water sports; nights spread across Tito's Lane, Soro and the open-air clubs at Anjuna and Vagator a short ride away.",
+        thingsToDo: ["Parasailing and jet-ski at Baga", "Sunset drinks at Britto's", "Saturday Night Market at Arpora", "Fort Aguada side trip"],
+        attractionsCount: 5,
+        famousFoods: ["Goan Fish Curry", "Prawn Balchão", "Bebinca"],
+        majorFestivals: ["Sunburn Festival", "Goa Carnival"],
+        nearbyAttractionSlugs: ["baga-calangute", "fort-aguada", "anjuna"],
+        coords: { lat: 15.5439, lng: 73.7553 },
+      },
     ],
     experiences: [
       { label: "Beach Activities", icon: "🏖", blurb: "Sunbathe, parasail, paddle-board and surf along the coast." },
@@ -185,9 +229,50 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
 
   "west-bengal": {
     cities: [
-      { slug: "kolkata", name: "Kolkata", stateSlug: "west-bengal", shortDescription: "Literary capital — coffee houses, trams, Durga Puja and Park Street.", attractionsCount: 9, famousFoods: ["Rasgulla", "Kathi Roll", "Macher Jhol", "Mishti Doi"], majorFestivals: ["Durga Puja", "Poila Boishakh", "Kolkata Book Fair"], coords: { lat: 22.5726, lng: 88.3639 } },
-      { slug: "darjeeling", name: "Darjeeling", stateSlug: "west-bengal", shortDescription: "Tea-estate hill town with Kanchenjunga views and a UNESCO toy train.", attractionsCount: 7, famousFoods: ["Momos", "Thukpa", "Darjeeling Tea"], majorFestivals: ["Tea & Tourism Festival"], coords: { lat: 27.041, lng: 88.2627 } },
-      { slug: "shantiniketan", name: "Shantiniketan", stateSlug: "west-bengal", shortDescription: "Tagore's UNESCO-listed open-air university campus.", attractionsCount: 4, famousFoods: ["Mishti", "Pithe"], majorFestivals: ["Poush Mela", "Basanta Utsav"], coords: { lat: 23.6803, lng: 87.685 } },
+      {
+        slug: "kolkata", name: "Kolkata", stateSlug: "west-bengal",
+        shortDescription: "Literary capital — coffee houses, trams, Durga Puja and Park Street.",
+        overview: "Kolkata is India's intellectual and literary heart. Yellow Ambassador taxis nose through Esplanade traffic, trams still rumble past Maidan, and the second-hand booksellers of College Street trade in everything from Tagore first editions to medical textbooks. Park Street has been the city's night-out address since the 1960s.",
+        thingsToDo: ["Tram ride through central Kolkata", "Walking tour of Kumartuli idol-makers", "Coffee House on College Street", "Dinner crawl down Park Street", "Sunset at Princep Ghat"],
+        attractionsCount: 10,
+        famousFoods: ["Rosogolla", "Kathi Roll", "Macher Jhol", "Mishti Doi", "Kosha Mangsho"],
+        majorFestivals: ["Durga Puja", "Kali Puja", "Poila Boishakh", "Kolkata Book Fair", "Saraswati Puja"],
+        nearbyAttractionSlugs: ["kolkata", "belur-math", "sundarbans", "shantiniketan", "bishnupur"],
+        coords: { lat: 22.5726, lng: 88.3639 },
+      },
+      {
+        slug: "darjeeling", name: "Darjeeling", stateSlug: "west-bengal",
+        shortDescription: "Tea-estate hill town with Kanchenjunga views and a UNESCO toy train.",
+        overview: "Darjeeling sits at 2,000 metres looking straight at Kanchenjunga, the world's third-highest peak. The town is built around the Chowrasta promenade, the steam-hauled Darjeeling Himalayan Railway and the tea estates that fan out from Happy Valley. Spring and autumn give the clearest mountain views.",
+        thingsToDo: ["Toy-train joy ride to Ghum", "Sunrise at Tiger Hill", "Tea-tasting at Happy Valley Estate", "Padmaja Naidu Himalayan Zoo"],
+        attractionsCount: 8,
+        famousFoods: ["Momos", "Thukpa", "Darjeeling Tea", "Sel Roti"],
+        majorFestivals: ["Tea & Tourism Festival", "Losar"],
+        nearbyAttractionSlugs: ["darjeeling", "kalimpong", "gorumara"],
+        coords: { lat: 27.041, lng: 88.2627 },
+      },
+      {
+        slug: "shantiniketan", name: "Shantiniketan", stateSlug: "west-bengal",
+        shortDescription: "Tagore's UNESCO-listed open-air university campus.",
+        overview: "Rabindranath Tagore's Visva-Bharati campus is set in the red-soil Birbhum countryside. Classes are held under the trees, the Kala Bhavana art school is a working museum of murals and sculpture, and the weekly Sonajhuri Haat sells tribal crafts under sal trees.",
+        thingsToDo: ["Walk the Visva-Bharati campus", "Saturday Sonajhuri Haat", "Visit Tagore's home Uttarayan", "Catch a Baul performance"],
+        attractionsCount: 5,
+        famousFoods: ["Mishti", "Pithe", "Khaja"],
+        majorFestivals: ["Poush Mela", "Basanta Utsav"],
+        nearbyAttractionSlugs: ["shantiniketan", "bishnupur", "kolkata"],
+        coords: { lat: 23.6803, lng: 87.685 },
+      },
+      {
+        slug: "kalimpong", name: "Kalimpong", stateSlug: "west-bengal",
+        shortDescription: "Quiet Himalayan ridge town of monasteries, orchids and colonial schools.",
+        overview: "Between Darjeeling and Sikkim, Kalimpong sits on a long ridge above the Teesta river. The town is famous for Buddhist monasteries (Durpin and Tharpa Choling), colonial-era boarding schools and the cactus and orchid nurseries on the road to Deolo.",
+        thingsToDo: ["Paragliding from Deolo Hill", "Visit Durpin Gompa", "Day trip to Lava and Lolegaon", "Tour an orchid nursery"],
+        attractionsCount: 5,
+        famousFoods: ["Momos", "Thukpa", "Kalimpong Cheese"],
+        majorFestivals: ["Losar", "Tea & Tourism Festival"],
+        nearbyAttractionSlugs: ["kalimpong", "darjeeling", "gorumara"],
+        coords: { lat: 27.0660, lng: 88.4740 },
+      },
     ],
     experiences: [
       { label: "Heritage Walks", icon: "🏛", blurb: "Colonial Kolkata, terracotta temples and Tagore's home." },
