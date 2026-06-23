@@ -56,7 +56,7 @@ const SHOWCASE: State[] = [
     region: "west",
     isUT: false,
     status: "showcase",
-    stats: { attractions: 5, foods: 4, festivals: 3 },
+    stats: { attractions: 10, foods: 7, festivals: 5 },
     overview:
       "Goa is India's smallest state by area and easily its most distinctive — a 450-year Portuguese colony that joined the Republic only in 1961. The result is a hybrid coastal culture: whitewashed churches next to Hindu temples, Konkani cuisine flavoured with vinegar and chillies brought from the New World, and a built environment of tiled-roof villas and slow riverside towns. North Goa draws the party crowd, the south is calmer and more curated, and inland the Western Ghats hide waterfalls, spice farms and a handful of wildlife sanctuaries.",
     culture:
@@ -75,7 +75,7 @@ const SHOWCASE: State[] = [
     region: "east",
     isUT: false,
     status: "showcase",
-    stats: { attractions: 5, foods: 5, festivals: 4 },
+    stats: { attractions: 10, foods: 7, festivals: 6 },
     overview:
       "West Bengal stretches from the high Himalayas at Darjeeling down through the Gangetic plains to the tiger-haunted Sundarbans delta. Kolkata, the capital, is India's intellectual and literary heart — a city of coffee houses, second-hand bookshops, art-house cinema and Durga Puja pandals that turn entire neighbourhoods into outdoor galleries every autumn. Beyond the city, narrow-gauge toy trains climb tea estates, Murshidabad and Bishnupur hide nawabi and terracotta-temple histories, and the mangrove forests of the south shelter the world's largest population of Bengal tigers.",
     culture:

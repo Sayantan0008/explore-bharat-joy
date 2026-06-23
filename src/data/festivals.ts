@@ -97,4 +97,20 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-lath-mar-holi", slug: "lath-mar-holi", name: "Lath Mar Holi", stateSlug: "uttar-pradesh", month: "March", type: "Cultural", image: "",
     description: "The Holi played at Barsana and Nandgaon, where women playfully beat men with bamboo sticks.",
     significance: "A re-enactment of Radha's playful response to Krishna's teasing — held a week before mainstream Holi." },
+
+  // Goa — extended
+  { id: "fest-st-francis-xavier", slug: "feast-of-st-francis-xavier", name: "Feast of St Francis Xavier", stateSlug: "goa", month: "December", type: "Religious", image: "",
+    description: "Nine days of novenas culminating on 3 December at the Basilica of Bom Jesus, where the saint's relics are enshrined.",
+    significance: "Goa's most attended Catholic feast — pilgrims arrive from across India and the Konkan coast." },
+  { id: "fest-bonderam", slug: "bonderam", name: "Bonderam Flag Festival", stateSlug: "goa", month: "August", type: "Cultural", image: "",
+    description: "A monsoon flag festival on Divar Island with a colourful village parade, decorated floats and the famous fotash (paper-pellet) mock battle.",
+    significance: "Commemorates 19th-century property-boundary disputes on Divar; today one of Goa's flagship village festivals." },
+
+  // West Bengal — extended
+  { id: "fest-jagaddhatri-puja", slug: "jagaddhatri-puja", name: "Jagaddhatri Puja", stateSlug: "west-bengal", month: "November", type: "Religious", image: "",
+    description: "A four-day puja best seen at Chandannagar, where the town's pandals and street-spanning light displays rival Kolkata's Durga Puja.",
+    significance: "Chandannagar's electricians light up Durga Puja pandals across India — Jagaddhatri is their home show." },
+  { id: "fest-saraswati-puja", slug: "saraswati-puja", name: "Saraswati Puja", stateSlug: "west-bengal", month: "February", type: "Religious", image: "",
+    description: "Bengal's spring festival of learning — yellow saris, school-and-college courtyards, and the ceremonial first-writing rituals for small children.",
+    significance: "Also informally called Bengal's Valentine's Day; a fixed date in the Bengali cultural calendar." },
 ];
