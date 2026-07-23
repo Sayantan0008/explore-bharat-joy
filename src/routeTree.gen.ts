@@ -18,7 +18,7 @@ import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as StatesSlugRouteImport } from './routes/states.$slug'
+import { Route as StatesSlugRouteImport } from './routes/states_.$slug'
 import { Route as InterestsSlugRouteImport } from './routes/interests.$slug'
 import { Route as FoodsSlugRouteImport } from './routes/foods.$slug'
 import { Route as FestivalsSlugRouteImport } from './routes/festivals.$slug'
@@ -71,9 +71,9 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const StatesSlugRoute = StatesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => StatesRoute,
+  id: '/states_/$slug',
+  path: '/states/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const InterestsSlugRoute = InterestsSlugRouteImport.update({
   id: '/interests/$slug',
@@ -110,7 +110,7 @@ export interface FileRoutesByFullPath {
   '/foods': typeof FoodsRouteWithChildren
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/states': typeof StatesRouteWithChildren
+  '/states': typeof StatesRoute
   '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
@@ -127,7 +127,7 @@ export interface FileRoutesByTo {
   '/foods': typeof FoodsRouteWithChildren
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/states': typeof StatesRouteWithChildren
+  '/states': typeof StatesRoute
   '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
@@ -145,13 +145,13 @@ export interface FileRoutesById {
   '/foods': typeof FoodsRouteWithChildren
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/states': typeof StatesRouteWithChildren
+  '/states': typeof StatesRoute
   '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/foods/$slug': typeof FoodsSlugRoute
   '/interests/$slug': typeof InterestsSlugRoute
-  '/states/$slug': typeof StatesSlugRoute
+  '/states_/$slug': typeof StatesSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -204,7 +204,7 @@ export interface FileRouteTypes {
     | '/festivals/$slug'
     | '/foods/$slug'
     | '/interests/$slug'
-    | '/states/$slug'
+    | '/states_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -216,9 +216,10 @@ export interface RootRouteChildren {
   FoodsRoute: typeof FoodsRouteWithChildren
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  StatesRoute: typeof StatesRouteWithChildren
+  StatesRoute: typeof StatesRoute
   CitiesSlugRoute: typeof CitiesSlugRoute
   InterestsSlugRoute: typeof InterestsSlugRoute
+  StatesSlugRoute: typeof StatesSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -286,12 +287,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/states/$slug': {
-      id: '/states/$slug'
-      path: '/$slug'
+    '/states_/$slug': {
+      id: '/states_/$slug'
+      path: '/states/$slug'
       fullPath: '/states/$slug'
       preLoaderRoute: typeof StatesSlugRouteImport
-      parentRoute: typeof StatesRoute
+      parentRoute: typeof rootRouteImport
     }
     '/interests/$slug': {
       id: '/interests/$slug'
@@ -365,17 +366,6 @@ const FoodsRouteChildren: FoodsRouteChildren = {
 
 const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
 
-interface StatesRouteChildren {
-  StatesSlugRoute: typeof StatesSlugRoute
-}
-
-const StatesRouteChildren: StatesRouteChildren = {
-  StatesSlugRoute: StatesSlugRoute,
-}
-
-const StatesRouteWithChildren =
-  StatesRoute._addFileChildren(StatesRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -385,20 +375,11 @@ const rootRouteChildren: RootRouteChildren = {
   FoodsRoute: FoodsRouteWithChildren,
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  StatesRoute: StatesRouteWithChildren,
+  StatesRoute: StatesRoute,
   CitiesSlugRoute: CitiesSlugRoute,
   InterestsSlugRoute: InterestsSlugRoute,
+  StatesSlugRoute: StatesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
