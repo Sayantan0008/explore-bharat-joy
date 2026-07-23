@@ -386,9 +386,36 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
 
   "himachal-pradesh": {
     cities: [
-      { slug: "shimla", name: "Shimla", stateSlug: "himachal-pradesh", shortDescription: "Former summer capital of British India with Raj-era promenades.", attractionsCount: 6, famousFoods: ["Chana Madra", "Siddu", "Babru"], majorFestivals: ["Summer Festival", "Sipi Fair"], coords: { lat: 31.1048, lng: 77.1734 } },
-      { slug: "manali", name: "Manali", stateSlug: "himachal-pradesh", shortDescription: "Mountain town in the Beas valley — gateway to Lahaul and Spiti.", attractionsCount: 7, famousFoods: ["Trout", "Siddu", "Thukpa"], majorFestivals: ["Winter Carnival", "Hadimba Mela"], coords: { lat: 32.2396, lng: 77.1887 } },
-      { slug: "dharamshala", name: "Dharamshala", stateSlug: "himachal-pradesh", shortDescription: "Seat of the Dalai Lama, with Tibetan monasteries and cafes.", attractionsCount: 5, famousFoods: ["Momos", "Thukpa", "Tibetan Bread"], majorFestivals: ["Losar", "International Himalayan Festival"], coords: { lat: 32.219, lng: 76.3234 } },
+      {
+        slug: "shimla", name: "Shimla", stateSlug: "himachal-pradesh",
+        shortDescription: "Former summer capital of British India with Raj-era promenades.",
+        overview: "Shimla was the summer capital of British India from 1864 to 1939 and still wears the Raj lightly — half-timbered cottages, Christ Church on the Ridge, and the pedestrian Mall lined with deodars. The UNESCO-listed narrow-gauge toy train from Kalka climbs 96 kilometres through 102 tunnels to reach it.",
+        thingsToDo: ["Mall Road & Ridge stroll", "Kalka–Shimla toy train ride", "Jakhu Temple hike", "Viceregal Lodge tour", "Day trip to Kufri or Chail"],
+        attractionsCount: 6, famousFoods: ["Chana Madra", "Siddu", "Babru"],
+        majorFestivals: ["Summer Festival", "Sipi Fair"],
+        nearbyAttractionSlugs: ["shimla", "manali", "kasol"],
+        coords: { lat: 31.1048, lng: 77.1734 },
+      },
+      {
+        slug: "manali", name: "Manali", stateSlug: "himachal-pradesh",
+        shortDescription: "Mountain town in the Beas valley — gateway to Lahaul and Spiti.",
+        overview: "At 2,050 metres on the banks of the Beas, Manali is Himachal's adventure hub — trekking, paragliding and snow-play in Solang Valley, and the launch point for the Rohtang Pass road into Lahaul and Spiti. Old Manali across the river keeps a mellow café-and-guesthouse scene popular with long-stay travellers.",
+        thingsToDo: ["Solang Valley snow & paragliding", "Old Manali café crawl", "Hadimba Temple visit", "Vashisht hot springs", "Rohtang Pass day trip (permit required)"],
+        attractionsCount: 7, famousFoods: ["Trout", "Siddu", "Thukpa"],
+        majorFestivals: ["Winter Carnival", "Hadimba Mela"],
+        nearbyAttractionSlugs: ["manali", "kasol", "spiti", "shimla"],
+        coords: { lat: 32.2396, lng: 77.1887 },
+      },
+      {
+        slug: "dharamshala", name: "Dharamshala", stateSlug: "himachal-pradesh",
+        shortDescription: "Seat of the Dalai Lama, with Tibetan monasteries and cafes.",
+        overview: "Dharamshala and its upper suburb McLeod Ganj have hosted the Tibetan government-in-exile since 1960. The Namgyal Monastery, Tsuglagkhang temple complex and Tibet Museum sit within a few walking minutes of each other, and the Dhauladhar range rises straight up from the town.",
+        thingsToDo: ["Tsuglagkhang Complex & Dalai Lama teachings", "Triund day trek", "Bhagsu waterfall & café stop", "Norbulingka Institute tour", "Cricket at HPCA Stadium"],
+        attractionsCount: 5, famousFoods: ["Momos", "Thukpa", "Tibetan Bread"],
+        majorFestivals: ["Losar", "International Himalayan Festival"],
+        nearbyAttractionSlugs: ["dharamshala", "manali", "kasol"],
+        coords: { lat: 32.219, lng: 76.3234 },
+      },
     ],
     experiences: [
       { label: "Trekking", icon: "🥾", blurb: "Hampta Pass, Triund and Pin Parvati." },
