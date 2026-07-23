@@ -20,9 +20,9 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatesSlugRouteImport } from './routes/states_.$slug'
 import { Route as InterestsSlugRouteImport } from './routes/interests.$slug'
-import { Route as FoodsSlugRouteImport } from './routes/foods.$slug'
-import { Route as FestivalsSlugRouteImport } from './routes/festivals.$slug'
-import { Route as DestinationsSlugRouteImport } from './routes/destinations.$slug'
+import { Route as FoodsSlugRouteImport } from './routes/foods_.$slug'
+import { Route as FestivalsSlugRouteImport } from './routes/festivals_.$slug'
+import { Route as DestinationsSlugRouteImport } from './routes/destinations_.$slug'
 import { Route as CitiesSlugRouteImport } from './routes/cities.$slug'
 
 const StatesRoute = StatesRouteImport.update({
@@ -81,19 +81,19 @@ const InterestsSlugRoute = InterestsSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const FoodsSlugRoute = FoodsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => FoodsRoute,
+  id: '/foods_/$slug',
+  path: '/foods/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const FestivalsSlugRoute = FestivalsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => FestivalsRoute,
+  id: '/festivals_/$slug',
+  path: '/festivals/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => DestinationsRoute,
+  id: '/destinations_/$slug',
+  path: '/destinations/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CitiesSlugRoute = CitiesSlugRouteImport.update({
   id: '/cities/$slug',
@@ -105,9 +105,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/destinations': typeof DestinationsRouteWithChildren
-  '/festivals': typeof FestivalsRouteWithChildren
-  '/foods': typeof FoodsRouteWithChildren
+  '/destinations': typeof DestinationsRoute
+  '/festivals': typeof FestivalsRoute
+  '/foods': typeof FoodsRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRoute
@@ -122,9 +122,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/destinations': typeof DestinationsRouteWithChildren
-  '/festivals': typeof FestivalsRouteWithChildren
-  '/foods': typeof FoodsRouteWithChildren
+  '/destinations': typeof DestinationsRoute
+  '/festivals': typeof FestivalsRoute
+  '/foods': typeof FoodsRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRoute
@@ -140,16 +140,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
-  '/destinations': typeof DestinationsRouteWithChildren
-  '/festivals': typeof FestivalsRouteWithChildren
-  '/foods': typeof FoodsRouteWithChildren
+  '/destinations': typeof DestinationsRoute
+  '/festivals': typeof FestivalsRoute
+  '/foods': typeof FoodsRoute
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRoute
   '/cities/$slug': typeof CitiesSlugRoute
-  '/destinations/$slug': typeof DestinationsSlugRoute
-  '/festivals/$slug': typeof FestivalsSlugRoute
-  '/foods/$slug': typeof FoodsSlugRoute
+  '/destinations_/$slug': typeof DestinationsSlugRoute
+  '/festivals_/$slug': typeof FestivalsSlugRoute
+  '/foods_/$slug': typeof FoodsSlugRoute
   '/interests/$slug': typeof InterestsSlugRoute
   '/states_/$slug': typeof StatesSlugRoute
 }
@@ -200,9 +200,9 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/states'
     | '/cities/$slug'
-    | '/destinations/$slug'
-    | '/festivals/$slug'
-    | '/foods/$slug'
+    | '/destinations_/$slug'
+    | '/festivals_/$slug'
+    | '/foods_/$slug'
     | '/interests/$slug'
     | '/states_/$slug'
   fileRoutesById: FileRoutesById
@@ -211,13 +211,16 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
-  DestinationsRoute: typeof DestinationsRouteWithChildren
-  FestivalsRoute: typeof FestivalsRouteWithChildren
-  FoodsRoute: typeof FoodsRouteWithChildren
+  DestinationsRoute: typeof DestinationsRoute
+  FestivalsRoute: typeof FestivalsRoute
+  FoodsRoute: typeof FoodsRoute
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatesRoute: typeof StatesRoute
   CitiesSlugRoute: typeof CitiesSlugRoute
+  DestinationsSlugRoute: typeof DestinationsSlugRoute
+  FestivalsSlugRoute: typeof FestivalsSlugRoute
+  FoodsSlugRoute: typeof FoodsSlugRoute
   InterestsSlugRoute: typeof InterestsSlugRoute
   StatesSlugRoute: typeof StatesSlugRoute
 }
@@ -301,26 +304,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InterestsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/foods/$slug': {
-      id: '/foods/$slug'
-      path: '/$slug'
+    '/foods_/$slug': {
+      id: '/foods_/$slug'
+      path: '/foods/$slug'
       fullPath: '/foods/$slug'
       preLoaderRoute: typeof FoodsSlugRouteImport
-      parentRoute: typeof FoodsRoute
+      parentRoute: typeof rootRouteImport
     }
-    '/festivals/$slug': {
-      id: '/festivals/$slug'
-      path: '/$slug'
+    '/festivals_/$slug': {
+      id: '/festivals_/$slug'
+      path: '/festivals/$slug'
       fullPath: '/festivals/$slug'
       preLoaderRoute: typeof FestivalsSlugRouteImport
-      parentRoute: typeof FestivalsRoute
+      parentRoute: typeof rootRouteImport
     }
-    '/destinations/$slug': {
-      id: '/destinations/$slug'
-      path: '/$slug'
+    '/destinations_/$slug': {
+      id: '/destinations_/$slug'
+      path: '/destinations/$slug'
       fullPath: '/destinations/$slug'
       preLoaderRoute: typeof DestinationsSlugRouteImport
-      parentRoute: typeof DestinationsRoute
+      parentRoute: typeof rootRouteImport
     }
     '/cities/$slug': {
       id: '/cities/$slug'
@@ -332,54 +335,33 @@ declare module '@tanstack/react-router' {
   }
 }
 
-interface DestinationsRouteChildren {
-  DestinationsSlugRoute: typeof DestinationsSlugRoute
-}
-
-const DestinationsRouteChildren: DestinationsRouteChildren = {
-  DestinationsSlugRoute: DestinationsSlugRoute,
-}
-
-const DestinationsRouteWithChildren = DestinationsRoute._addFileChildren(
-  DestinationsRouteChildren,
-)
-
-interface FestivalsRouteChildren {
-  FestivalsSlugRoute: typeof FestivalsSlugRoute
-}
-
-const FestivalsRouteChildren: FestivalsRouteChildren = {
-  FestivalsSlugRoute: FestivalsSlugRoute,
-}
-
-const FestivalsRouteWithChildren = FestivalsRoute._addFileChildren(
-  FestivalsRouteChildren,
-)
-
-interface FoodsRouteChildren {
-  FoodsSlugRoute: typeof FoodsSlugRoute
-}
-
-const FoodsRouteChildren: FoodsRouteChildren = {
-  FoodsSlugRoute: FoodsSlugRoute,
-}
-
-const FoodsRouteWithChildren = FoodsRoute._addFileChildren(FoodsRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
-  DestinationsRoute: DestinationsRouteWithChildren,
-  FestivalsRoute: FestivalsRouteWithChildren,
-  FoodsRoute: FoodsRouteWithChildren,
+  DestinationsRoute: DestinationsRoute,
+  FestivalsRoute: FestivalsRoute,
+  FoodsRoute: FoodsRoute,
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatesRoute: StatesRoute,
   CitiesSlugRoute: CitiesSlugRoute,
+  DestinationsSlugRoute: DestinationsSlugRoute,
+  FestivalsSlugRoute: FestivalsSlugRoute,
+  FoodsSlugRoute: FoodsSlugRoute,
   InterestsSlugRoute: InterestsSlugRoute,
   StatesSlugRoute: StatesSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

@@ -7,7 +7,7 @@ import { DestinationCard } from "@/components/cards/Cards";
 import { getDestinationBySlug, getAllDestinations } from "@/content/destinations";
 import { getStateBySlug } from "@/content/states";
 
-export const Route = createFileRoute("/destinations/$slug")({
+export const Route = createFileRoute("/destinations_/$slug")({
   loader: ({ params }) => {
     const dest = getDestinationBySlug(params.slug);
     if (!dest) throw notFound();
