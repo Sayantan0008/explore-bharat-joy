@@ -4,7 +4,7 @@ import { SmartImage } from "@/components/media/SmartImage";
 import { getFestivalBySlug } from "@/content/festivals";
 import { getStateBySlug } from "@/content/states";
 
-export const Route = createFileRoute("/festivals/$slug")({
+export const Route = createFileRoute("/festivals_/$slug")({
   loader: ({ params }) => {
     const festival = getFestivalBySlug(params.slug);
     if (!festival) throw notFound();

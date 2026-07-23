@@ -4,7 +4,7 @@ import { SmartImage } from "@/components/media/SmartImage";
 import { getFoodBySlug } from "@/content/foods";
 import { getStateBySlug } from "@/content/states";
 
-export const Route = createFileRoute("/foods/$slug")({
+export const Route = createFileRoute("/foods_/$slug")({
   loader: ({ params }) => {
     const food = getFoodBySlug(params.slug);
     if (!food) throw notFound();

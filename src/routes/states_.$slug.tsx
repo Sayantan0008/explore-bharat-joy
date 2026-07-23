@@ -18,7 +18,7 @@ import {
   FaqSection,
 } from "@/components/state/StateSections";
 
-export const Route = createFileRoute("/states/$slug")({
+export const Route = createFileRoute("/states_/$slug")({
   loader: ({ params }) => {
     const state = getStateBySlug(params.slug);
     if (!state) throw notFound();
