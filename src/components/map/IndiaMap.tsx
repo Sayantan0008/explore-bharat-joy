@@ -163,7 +163,7 @@ export function IndiaMap() {
   }, [selectedGeo]);
 
   function handleStateClick(slug: string) {
-    setSelected((prev) => (prev === slug ? null : slug));
+    navigate({ to: "/states/$slug", params: { slug } });
   }
 
   function zoom(factor: number) {
