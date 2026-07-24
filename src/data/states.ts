@@ -157,6 +157,44 @@ const SHOWCASE: State[] = [
     culture:
       "UP straddles two great cultural streams: the Sanskritic-Hindu heritage of Varanasi, Ayodhya and Mathura, and the Indo-Islamic Awadhi tradition of Lucknow. The result is a kitchen that runs from temple-pure sattvic food to slow-cooked dum biryani, and a musical heritage that gave India both Tulsidas and the Lucknow gharana of Kathak.",
   },
+  {
+    id: "st-karnataka",
+    slug: "karnataka",
+    name: "Karnataka",
+    capital: "Bengaluru",
+    language: "Kannada",
+    population: "61.1 million",
+    area: "191,791 km²",
+    bestTimeToVisit: "October – March",
+    heroImage: "",
+    region: "south",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 5, foods: 4, festivals: 3 },
+    overview:
+      "Karnataka pairs India's tech capital, Bengaluru, with some of the country's most extraordinary heritage — the ruined Vijayanagara city of Hampi strewn across a boulder-strewn plain, the Hoysala star-shaped temples at Belur and Halebidu, and the palaces of Mysuru lit up on Dasara. The Western Ghats rise along the western edge with coffee estates around Chikmagalur and Coorg, while the Malabar-influenced Karavali coast holds beach towns like Gokarna and the port of Mangaluru.",
+    culture:
+      "Karnataka is the home of Carnatic music and the state of the great Vijayanagara empire. Yakshagana theatre still runs all-night performances on the coast, Mysuru's silk and sandalwood traditions remain intact, and the Dasara procession — a 400-year-old royal parade — closes the state's cultural calendar every October.",
+  },
+  {
+    id: "st-gujarat",
+    slug: "gujarat",
+    name: "Gujarat",
+    capital: "Gandhinagar",
+    language: "Gujarati",
+    population: "60.4 million",
+    area: "196,024 km²",
+    bestTimeToVisit: "November – February",
+    heroImage: "",
+    region: "west",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 5, foods: 4, festivals: 3 },
+    overview:
+      "Gujarat is India's westernmost mainland state — a land of merchant cities, salt deserts and the birthplace of Mahatma Gandhi. Ahmedabad is a UNESCO-listed city of carved pols and stepwells; the Rann of Kutch is a shimmering white salt flat that comes alive every winter for the Rann Utsav; the Gir Forest is the last home of the Asiatic lion; and Dwarka and Somnath are among Hinduism's most sacred coastal pilgrim sites.",
+    culture:
+      "Vegetarian Jain and Vaishnav traditions shape the food, garba and dandiya-raas dominate the nine-night Navratri, and the state's textile heritage — bandhani tie-dye, patola silks, Kutchi embroidery — remains one of the finest craft ecosystems in the country.",
+  },
 ];
 
 const STUBS: State[] = [
@@ -166,10 +204,8 @@ const STUBS: State[] = [
   { name: "Assam", capital: "Dispur", region: "northeast" },
   { name: "Bihar", capital: "Patna", region: "east" },
   { name: "Chhattisgarh", capital: "Raipur", region: "central" },
-  { name: "Gujarat", capital: "Gandhinagar", region: "west" },
   { name: "Haryana", capital: "Chandigarh", region: "north" },
   { name: "Jharkhand", capital: "Ranchi", region: "east" },
-  { name: "Karnataka", capital: "Bengaluru", region: "south" },
   { name: "Madhya Pradesh", capital: "Bhopal", region: "central" },
   { name: "Manipur", capital: "Imphal", region: "northeast" },
   { name: "Meghalaya", capital: "Shillong", region: "northeast" },

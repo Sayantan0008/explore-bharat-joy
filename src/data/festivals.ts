@@ -98,6 +98,29 @@ export const FESTIVALS: Festival[] = [
     description: "The Holi played at Barsana and Nandgaon, where women playfully beat men with bamboo sticks.",
     significance: "A re-enactment of Radha's playful response to Krishna's teasing — held a week before mainstream Holi." },
 
+  // Karnataka
+  { id: "fest-mysuru-dasara", slug: "mysuru-dasara", name: "Mysuru Dasara", stateSlug: "karnataka", month: "October", type: "Religious", image: "", featured: true,
+    description: "A 10-day royal festival culminating in the Jamboo Savari procession — a caparisoned elephant carrying the goddess Chamundeshwari through Mysuru's palace-lit streets.",
+    significance: "Nadahabba — the state festival of Karnataka — celebrated continuously by the Wodeyars for over 400 years." },
+  { id: "fest-hampi-utsav", slug: "hampi-utsav", name: "Hampi Utsava", stateSlug: "karnataka", month: "November", type: "Cultural", image: "",
+    description: "A three-day music, dance and light festival staged among the Vijayanagara ruins.",
+    significance: "Recreates the artistic patronage of the Vijayanagara emperors in the ruins of their own capital." },
+  { id: "fest-ugadi", slug: "ugadi", name: "Ugadi", stateSlug: "karnataka", month: "March", type: "Religious", image: "",
+    description: "The Kannada and Telugu new year, marked with obbattu sweets and the ceremonial tasting of six flavours.",
+    significance: "The six-flavour bevu-bella prasada represents life's mix of joy, sorrow and everything in between." },
+
+  // Gujarat
+  { id: "fest-navratri", slug: "navratri-gujarat", name: "Navratri", stateSlug: "gujarat", month: "October", type: "Religious", image: "", featured: true,
+    description: "Nine nights of garba and dandiya-raas dancing in circles around a central lamp — the world's longest dance festival.",
+    significance: "Ahmedabad and Vadodara host the largest all-night garbas, often with 10,000+ dancers under a single canopy." },
+  { id: "fest-rann-utsav", slug: "rann-utsav", name: "Rann Utsav", stateSlug: "gujarat", month: "December", type: "Cultural", image: "",
+    description: "A four-month tent-city festival on the White Rann of Kutch with folk music, camel rides and full-moon walks on the salt.",
+    significance: "Showcases Kutchi crafts — bandhani, rogan art, ajrakh — alongside desert adventure and star-lit dinners." },
+  { id: "fest-uttarayan", slug: "uttarayan", name: "Uttarayan (Kite Festival)", stateSlug: "gujarat", month: "January", type: "Cultural", image: "",
+    description: "A statewide kite-flying festival on 14 January when the sky over every Gujarati city fills with colour.",
+    significance: "Ahmedabad hosts the International Kite Festival with masters from across the world; families roof-hop through the day." },
+
+
   // Goa — extended
   { id: "fest-st-francis-xavier", slug: "feast-of-st-francis-xavier", name: "Feast of St Francis Xavier", stateSlug: "goa", month: "December", type: "Religious", image: "",
     description: "Nine days of novenas culminating on 3 December at the Basilica of Bom Jesus, where the saint's relics are enshrined.",

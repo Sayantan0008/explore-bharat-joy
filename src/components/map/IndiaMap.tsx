@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useMemo, useRef, useState, useEffect } from "react";
 import {
   INDIA_STATE_GEOS,
@@ -100,6 +100,7 @@ function getStateCoord(slug: string): { lng: number; lat: number } | null {
 }
 
 export function IndiaMap() {
+  const navigate = useNavigate();
   const allStates = useMemo(() => getAllStates(), []);
   const stateBySlug = useMemo(
     () => new Map(allStates.map((s) => [s.slug, s])),
@@ -162,7 +163,7 @@ export function IndiaMap() {
   }, [selectedGeo]);
 
   function handleStateClick(slug: string) {
-    setSelected((prev) => (prev === slug ? null : slug));
+    navigate({ to: "/states/$slug", params: { slug } });
   }
 
   function zoom(factor: number) {
