@@ -91,6 +91,27 @@ export const FOODS: Food[] = [
   { id: "f-kachori-sabzi", slug: "kachori-sabzi", name: "Kachori Sabzi", stateSlug: "uttar-pradesh", category: "Breakfast", image: "", vegetarian: true,
     description: "Banarasi-style flaky kachoris with a spiced potato curry — the classic Varanasi street breakfast." },
 
+  // Karnataka
+  { id: "f-mysore-masala-dosa", slug: "mysore-masala-dosa", name: "Mysore Masala Dosa", stateSlug: "karnataka", category: "Breakfast", image: "", vegetarian: true, featured: true,
+    description: "A crisp golden dosa smeared inside with fiery red garlic chutney and folded around spiced potato — Mysuru's contribution to south Indian breakfast." },
+  { id: "f-bisi-bele-bath", slug: "bisi-bele-bath", name: "Bisi Bele Bath", stateSlug: "karnataka", category: "Main", image: "", vegetarian: true,
+    description: "A spiced rice-and-lentil one-pot cooked with tamarind, vegetables and a distinctive Karnataka masala — served hot with a spoon of ghee." },
+  { id: "f-mangalorean-fish-curry", slug: "mangalorean-fish-curry", name: "Mangalorean Fish Curry", stateSlug: "karnataka", category: "Main", image: "", vegetarian: false,
+    description: "A tangy coconut-and-Byadagi-chilli curry from the Karavali coast — usually mackerel or seer fish, eaten with red rice." },
+  { id: "f-mysore-pak", slug: "mysore-pak", name: "Mysore Pak", stateSlug: "karnataka", category: "Sweet", image: "", vegetarian: true,
+    description: "A rich, ghee-dense gram-flour fudge invented in the Mysore Palace kitchens in the 1930s." },
+
+  // Gujarat
+  { id: "f-dhokla", slug: "dhokla", name: "Dhokla", stateSlug: "gujarat", category: "Snack", image: "", vegetarian: true, featured: true,
+    description: "Fluffy steamed savoury cakes of fermented gram flour, tempered with mustard seeds and served with green chutney." },
+  { id: "f-thepla", slug: "thepla", name: "Methi Thepla", stateSlug: "gujarat", category: "Breakfast", image: "", vegetarian: true,
+    description: "A soft fenugreek-and-wheat flatbread that keeps for days — the classic Gujarati travel food." },
+  { id: "f-undhiyu", slug: "undhiyu", name: "Undhiyu", stateSlug: "gujarat", category: "Main", image: "", vegetarian: true,
+    description: "A slow-cooked winter casserole of root vegetables, muthiya dumplings and green masala — traditionally sealed in a matka and cooked underground." },
+  { id: "f-fafda-jalebi", slug: "fafda-jalebi", name: "Fafda-Jalebi", stateSlug: "gujarat", category: "Snack", image: "", vegetarian: true,
+    description: "Gujarat's beloved breakfast pairing — crisp chickpea fafda with fried, syrup-soaked jalebi and green chutney." },
+
+
   // Goa — extended
   { id: "f-prawn-balchao", slug: "prawn-balchao", name: "Prawn Balchão", stateSlug: "goa", category: "Pickle", image: "", vegetarian: false,
     description: "Prawns preserved in a fiery red masala of dried Kashmiri chillies, vinegar and palm-feni — a Goan-Portuguese pickle that doubles as a side dish." },
