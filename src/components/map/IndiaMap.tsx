@@ -100,6 +100,7 @@ function getStateCoord(slug: string): { lng: number; lat: number } | null {
 }
 
 export function IndiaMap() {
+  const navigate = useNavigate();
   const allStates = useMemo(() => getAllStates(), []);
   const stateBySlug = useMemo(
     () => new Map(allStates.map((s) => [s.slug, s])),
