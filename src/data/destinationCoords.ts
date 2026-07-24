@@ -64,6 +64,20 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "ayodhya": { lng: 82.1998, lat: 26.7922 },
   "mathura": { lng: 77.6735, lat: 27.4924 },
   "fatehpur-sikri": { lng: 77.6611, lat: 27.0937 },
+  // Karnataka
+  "bengaluru": { lng: 77.5946, lat: 12.9716 },
+  "mysuru": { lng: 76.6394, lat: 12.2958 },
+  "hampi": { lng: 76.4600, lat: 15.3350 },
+  "coorg": { lng: 75.7382, lat: 12.4244 },
+  "gokarna": { lng: 74.3188, lat: 14.5479 },
+  "chikmagalur": { lng: 75.7720, lat: 13.3161 },
+  // Gujarat
+  "ahmedabad": { lng: 72.5714, lat: 23.0225 },
+  "rann-of-kutch": { lng: 69.8667, lat: 23.7333 },
+  "gir": { lng: 70.8244, lat: 21.1244 },
+  "dwarka": { lng: 68.9678, lat: 22.2394 },
+  "somnath": { lng: 70.4013, lat: 20.8880 },
+  "vadodara": { lng: 73.1812, lat: 22.3072 },
 };
 
 // State-capital fallback coords used when a state has no destinations yet.
