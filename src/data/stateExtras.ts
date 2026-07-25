@@ -13,6 +13,8 @@ export interface CityInfo {
   overview?: string;
   thingsToDo?: string[];
   nearbyAttractionSlugs?: string[];
+  travel?: TravelInfo;
+  gallerySeeds?: string[];
 }
 
 export interface SeasonInfo {
