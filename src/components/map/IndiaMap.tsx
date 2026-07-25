@@ -817,6 +817,25 @@ function SidePanel({
         </Section>
       )}
 
+      {cities.length > 0 && (
+        <Section title="Cities">
+          <ul className="flex flex-wrap gap-1.5">
+            {cities.slice(0, 8).map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/cities/$slug"
+                  params={{ slug: c.slug }}
+                  className="inline-block rounded-full border border-border bg-background px-2.5 py-1 text-[11px] hover:bg-accent/30"
+                >
+                  {c.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
+
       {foods.length > 0 && (
         <Section title="Try the food">
           <p className="text-[11px] text-muted-foreground">
