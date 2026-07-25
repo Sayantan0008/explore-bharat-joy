@@ -767,6 +767,7 @@ function SidePanel({
     );
   }
   const dests = getDestinationsByState(state.slug);
+  const cities = getCitiesByState(state.slug);
   const foods = getFoodsByState(state.slug);
   const fests = getFestivalsByState(state.slug);
   return (
