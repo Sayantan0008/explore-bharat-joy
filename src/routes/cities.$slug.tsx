@@ -186,13 +186,9 @@ function CityDetail() {
           </section>
         )}
 
-        <section className="mt-14">
-          <TravelInfoSection travel={cityTravel} />
-        </section>
+        <TravelInfoSection travel={cityTravel} />
 
-        <section className="mt-14">
-          <GallerySection seeds={cityGallerySeeds} stateName={city.name} />
-        </section>
+        <GallerySection seeds={cityGallerySeeds} stateName={city.name} />
 
         {fests.length > 0 && (
           <section className="mt-14">
