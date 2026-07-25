@@ -525,13 +525,14 @@ export function IndiaMap() {
             );
           })()}
 
-          {hoveredDestObj && !hoveredDestObj.showLabel && (() => {
+          {hoveredMarker && !hoveredMarker.showLabel && (() => {
             const s = scale;
+            const name = hoveredMarker.kind === "destination" ? hoveredMarker.dest.name : hoveredMarker.city.name;
             return (
-              <g transform={`translate(${hoveredDestObj.x + 8 * s} ${hoveredDestObj.y + 8 * s})`} className="pointer-events-none">
+              <g transform={`translate(${hoveredMarker.x + 8 * s} ${hoveredMarker.y + 8 * s})`} className="pointer-events-none">
                 <rect width={150 * s} height={28 * s} rx={5 * s} fill="var(--popover)" stroke="var(--border)" />
                 <text x={8 * s} y={18 * s} fontSize={11 * s} className="fill-foreground">
-                  {hoveredDestObj.dest.name}
+                  {name}
                 </text>
               </g>
             );
