@@ -186,6 +186,14 @@ function CityDetail() {
           </section>
         )}
 
+        <section className="mt-14">
+          <TravelInfoSection travel={cityTravel} />
+        </section>
+
+        <section className="mt-14">
+          <GallerySection seeds={cityGallerySeeds} stateName={city.name} />
+        </section>
+
         {fests.length > 0 && (
           <section className="mt-14">
             <h2 className="mb-5 font-display text-2xl font-semibold">Festivals</h2>
