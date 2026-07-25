@@ -327,8 +327,10 @@ export function IndiaMap() {
     setTip({ x: local.x, y: local.y });
   }
 
-  const hoveredDestObj = hoveredDest
-    ? visibleMarkers.find((m) => m.dest.slug === hoveredDest) ?? null
+  const hoveredMarker = hoveredDest
+    ? visibleMarkers.find(
+        (m) => (m.kind === "destination" ? m.dest.slug : m.city.slug) === hoveredDest,
+      ) ?? null
     : null;
 
   return (
