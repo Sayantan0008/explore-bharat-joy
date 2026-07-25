@@ -4,6 +4,7 @@ import { getAllStates } from "@/content/states";
 import { getAllDestinations } from "@/content/destinations";
 import { getAllFoods } from "@/content/foods";
 import { getAllFestivals } from "@/content/festivals";
+import { getAllCities } from "@/content/cities";
 import { INTERESTS } from "@/lib/constants";
 
 // TODO: replace with your project URL once a custom domain is set.
@@ -16,6 +17,7 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: { path: string; changefreq?: string; priority?: string }[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
           { path: "/states", changefreq: "weekly", priority: "0.9" },
+          { path: "/cities", changefreq: "weekly", priority: "0.8" },
           { path: "/destinations", changefreq: "weekly", priority: "0.9" },
           { path: "/foods", changefreq: "weekly", priority: "0.7" },
           { path: "/festivals", changefreq: "weekly", priority: "0.7" },
@@ -23,6 +25,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/contact", changefreq: "monthly", priority: "0.3" },
         ];
         for (const s of getAllStates()) entries.push({ path: `/states/${s.slug}`, changefreq: "monthly", priority: "0.8" });
+        for (const c of getAllCities()) entries.push({ path: `/cities/${c.slug}`, changefreq: "monthly", priority: "0.6" });
         for (const d of getAllDestinations()) entries.push({ path: `/destinations/${d.slug}`, changefreq: "monthly", priority: "0.7" });
         for (const f of getAllFoods()) entries.push({ path: `/foods/${f.slug}`, changefreq: "monthly", priority: "0.5" });
         for (const f of getAllFestivals()) entries.push({ path: `/festivals/${f.slug}`, changefreq: "monthly", priority: "0.5" });

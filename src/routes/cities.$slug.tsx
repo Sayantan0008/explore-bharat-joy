@@ -3,7 +3,8 @@ import { MapPin, ExternalLink, Navigation } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { SmartImage } from "@/components/media/SmartImage";
 import { DestinationCard, FoodCard, FestivalCard } from "@/components/cards/Cards";
-import { getCityBySlug } from "@/data/stateExtras";
+import { TravelInfoSection, GallerySection } from "@/components/state/StateSections";
+import { getCityBySlug, getCityTravel, getCityGallerySeeds } from "@/data/stateExtras";
 import { getStateBySlug } from "@/content/states";
 import { getDestinationsByState, getDestinationBySlug } from "@/content/destinations";
 import { getFoodsByState } from "@/content/foods";
@@ -56,6 +57,8 @@ function CityDetail() {
   const stateDests = getDestinationsByState(city.stateSlug);
   const foods = getFoodsByState(city.stateSlug).slice(0, 6);
   const fests = getFestivalsByState(city.stateSlug).slice(0, 6);
+  const cityTravel = getCityTravel(city);
+  const cityGallerySeeds = getCityGallerySeeds(city);
 
   // Nearby attractions: prefer curated slugs, else fall back to distance-ranked state destinations.
   const nearby: Destination[] = (() => {
@@ -182,6 +185,10 @@ function CityDetail() {
             </div>
           </section>
         )}
+
+        <TravelInfoSection travel={cityTravel} />
+
+        <GallerySection seeds={cityGallerySeeds} stateName={city.name} />
 
         {fests.length > 0 && (
           <section className="mt-14">

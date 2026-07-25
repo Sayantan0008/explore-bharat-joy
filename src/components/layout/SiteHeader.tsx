@@ -8,6 +8,7 @@ import { SITE_NAME } from "@/lib/constants";
 
 const NAV = [
   { to: "/states", label: "States" },
+  { to: "/cities", label: "Cities" },
   { to: "/destinations", label: "Destinations" },
   { to: "/foods", label: "Foods" },
   { to: "/festivals", label: "Festivals" },

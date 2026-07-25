@@ -16,6 +16,7 @@ import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as FestivalsRouteImport } from './routes/festivals'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CitiesRouteImport } from './routes/cities'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatesSlugRouteImport } from './routes/states_.$slug'
@@ -60,6 +61,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CitiesRoute = CitiesRouteImport.update({
+  id: '/cities',
+  path: '/cities',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -96,14 +102,15 @@ const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const CitiesSlugRoute = CitiesSlugRouteImport.update({
-  id: '/cities/$slug',
-  path: '/cities/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => CitiesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cities': typeof CitiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/festivals': typeof FestivalsRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cities': typeof CitiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/festivals': typeof FestivalsRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/cities': typeof CitiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/festivals': typeof FestivalsRoute
@@ -158,6 +167,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/cities'
     | '/contact'
     | '/destinations'
     | '/festivals'
@@ -175,6 +185,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/cities'
     | '/contact'
     | '/destinations'
     | '/festivals'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/cities'
     | '/contact'
     | '/destinations'
     | '/festivals'
@@ -210,6 +222,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  CitiesRoute: typeof CitiesRouteWithChildren
   ContactRoute: typeof ContactRoute
   DestinationsRoute: typeof DestinationsRoute
   FestivalsRoute: typeof FestivalsRoute
@@ -217,7 +230,6 @@ export interface RootRouteChildren {
   SearchRoute: typeof SearchRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StatesRoute: typeof StatesRoute
-  CitiesSlugRoute: typeof CitiesSlugRoute
   DestinationsSlugRoute: typeof DestinationsSlugRoute
   FestivalsSlugRoute: typeof FestivalsSlugRoute
   FoodsSlugRoute: typeof FoodsSlugRoute
@@ -276,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cities': {
+      id: '/cities'
+      path: '/cities'
+      fullPath: '/cities'
+      preLoaderRoute: typeof CitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -327,17 +346,29 @@ declare module '@tanstack/react-router' {
     }
     '/cities/$slug': {
       id: '/cities/$slug'
-      path: '/cities/$slug'
+      path: '/$slug'
       fullPath: '/cities/$slug'
       preLoaderRoute: typeof CitiesSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof CitiesRoute
     }
   }
 }
 
+interface CitiesRouteChildren {
+  CitiesSlugRoute: typeof CitiesSlugRoute
+}
+
+const CitiesRouteChildren: CitiesRouteChildren = {
+  CitiesSlugRoute: CitiesSlugRoute,
+}
+
+const CitiesRouteWithChildren =
+  CitiesRoute._addFileChildren(CitiesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  CitiesRoute: CitiesRouteWithChildren,
   ContactRoute: ContactRoute,
   DestinationsRoute: DestinationsRoute,
   FestivalsRoute: FestivalsRoute,
@@ -345,7 +376,6 @@ const rootRouteChildren: RootRouteChildren = {
   SearchRoute: SearchRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   StatesRoute: StatesRoute,
-  CitiesSlugRoute: CitiesSlugRoute,
   DestinationsSlugRoute: DestinationsSlugRoute,
   FestivalsSlugRoute: FestivalsSlugRoute,
   FoodsSlugRoute: FoodsSlugRoute,
