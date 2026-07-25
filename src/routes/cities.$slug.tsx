@@ -57,6 +57,8 @@ function CityDetail() {
   const stateDests = getDestinationsByState(city.stateSlug);
   const foods = getFoodsByState(city.stateSlug).slice(0, 6);
   const fests = getFestivalsByState(city.stateSlug).slice(0, 6);
+  const cityTravel = getCityTravel(city);
+  const cityGallerySeeds = getCityGallerySeeds(city);
 
   // Nearby attractions: prefer curated slugs, else fall back to distance-ranked state destinations.
   const nearby: Destination[] = (() => {
