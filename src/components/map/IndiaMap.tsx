@@ -428,7 +428,7 @@ export function IndiaMap() {
                   }}
                   onMouseEnter={(e) => handlePathMove(e, g.slug)}
                   onMouseMove={(e) => handlePathMove(e, g.slug)}
-                  onClick={(e) => { e.stopPropagation(); handleStateClick(g.slug); }}
+                  onClick={(e) => { e.stopPropagation(); setSelected(g.slug); }}
                 >
                   <title>{g.name}</title>
                 </path>
