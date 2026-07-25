@@ -256,9 +256,11 @@ export function IndiaMap() {
 
   // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
   const visibleMarkers = (() => {
-    let pool: { dest: Destination; x: number; y: number; name: string }[] = [];
+    let pool: MapMarker[] = [];
     if (selected) {
-      pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
+      pool = stateCityMarkers
+        .slice(0, CITY_VISIBILITY.maxAtStateView)
+        .map((m) => ({ kind: "city" as const, city: m.city, x: m.x, y: m.y, name: m.name }));
     } else if (mode === "destinations") {
       const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
       const filtered = useMajorOnly
@@ -266,12 +268,12 @@ export function IndiaMap() {
         : allDestMarkers;
       pool = filtered
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
-        .map((m) => ({ ...m, name: m.dest.name }));
+        .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
     const h = fs + 2 * svgPerCssPx;
     const fitText = (name: string, maxW: number): string => {
-      if (maxW <= charW * 2) return ""; // no room even for "A…"
+      if (maxW <= charW * 2) return "";
       const fullW = name.length * charW;
       if (fullW <= maxW) return name;
       const maxChars = Math.max(1, Math.floor(maxW / charW) - 1);
@@ -281,7 +283,6 @@ export function IndiaMap() {
       const rightRoom = INDIA_VIEW_W - edgePad - (m.x + labelOffset);
       const leftRoom = (m.x - labelOffset) - edgePad;
       const desiredW = m.name.length * charW + 3 * svgPerCssPx;
-      // Pick the side with more room when the full label doesn't fit either side.
       let anchor: "start" | "end";
       let lx: number;
       let maxW: number;
