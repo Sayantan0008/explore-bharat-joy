@@ -11,11 +11,17 @@ import { getAllStates } from "@/content/states";
 import { getDestinationsByState, getAllDestinations } from "@/content/destinations";
 import { getFoodsByState } from "@/content/foods";
 import { getFestivalsByState } from "@/content/festivals";
+import { getCitiesByState } from "@/content/cities";
+import type { CityInfo } from "@/data/stateExtras";
 import {
   DESTINATION_COORDS,
   STATE_CAPITAL_COORDS,
 } from "@/data/destinationCoords";
 import type { State, Destination } from "@/content/types";
+
+type MapMarker =
+  | { kind: "destination"; dest: Destination; x: number; y: number; name: string }
+  | { kind: "city"; city: CityInfo; x: number; y: number; name: string };
 import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
