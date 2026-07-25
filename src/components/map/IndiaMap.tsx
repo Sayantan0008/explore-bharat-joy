@@ -11,12 +11,19 @@ import { getAllStates } from "@/content/states";
 import { getDestinationsByState, getAllDestinations } from "@/content/destinations";
 import { getFoodsByState } from "@/content/foods";
 import { getFestivalsByState } from "@/content/festivals";
+import { getCitiesByState } from "@/content/cities";
+import type { CityInfo } from "@/data/stateExtras";
 import {
   DESTINATION_COORDS,
   STATE_CAPITAL_COORDS,
 } from "@/data/destinationCoords";
 import type { State, Destination } from "@/content/types";
+
 import { INTERESTS } from "@/lib/constants";
+
+type MapMarker =
+  | { kind: "destination"; dest: Destination; x: number; y: number; name: string }
+  | { kind: "city"; city: CityInfo; x: number; y: number; name: string };
 
 type Mode = "states" | "destinations";
 
@@ -162,9 +169,8 @@ export function IndiaMap() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGeo]);
 
-  function handleStateClick(slug: string) {
-    navigate({ to: "/states/$slug", params: { slug } });
-  }
+  // State taps zoom in (setSelected triggers the selectedGeo animation effect).
+  // The explicit "Open {state} guide →" link in the SidePanel handles navigation.
 
   function zoom(factor: number) {
     const cx = view.x + view.w / 2;
@@ -215,16 +221,15 @@ export function IndiaMap() {
       .filter(Boolean) as { dest: Destination; x: number; y: number }[];
   }, [destinations]);
 
-  const stateDestMarkers = useMemo(() => {
+  const stateCityMarkers = useMemo(() => {
     if (!selected) return [];
-    return getDestinationsByState(selected)
-      .map((d) => {
-        const c = DESTINATION_COORDS[d.slug] ?? STATE_CAPITAL_COORDS[selected];
-        if (!c) return null;
-        const p = projectLngLat(c.lng, c.lat);
-        return { dest: d, x: p.x, y: p.y, name: d.name };
+    return getCitiesByState(selected)
+      .map((c) => {
+        if (!c.coords) return null;
+        const p = projectLngLat(c.coords.lng, c.coords.lat);
+        return { city: c, x: p.x, y: p.y, name: c.name };
       })
-      .filter(Boolean) as { dest: Destination; x: number; y: number; name: string }[];
+      .filter(Boolean) as { city: CityInfo; x: number; y: number; name: string }[];
   }, [selected]);
 
   // Major-city allowlist shown at the India-wide view; the rest reveal on state zoom.
@@ -251,9 +256,11 @@ export function IndiaMap() {
 
   // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
   const visibleMarkers = (() => {
-    let pool: { dest: Destination; x: number; y: number; name: string }[] = [];
+    let pool: MapMarker[] = [];
     if (selected) {
-      pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
+      pool = stateCityMarkers
+        .slice(0, CITY_VISIBILITY.maxAtStateView)
+        .map((m) => ({ kind: "city" as const, city: m.city, x: m.x, y: m.y, name: m.name }));
     } else if (mode === "destinations") {
       const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
       const filtered = useMajorOnly
@@ -261,12 +268,12 @@ export function IndiaMap() {
         : allDestMarkers;
       pool = filtered
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
-        .map((m) => ({ ...m, name: m.dest.name }));
+        .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
     const h = fs + 2 * svgPerCssPx;
     const fitText = (name: string, maxW: number): string => {
-      if (maxW <= charW * 2) return ""; // no room even for "A…"
+      if (maxW <= charW * 2) return "";
       const fullW = name.length * charW;
       if (fullW <= maxW) return name;
       const maxChars = Math.max(1, Math.floor(maxW / charW) - 1);
@@ -276,7 +283,6 @@ export function IndiaMap() {
       const rightRoom = INDIA_VIEW_W - edgePad - (m.x + labelOffset);
       const leftRoom = (m.x - labelOffset) - edgePad;
       const desiredW = m.name.length * charW + 3 * svgPerCssPx;
-      // Pick the side with more room when the full label doesn't fit either side.
       let anchor: "start" | "end";
       let lx: number;
       let maxW: number;
@@ -321,8 +327,10 @@ export function IndiaMap() {
     setTip({ x: local.x, y: local.y });
   }
 
-  const hoveredDestObj = hoveredDest
-    ? visibleMarkers.find((m) => m.dest.slug === hoveredDest) ?? null
+  const hoveredMarker = hoveredDest
+    ? visibleMarkers.find(
+        (m) => (m.kind === "destination" ? m.dest.slug : m.city.slug) === hoveredDest,
+      ) ?? null
     : null;
 
   return (
@@ -420,7 +428,7 @@ export function IndiaMap() {
                   }}
                   onMouseEnter={(e) => handlePathMove(e, g.slug)}
                   onMouseMove={(e) => handlePathMove(e, g.slug)}
-                  onClick={(e) => { e.stopPropagation(); handleStateClick(g.slug); }}
+                  onClick={(e) => { e.stopPropagation(); setSelected(g.slug); }}
                 >
                   <title>{g.name}</title>
                 </path>
@@ -431,17 +439,30 @@ export function IndiaMap() {
 
           {/* Destination markers — sized in CSS px, hard-clipped to the India bounds */}
           <g clipPath="url(#india-bounds)">
-          {visibleMarkers.map(({ dest, x, y, label, showLabel, fs, lx, ly, anchor }) => {
-            const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
+          {visibleMarkers.map((marker) => {
+            const { x, y, label, showLabel, fs, lx, ly, anchor } = marker;
+            const slugKey = marker.kind === "destination" ? marker.dest.slug : marker.city.slug;
+            const reactKey = marker.kind === "destination" ? marker.dest.id : `city-${marker.city.slug}`;
+            const isActive =
+              hoveredDest === slugKey ||
+              (marker.kind === "destination" && modalDest?.slug === marker.dest.slug);
             const r = isActive ? markerR * 1.18 : markerR;
             const haloR = r * haloFactor;
+            const handleClick = (e: React.MouseEvent) => {
+              e.stopPropagation();
+              if (marker.kind === "city") {
+                navigate({ to: "/cities/$slug", params: { slug: marker.city.slug } });
+              } else {
+                setModalDest(marker.dest);
+              }
+            };
             return (
               <g
-                key={dest.id}
+                key={reactKey}
                 className="cursor-pointer"
-                onMouseEnter={() => setHoveredDest(dest.slug)}
+                onMouseEnter={() => setHoveredDest(slugKey)}
                 onMouseLeave={() => setHoveredDest(null)}
-                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
+                onClick={handleClick}
               >
                 <circle
                   cx={x} cy={y} r={haloR}
@@ -504,13 +525,14 @@ export function IndiaMap() {
             );
           })()}
 
-          {hoveredDestObj && !hoveredDestObj.showLabel && (() => {
+          {hoveredMarker && !hoveredMarker.showLabel && (() => {
             const s = scale;
+            const name = hoveredMarker.kind === "destination" ? hoveredMarker.dest.name : hoveredMarker.city.name;
             return (
-              <g transform={`translate(${hoveredDestObj.x + 8 * s} ${hoveredDestObj.y + 8 * s})`} className="pointer-events-none">
+              <g transform={`translate(${hoveredMarker.x + 8 * s} ${hoveredMarker.y + 8 * s})`} className="pointer-events-none">
                 <rect width={150 * s} height={28 * s} rx={5 * s} fill="var(--popover)" stroke="var(--border)" />
                 <text x={8 * s} y={18 * s} fontSize={11 * s} className="fill-foreground">
-                  {hoveredDestObj.dest.name}
+                  {name}
                 </text>
               </g>
             );
@@ -522,7 +544,7 @@ export function IndiaMap() {
             {mode === "states"
               ? selected
                 ? `Selected · ${selectedState?.name}`
-                : "Hover a state · click to explore"
+                : "Click a state to zoom in · tap a city to explore"
               : "All featured destinations across India"}
           </span>
           <span className="hidden sm:inline">28 states · 8 Union Territories</span>
@@ -745,6 +767,7 @@ function SidePanel({
     );
   }
   const dests = getDestinationsByState(state.slug);
+  const cities = getCitiesByState(state.slug);
   const foods = getFoodsByState(state.slug);
   const fests = getFestivalsByState(state.slug);
   return (
@@ -793,6 +816,25 @@ function SidePanel({
           </ul>
         </Section>
       )}
+
+      {cities.length > 0 && (
+        <Section title="Cities">
+          <ul className="flex flex-wrap gap-1.5">
+            {cities.slice(0, 8).map((c) => (
+              <li key={c.slug}>
+                <Link
+                  to="/cities/$slug"
+                  params={{ slug: c.slug }}
+                  className="inline-block rounded-full border border-border bg-background px-2.5 py-1 text-[11px] hover:bg-accent/30"
+                >
+                  {c.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Section>
+      )}
+
 
       {foods.length > 0 && (
         <Section title="Try the food">
