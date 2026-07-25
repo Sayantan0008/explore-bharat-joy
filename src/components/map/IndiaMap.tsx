@@ -544,7 +544,7 @@ export function IndiaMap() {
             {mode === "states"
               ? selected
                 ? `Selected · ${selectedState?.name}`
-                : "Hover a state · click to explore"
+                : "Click a state to zoom in · tap a city to explore"
               : "All featured destinations across India"}
           </span>
           <span className="hidden sm:inline">28 states · 8 Union Territories</span>
