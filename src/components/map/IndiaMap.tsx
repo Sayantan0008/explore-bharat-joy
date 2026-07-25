@@ -221,16 +221,15 @@ export function IndiaMap() {
       .filter(Boolean) as { dest: Destination; x: number; y: number }[];
   }, [destinations]);
 
-  const stateDestMarkers = useMemo(() => {
+  const stateCityMarkers = useMemo(() => {
     if (!selected) return [];
-    return getDestinationsByState(selected)
-      .map((d) => {
-        const c = DESTINATION_COORDS[d.slug] ?? STATE_CAPITAL_COORDS[selected];
-        if (!c) return null;
-        const p = projectLngLat(c.lng, c.lat);
-        return { dest: d, x: p.x, y: p.y, name: d.name };
+    return getCitiesByState(selected)
+      .map((c) => {
+        if (!c.coords) return null;
+        const p = projectLngLat(c.coords.lng, c.coords.lat);
+        return { city: c, x: p.x, y: p.y, name: c.name };
       })
-      .filter(Boolean) as { dest: Destination; x: number; y: number; name: string }[];
+      .filter(Boolean) as { city: CityInfo; x: number; y: number; name: string }[];
   }, [selected]);
 
   // Major-city allowlist shown at the India-wide view; the rest reveal on state zoom.
