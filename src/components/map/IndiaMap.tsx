@@ -19,10 +19,11 @@ import {
 } from "@/data/destinationCoords";
 import type { State, Destination } from "@/content/types";
 
+import { INTERESTS } from "@/lib/constants";
+
 type MapMarker =
   | { kind: "destination"; dest: Destination; x: number; y: number; name: string }
   | { kind: "city"; city: CityInfo; x: number; y: number; name: string };
-import { INTERESTS } from "@/lib/constants";
 
 type Mode = "states" | "destinations";
 
