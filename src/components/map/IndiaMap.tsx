@@ -169,9 +169,8 @@ export function IndiaMap() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGeo]);
 
-  function handleStateClick(slug: string) {
-    navigate({ to: "/states/$slug", params: { slug } });
-  }
+  // State taps zoom in (setSelected triggers the selectedGeo animation effect).
+  // The explicit "Open {state} guide →" link in the SidePanel handles navigation.
 
   function zoom(factor: number) {
     const cx = view.x + view.w / 2;
