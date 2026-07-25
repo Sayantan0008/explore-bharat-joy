@@ -439,17 +439,30 @@ export function IndiaMap() {
 
           {/* Destination markers — sized in CSS px, hard-clipped to the India bounds */}
           <g clipPath="url(#india-bounds)">
-          {visibleMarkers.map(({ dest, x, y, label, showLabel, fs, lx, ly, anchor }) => {
-            const isActive = hoveredDest === dest.slug || modalDest?.slug === dest.slug;
+          {visibleMarkers.map((marker) => {
+            const { x, y, label, showLabel, fs, lx, ly, anchor } = marker;
+            const slugKey = marker.kind === "destination" ? marker.dest.slug : marker.city.slug;
+            const reactKey = marker.kind === "destination" ? marker.dest.id : `city-${marker.city.slug}`;
+            const isActive =
+              hoveredDest === slugKey ||
+              (marker.kind === "destination" && modalDest?.slug === marker.dest.slug);
             const r = isActive ? markerR * 1.18 : markerR;
             const haloR = r * haloFactor;
+            const handleClick = (e: React.MouseEvent) => {
+              e.stopPropagation();
+              if (marker.kind === "city") {
+                navigate({ to: "/cities/$slug", params: { slug: marker.city.slug } });
+              } else {
+                setModalDest(marker.dest);
+              }
+            };
             return (
               <g
-                key={dest.id}
+                key={reactKey}
                 className="cursor-pointer"
-                onMouseEnter={() => setHoveredDest(dest.slug)}
+                onMouseEnter={() => setHoveredDest(slugKey)}
                 onMouseLeave={() => setHoveredDest(null)}
-                onClick={(e) => { e.stopPropagation(); setModalDest(dest); }}
+                onClick={handleClick}
               >
                 <circle
                   cx={x} cy={y} r={haloR}
