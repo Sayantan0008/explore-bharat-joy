@@ -854,3 +854,20 @@ export function getCityBySlug(slug: string): CityInfo | undefined {
 export function getAllCities(): CityInfo[] {
   return Object.values(STATE_EXTRAS).flatMap((e) => e.cities);
 }
+
+export function getCityTravel(city: CityInfo): TravelInfo {
+  if (city.travel) return city.travel;
+  const stateExtras = STATE_EXTRAS[city.stateSlug];
+  if (stateExtras) return stateExtras.travel;
+  return {
+    airports: [{ name: `${city.name} Airport`, mapsQuery: `${city.name} Airport` }],
+    railwayStations: [{ name: `${city.name} Railway Station`, mapsQuery: `${city.name} Railway Station` }],
+    roads: "Connected by national highways and state-run buses.",
+    localTransport: ["Auto-rickshaws", "App taxis", "Local buses"],
+  };
+}
+
+export function getCityGallerySeeds(city: CityInfo): string[] {
+  if (city.gallerySeeds?.length) return city.gallerySeeds;
+  return Array.from({ length: 6 }, (_, i) => `${city.slug}-${i + 1}`);
+}
