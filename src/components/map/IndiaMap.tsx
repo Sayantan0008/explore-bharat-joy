@@ -48,6 +48,26 @@ const SIZE_BREAKPOINTS = [
   { maxWidth: Infinity, markerR: 11.5, fontPx: 16.5, strokePx: 2.4, haloFactor: 2.1 },
 ] as const;
 
+function declutterMarkers<T extends { x: number; y: number }>(markers: T[], minDist: number, iterations = 4): T[] {
+  const pts = markers.map((m) => ({ ...m }));
+  for (let iter = 0; iter < iterations; iter++) {
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[j].x - pts[i].x;
+        const dy = pts[j].y - pts[i].y;
+        const dist = Math.hypot(dx, dy) || 0.0001;
+        if (dist < minDist) {
+          const push = (minDist - dist) / 2;
+          const ux = dx / dist, uy = dy / dist;
+          pts[i].x -= ux * push; pts[i].y -= uy * push;
+          pts[j].x += ux * push; pts[j].y += uy * push;
+        }
+      }
+    }
+  }
+  return pts;
+}
+
 
 function sizingFor(containerWidth: number) {
   return (
