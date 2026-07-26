@@ -576,6 +576,16 @@ export function IndiaMap() {
           {hoveredMarker && !hoveredMarker.showLabel && (() => {
             const s = scale;
             const name = hoveredMarker.kind === "destination" ? hoveredMarker.dest.name : hoveredMarker.city.name;
+            const tooltipBox = {
+              x1: hoveredMarker.x + 8 * s,
+              y1: hoveredMarker.y + 8 * s,
+              x2: hoveredMarker.x + 158 * s,
+              y2: hoveredMarker.y + 36 * s,
+            };
+            const tooltipCollides = placed.some(
+              (p) => !(tooltipBox.x2 < p.x1 || tooltipBox.x1 > p.x2 || tooltipBox.y2 < p.y1 || tooltipBox.y1 > p.y2),
+            );
+            if (tooltipCollides) return null;
             return (
               <g transform={`translate(${hoveredMarker.x + 8 * s} ${hoveredMarker.y + 8 * s})`} className="pointer-events-none">
                 <rect width={150 * s} height={28 * s} rx={5 * s} fill="var(--popover)" stroke="var(--border)" />
