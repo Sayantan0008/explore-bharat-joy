@@ -49,7 +49,10 @@ const SIZE_BREAKPOINTS = [
 ] as const;
 
 function declutterMarkers<T extends { x: number; y: number }>(markers: T[], minDist: number, iterations = 4): T[] {
+  const MAX_DISP = 14; // keep every marker within ~14 SVG units of its true position
   const pts = markers.map((m) => ({ ...m }));
+  const moved = new Array(pts.length).fill(0);
+
   for (let iter = 0; iter < iterations; iter++) {
     for (let i = 0; i < pts.length; i++) {
       for (let j = i + 1; j < pts.length; j++) {
@@ -59,8 +62,13 @@ function declutterMarkers<T extends { x: number; y: number }>(markers: T[], minD
         if (dist < minDist) {
           const push = (minDist - dist) / 2;
           const ux = dx / dist, uy = dy / dist;
-          pts[i].x -= ux * push; pts[i].y -= uy * push;
-          pts[j].x += ux * push; pts[j].y += uy * push;
+          // Clamp push so neither marker drifts beyond its displacement budget.
+          const pushI = Math.min(push, Math.max(0, MAX_DISP - moved[i]));
+          const pushJ = Math.min(push, Math.max(0, MAX_DISP - moved[j]));
+          pts[i].x -= ux * pushI; pts[i].y -= uy * pushI;
+          pts[j].x += ux * pushJ; pts[j].y += uy * pushJ;
+          moved[i] += pushI;
+          moved[j] += pushJ;
         }
       }
     }
@@ -278,7 +286,7 @@ export function IndiaMap() {
   const edgePad = 4 * svgPerCssPx;
 
   // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
-  const visibleMarkers = (() => {
+  const { visibleMarkers, placed } = (() => {
     let pool: MapMarker[] = [];
     if (selected) {
       pool = stateCityMarkers
@@ -293,7 +301,7 @@ export function IndiaMap() {
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
         .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
-    pool = declutterMarkers(pool, markerR * 2.6);
+    pool = declutterMarkers(pool, markerR * 3.6, 7);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
 
     const h = fs + 2 * svgPerCssPx;
@@ -304,7 +312,7 @@ export function IndiaMap() {
       const maxChars = Math.max(1, Math.floor(maxW / charW) - 1);
       return name.slice(0, maxChars).trimEnd() + "…";
     };
-    return pool.map((m) => {
+    const visibleMarkers = pool.map((m) => {
       const rightRoom = INDIA_VIEW_W - edgePad - (m.x + labelOffset);
       const leftRoom = (m.x - labelOffset) - edgePad;
       const desiredW = m.name.length * charW + 3 * svgPerCssPx;
@@ -350,6 +358,7 @@ export function IndiaMap() {
       if (show) placed.push(box);
       return { ...m, label, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
     });
+    return { visibleMarkers, placed };
   })();
 
 
@@ -567,6 +576,16 @@ export function IndiaMap() {
           {hoveredMarker && !hoveredMarker.showLabel && (() => {
             const s = scale;
             const name = hoveredMarker.kind === "destination" ? hoveredMarker.dest.name : hoveredMarker.city.name;
+            const tooltipBox = {
+              x1: hoveredMarker.x + 8 * s,
+              y1: hoveredMarker.y + 8 * s,
+              x2: hoveredMarker.x + 158 * s,
+              y2: hoveredMarker.y + 36 * s,
+            };
+            const tooltipCollides = placed.some(
+              (p) => !(tooltipBox.x2 < p.x1 || tooltipBox.x1 > p.x2 || tooltipBox.y2 < p.y1 || tooltipBox.y1 > p.y2),
+            );
+            if (tooltipCollides) return null;
             return (
               <g transform={`translate(${hoveredMarker.x + 8 * s} ${hoveredMarker.y + 8 * s})`} className="pointer-events-none">
                 <rect width={150 * s} height={28 * s} rx={5 * s} fill="var(--popover)" stroke="var(--border)" />
