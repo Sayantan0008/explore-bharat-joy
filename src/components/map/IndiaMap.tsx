@@ -273,7 +273,9 @@ export function IndiaMap() {
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
         .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
+    pool = declutterMarkers(pool, markerR * 2.6);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
+
     const h = fs + 2 * svgPerCssPx;
     const fitText = (name: string, maxW: number): string => {
       if (maxW <= charW * 2) return "";
