@@ -329,9 +329,23 @@ export function IndiaMap() {
         label.length > 0 &&
         box.x1 >= edgePad && box.x2 <= INDIA_VIEW_W - edgePad &&
         box.y1 >= edgePad && box.y2 <= INDIA_VIEW_H - edgePad;
-      const collides = placed.some(
-        (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
-      );
+      const collides =
+        placed.some(
+          (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
+        ) ||
+        // Never draw a label over a neighbouring dot, and never let this dot sit inside an existing label.
+        pool.some(
+          (o) =>
+            o !== m &&
+            o.x + markerR >= box.x1 && o.x - markerR <= box.x2 &&
+            o.y + markerR >= box.y1 && o.y - markerR <= box.y2,
+        ) ||
+        placed.some(
+          (p) =>
+            m.x + markerR >= p.x1 && m.x - markerR <= p.x2 &&
+            m.y + markerR >= p.y1 && m.y - markerR <= p.y2,
+        );
+
       const show = inBounds && !collides;
       if (show) placed.push(box);
       return { ...m, label, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
