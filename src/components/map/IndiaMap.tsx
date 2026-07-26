@@ -42,11 +42,32 @@ const CITY_VISIBILITY = {
 
 /** Responsive target sizes (CSS pixels) for markers + labels. */
 const SIZE_BREAKPOINTS = [
-  { maxWidth: 640,      markerR: 4.5, fontPx: 10,   strokePx: 1.4, haloFactor: 1.9 },
-  { maxWidth: 1024,     markerR: 7.5, fontPx: 12.5, strokePx: 1.8, haloFactor: 2.0 },
-  { maxWidth: 1440,     markerR: 9,   fontPx: 13.5, strokePx: 2.0, haloFactor: 2.0 },
-  { maxWidth: Infinity, markerR: 10.5, fontPx: 14.5, strokePx: 2.2, haloFactor: 2.1 },
+  { maxWidth: 640,      markerR: 5.5, fontPx: 12,   strokePx: 1.6, haloFactor: 1.9 },
+  { maxWidth: 1024,     markerR: 8.5, fontPx: 14,   strokePx: 2.0, haloFactor: 2.0 },
+  { maxWidth: 1440,     markerR: 10,  fontPx: 15.5, strokePx: 2.2, haloFactor: 2.0 },
+  { maxWidth: Infinity, markerR: 11.5, fontPx: 16.5, strokePx: 2.4, haloFactor: 2.1 },
 ] as const;
+
+function declutterMarkers<T extends { x: number; y: number }>(markers: T[], minDist: number, iterations = 4): T[] {
+  const pts = markers.map((m) => ({ ...m }));
+  for (let iter = 0; iter < iterations; iter++) {
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[j].x - pts[i].x;
+        const dy = pts[j].y - pts[i].y;
+        const dist = Math.hypot(dx, dy) || 0.0001;
+        if (dist < minDist) {
+          const push = (minDist - dist) / 2;
+          const ux = dx / dist, uy = dy / dist;
+          pts[i].x -= ux * push; pts[i].y -= uy * push;
+          pts[j].x += ux * push; pts[j].y += uy * push;
+        }
+      }
+    }
+  }
+  return pts;
+}
+
 
 function sizingFor(containerWidth: number) {
   return (
@@ -246,9 +267,11 @@ export function IndiaMap() {
   const sizing = sizingFor(containerWidth);
   // svg-units-per-css-px at the current viewBox + container width.
   const svgPerCssPx = view.w / Math.max(1, containerWidth);
-  const fs = sizing.fontPx * svgPerCssPx;
-  const markerR = sizing.markerR * svgPerCssPx;
-  const markerStroke = sizing.strokePx * svgPerCssPx;
+  const zoomBoost = selected ? 1.25 : 1;
+  const fs = sizing.fontPx * svgPerCssPx * zoomBoost;
+  const markerR = sizing.markerR * svgPerCssPx * (selected ? 1.12 : 1);
+  const markerStroke = sizing.strokePx * svgPerCssPx * zoomBoost;
+
   const haloFactor = sizing.haloFactor;
   const charW = fs * 0.55;
   const labelOffset = markerR + 3 * svgPerCssPx;
@@ -270,7 +293,9 @@ export function IndiaMap() {
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
         .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
+    pool = declutterMarkers(pool, markerR * 2.6);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
+
     const h = fs + 2 * svgPerCssPx;
     const fitText = (name: string, maxW: number): string => {
       if (maxW <= charW * 2) return "";
@@ -304,9 +329,23 @@ export function IndiaMap() {
         label.length > 0 &&
         box.x1 >= edgePad && box.x2 <= INDIA_VIEW_W - edgePad &&
         box.y1 >= edgePad && box.y2 <= INDIA_VIEW_H - edgePad;
-      const collides = placed.some(
-        (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
-      );
+      const collides =
+        placed.some(
+          (p) => !(box.x2 < p.x1 || box.x1 > p.x2 || box.y2 < p.y1 || box.y1 > p.y2),
+        ) ||
+        // Never draw a label over a neighbouring dot, and never let this dot sit inside an existing label.
+        pool.some(
+          (o) =>
+            o !== m &&
+            o.x + markerR >= box.x1 && o.x - markerR <= box.x2 &&
+            o.y + markerR >= box.y1 && o.y - markerR <= box.y2,
+        ) ||
+        placed.some(
+          (p) =>
+            m.x + markerR >= p.x1 && m.x - markerR <= p.x2 &&
+            m.y + markerR >= p.y1 && m.y - markerR <= p.y2,
+        );
+
       const show = inBounds && !collides;
       if (show) placed.push(box);
       return { ...m, label, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
