@@ -49,7 +49,10 @@ const SIZE_BREAKPOINTS = [
 ] as const;
 
 function declutterMarkers<T extends { x: number; y: number }>(markers: T[], minDist: number, iterations = 4): T[] {
+  const MAX_DISP = 14; // keep every marker within ~14 SVG units of its true position
   const pts = markers.map((m) => ({ ...m }));
+  const moved = new Array(pts.length).fill(0);
+
   for (let iter = 0; iter < iterations; iter++) {
     for (let i = 0; i < pts.length; i++) {
       for (let j = i + 1; j < pts.length; j++) {
@@ -59,8 +62,13 @@ function declutterMarkers<T extends { x: number; y: number }>(markers: T[], minD
         if (dist < minDist) {
           const push = (minDist - dist) / 2;
           const ux = dx / dist, uy = dy / dist;
-          pts[i].x -= ux * push; pts[i].y -= uy * push;
-          pts[j].x += ux * push; pts[j].y += uy * push;
+          // Clamp push so neither marker drifts beyond its displacement budget.
+          const pushI = Math.min(push, Math.max(0, MAX_DISP - moved[i]));
+          const pushJ = Math.min(push, Math.max(0, MAX_DISP - moved[j]));
+          pts[i].x -= ux * pushI; pts[i].y -= uy * pushI;
+          pts[j].x += ux * pushJ; pts[j].y += uy * pushJ;
+          moved[i] += pushI;
+          moved[j] += pushJ;
         }
       }
     }
