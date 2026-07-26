@@ -286,7 +286,7 @@ export function IndiaMap() {
   const edgePad = 4 * svgPerCssPx;
 
   // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
-  const visibleMarkers = (() => {
+  const { visibleMarkers, placed } = (() => {
     let pool: MapMarker[] = [];
     if (selected) {
       pool = stateCityMarkers
@@ -301,7 +301,7 @@ export function IndiaMap() {
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
         .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
-    pool = declutterMarkers(pool, markerR * 2.6);
+    pool = declutterMarkers(pool, markerR * 3.6, 7);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
 
     const h = fs + 2 * svgPerCssPx;
@@ -312,7 +312,7 @@ export function IndiaMap() {
       const maxChars = Math.max(1, Math.floor(maxW / charW) - 1);
       return name.slice(0, maxChars).trimEnd() + "…";
     };
-    return pool.map((m) => {
+    const visibleMarkers = pool.map((m) => {
       const rightRoom = INDIA_VIEW_W - edgePad - (m.x + labelOffset);
       const leftRoom = (m.x - labelOffset) - edgePad;
       const desiredW = m.name.length * charW + 3 * svgPerCssPx;
@@ -358,6 +358,7 @@ export function IndiaMap() {
       if (show) placed.push(box);
       return { ...m, label, showLabel: show, fs, lx, ly: m.y + fs * 0.35, anchor };
     });
+    return { visibleMarkers, placed };
   })();
 
 
