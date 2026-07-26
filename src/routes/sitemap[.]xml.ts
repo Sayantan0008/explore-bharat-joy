@@ -25,8 +25,13 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/contact", changefreq: "monthly", priority: "0.3" },
         ];
         for (const s of getAllStates()) entries.push({ path: `/states/${s.slug}`, changefreq: "monthly", priority: "0.8" });
+        const citySlugs = new Set(getAllCities().map((c) => c.slug));
         for (const c of getAllCities()) entries.push({ path: `/cities/${c.slug}`, changefreq: "monthly", priority: "0.6" });
-        for (const d of getAllDestinations()) entries.push({ path: `/destinations/${d.slug}`, changefreq: "monthly", priority: "0.7" });
+        for (const d of getAllDestinations()) {
+          if (citySlugs.has(d.slug)) continue; // canonical URL is /cities/$slug
+          entries.push({ path: `/destinations/${d.slug}`, changefreq: "monthly", priority: "0.7" });
+        }
+
         for (const f of getAllFoods()) entries.push({ path: `/foods/${f.slug}`, changefreq: "monthly", priority: "0.5" });
         for (const f of getAllFestivals()) entries.push({ path: `/festivals/${f.slug}`, changefreq: "monthly", priority: "0.5" });
         for (const i of INTERESTS) entries.push({ path: `/interests/${i.slug}`, changefreq: "weekly", priority: "0.6" });
