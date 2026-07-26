@@ -247,9 +247,11 @@ export function IndiaMap() {
   const sizing = sizingFor(containerWidth);
   // svg-units-per-css-px at the current viewBox + container width.
   const svgPerCssPx = view.w / Math.max(1, containerWidth);
-  const fs = sizing.fontPx * svgPerCssPx;
-  const markerR = sizing.markerR * svgPerCssPx;
-  const markerStroke = sizing.strokePx * svgPerCssPx;
+  const zoomBoost = selected ? 1.25 : 1;
+  const fs = sizing.fontPx * svgPerCssPx * zoomBoost;
+  const markerR = sizing.markerR * svgPerCssPx * (selected ? 1.12 : 1);
+  const markerStroke = sizing.strokePx * svgPerCssPx * zoomBoost;
+
   const haloFactor = sizing.haloFactor;
   const charW = fs * 0.55;
   const labelOffset = markerR + 3 * svgPerCssPx;
