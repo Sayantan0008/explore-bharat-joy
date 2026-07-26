@@ -1,18 +1,24 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { MapPin, ExternalLink } from "lucide-react";
 import type { InterestSlug } from "@/lib/constants";
 import { Container } from "@/components/layout/Container";
 import { SmartImage } from "@/components/media/SmartImage";
 import { DestinationCard } from "@/components/cards/Cards";
 import { getDestinationBySlug, getAllDestinations } from "@/content/destinations";
+import { getCityBySlug } from "@/content/cities";
 import { getStateBySlug } from "@/content/states";
 
 export const Route = createFileRoute("/destinations_/$slug")({
   loader: ({ params }) => {
+    const city = getCityBySlug(params.slug);
+    if (city) {
+      throw redirect({ to: "/cities/$slug", params: { slug: params.slug } });
+    }
     const dest = getDestinationBySlug(params.slug);
     if (!dest) throw notFound();
     return { dest };
   },
+
   head: ({ loaderData, params }) => {
     const d = loaderData?.dest;
     const title = d ? `${d.name} — India Atlas` : "Destination";
