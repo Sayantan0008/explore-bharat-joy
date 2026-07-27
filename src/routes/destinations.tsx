@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import { Container } from "@/components/layout/Container";
 import { DestinationCard } from "@/components/cards/Cards";
 import { getAllDestinations } from "@/content/destinations";
+import { getShowcaseStates } from "@/content/states";
 import { DESTINATION_CATEGORIES, INTERESTS, type InterestSlug, type DestinationCategory } from "@/lib/constants";
 
 export const Route = createFileRoute("/destinations")({

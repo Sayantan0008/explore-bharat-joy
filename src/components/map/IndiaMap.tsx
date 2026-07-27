@@ -817,7 +817,7 @@ function SidePanel({
     );
   }
   const dests = getDestinationsByState(state.slug);
-  const cities = getCitiesByState(state.slug);
+  const cities = dests.filter((d) => d.category === "City");
   const foods = getFoodsByState(state.slug);
   const fests = getFestivalsByState(state.slug);
   return (
@@ -873,7 +873,7 @@ function SidePanel({
             {cities.slice(0, 8).map((c) => (
               <li key={c.slug}>
                 <Link
-                  to="/cities/$slug"
+                  to="/destinations/$slug"
                   params={{ slug: c.slug }}
                   className="inline-block rounded-full border border-border bg-background px-2.5 py-1 text-[11px] hover:bg-accent/30"
                 >
