@@ -246,15 +246,17 @@ export function IndiaMap() {
       .filter(Boolean) as { dest: Destination; x: number; y: number }[];
   }, [destinations]);
 
-  const stateCityMarkers = useMemo(() => {
+  const stateDestMarkers = useMemo(() => {
     if (!selected) return [];
-    return getCitiesByState(selected)
-      .map((c) => {
-        if (!c.coords) return null;
-        const p = projectLngLat(c.coords.lng, c.coords.lat);
-        return { city: c, x: p.x, y: p.y, name: c.name };
+    return getDestinationsByState(selected)
+      .filter((d) => d.category === "City")
+      .map((d) => {
+        const c = DESTINATION_COORDS[d.slug];
+        if (!c) return null;
+        const p = projectLngLat(c.lng, c.lat);
+        return { dest: d, x: p.x, y: p.y, name: d.name };
       })
-      .filter(Boolean) as { city: CityInfo; x: number; y: number; name: string }[];
+      .filter(Boolean) as MapMarker[];
   }, [selected]);
 
   // Major-city allowlist shown at the India-wide view; the rest reveal on state zoom.
@@ -285,9 +287,7 @@ export function IndiaMap() {
   const { visibleMarkers, placed } = (() => {
     let pool: MapMarker[] = [];
     if (selected) {
-      pool = stateCityMarkers
-        .slice(0, CITY_VISIBILITY.maxAtStateView)
-        .map((m) => ({ kind: "city" as const, city: m.city, x: m.x, y: m.y, name: m.name }));
+      pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
     } else if (mode === "destinations") {
       const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
       const filtered = useMajorOnly
@@ -295,7 +295,7 @@ export function IndiaMap() {
         : allDestMarkers;
       pool = filtered
         .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
-        .map((m) => ({ kind: "destination" as const, dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
+        .map((m) => ({ dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     }
     pool = declutterMarkers(pool, markerR * 3.6, 7);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
