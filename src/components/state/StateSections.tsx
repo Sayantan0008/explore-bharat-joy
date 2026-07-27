@@ -4,7 +4,7 @@ import { MapPin, ExternalLink, Navigation, ChevronDown, X, Plane, Train, Bus, Ca
 import { SmartImage } from "@/components/media/SmartImage";
 import { DestinationCard } from "@/components/cards/Cards";
 import type { Destination } from "@/content/types";
-import type { CityInfo, SeasonInfo, TravelInfo, FaqItem } from "@/data/stateExtras";
+import type { SeasonInfo, TravelInfo, FaqItem } from "@/data/stateExtras";
 import { getStateBySlug } from "@/content/states";
 
 function mapsSearchHref(q: string) {
@@ -18,7 +18,7 @@ function directionsHref(q: string) {
 }
 
 /* -------------------- Cities -------------------- */
-export function CitiesSection({ cities }: { cities: CityInfo[] }) {
+export function CitiesSection({ cities }: { cities: Destination[] }) {
   if (!cities.length) return null;
   return (
     <section className="mt-14">
@@ -27,37 +27,9 @@ export function CitiesSection({ cities }: { cities: CityInfo[] }) {
         <span className="text-xs text-muted-foreground">{cities.length} cities</span>
       </header>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {cities.map((c) => (
-          <Link
-            key={c.slug}
-            to="/cities/$slug"
-            params={{ slug: c.slug }}
-            className="group block overflow-hidden rounded-2xl border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-sm"
-          >
-            <SmartImage alt={c.name} kind="destination" seed={c.slug} aspect="aspect-[5/3]" rounded="rounded-none" />
-            <div className="p-4">
-              <h3 className="font-display text-lg font-semibold transition-colors group-hover:text-accent-foreground">
-                {c.name}
-              </h3>
-              <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{c.shortDescription}</p>
-              <dl className="mt-3 grid grid-cols-3 gap-2 text-[11px]">
-                <Stat label="Attractions" value={String(c.attractionsCount)} />
-                <Stat label="Foods" value={String(c.famousFoods.length)} />
-                <Stat label="Festivals" value={String(c.majorFestivals.length)} />
-              </dl>
-            </div>
-          </Link>
-        ))}
+        {cities.map((d) => <DestinationCard key={d.id} dest={d} />)}
       </div>
     </section>
-  );
-}
-function Stat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-lg bg-secondary/50 px-2 py-1.5 text-center">
-      <div className="font-display text-sm font-semibold">{value}</div>
-      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">{label}</div>
-    </div>
   );
 }
 

@@ -145,7 +145,7 @@ function StateDetail() {
             </section>
           )}
 
-          <CitiesSection cities={extras.cities} />
+          <CitiesSection cities={dests.filter((d) => d.category === "City")} />
           <MustVisitSection destinations={mustVisit} />
           <ThingsToDoSection items={extras.experiences} />
           <SeasonsSection seasons={extras.seasons} />

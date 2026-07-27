@@ -4,7 +4,7 @@ import { getAllStates } from "@/content/states";
 import { getAllDestinations } from "@/content/destinations";
 import { getAllFoods } from "@/content/foods";
 import { getAllFestivals } from "@/content/festivals";
-import { getAllCities } from "@/content/cities";
+
 import { INTERESTS } from "@/lib/constants";
 
 // TODO: replace with your project URL once a custom domain is set.
