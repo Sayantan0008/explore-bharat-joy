@@ -3,6 +3,7 @@ import { useState, useMemo } from "react";
 import { Container } from "@/components/layout/Container";
 import { DestinationCard } from "@/components/cards/Cards";
 import { getAllDestinations } from "@/content/destinations";
+import { getShowcaseStates } from "@/content/states";
 import { DESTINATION_CATEGORIES, INTERESTS, type InterestSlug, type DestinationCategory } from "@/lib/constants";
 
 export const Route = createFileRoute("/destinations")({
@@ -22,11 +23,14 @@ function DestinationsPage() {
   const all = getAllDestinations();
   const [cat, setCat] = useState<DestinationCategory | "all">("all");
   const [interest, setInterest] = useState<InterestSlug | "all">("all");
+  const [stateSlug, setStateSlug] = useState<string>("all");
+  const states = getShowcaseStates();
 
   const filtered = useMemo(() => all.filter((d) =>
+    (stateSlug === "all" || d.stateSlug === stateSlug) &&
     (cat === "all" || d.category === cat) &&
     (interest === "all" || d.interests.includes(interest)),
-  ), [all, cat, interest]);
+  ), [all, stateSlug, cat, interest]);
 
   return (
     <Container className="py-12 md:py-16">
@@ -35,7 +39,18 @@ function DestinationsPage() {
         <p className="mt-3 text-muted-foreground">{all.length} places across our showcase states.</p>
       </header>
 
-      <div className="mb-8 grid gap-4 md:grid-cols-2">
+      <div className="mb-8 grid gap-4 md:grid-cols-3">
+        <div>
+          <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">State</div>
+          <select
+            value={stateSlug}
+            onChange={(e) => setStateSlug(e.target.value)}
+            className="rounded-md border border-border bg-card px-3 py-1.5 text-sm"
+          >
+            <option value="all">All states</option>
+            {states.map((s) => <option key={s.slug} value={s.slug}>{s.name}</option>)}
+          </select>
+        </div>
         <div>
           <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Category</div>
           <div className="flex flex-wrap gap-1.5">

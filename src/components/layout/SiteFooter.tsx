@@ -16,7 +16,7 @@ export function SiteFooter() {
           </h3>
           <ul className="mt-3 space-y-1.5 text-sm">
             <li><Link to="/states" className="hover:text-accent-foreground">States & UTs</Link></li>
-            <li><Link to="/cities" className="hover:text-accent-foreground">Cities</Link></li>
+            
             <li><Link to="/destinations" className="hover:text-accent-foreground">Destinations</Link></li>
             <li><Link to="/foods" className="hover:text-accent-foreground">Regional Food</Link></li>
             <li><Link to="/festivals" className="hover:text-accent-foreground">Festivals</Link></li>
