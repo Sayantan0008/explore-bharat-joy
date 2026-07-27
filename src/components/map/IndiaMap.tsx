@@ -372,9 +372,7 @@ export function IndiaMap() {
   }
 
   const hoveredMarker = hoveredDest
-    ? visibleMarkers.find(
-        (m) => (m.kind === "destination" ? m.dest.slug : m.city.slug) === hoveredDest,
-      ) ?? null
+    ? visibleMarkers.find((m) => m.dest.slug === hoveredDest) ?? null
     : null;
 
   return (
@@ -485,17 +483,15 @@ export function IndiaMap() {
           <g clipPath="url(#india-bounds)">
           {visibleMarkers.map((marker) => {
             const { x, y, label, showLabel, fs, lx, ly, anchor } = marker;
-            const slugKey = marker.kind === "destination" ? marker.dest.slug : marker.city.slug;
-            const reactKey = marker.kind === "destination" ? marker.dest.id : `city-${marker.city.slug}`;
-            const isActive =
-              hoveredDest === slugKey ||
-              (marker.kind === "destination" && modalDest?.slug === marker.dest.slug);
+            const slugKey = marker.dest.slug;
+            const reactKey = marker.dest.id;
+            const isActive = hoveredDest === slugKey || modalDest?.slug === marker.dest.slug;
             const r = isActive ? markerR * 1.18 : markerR;
             const haloR = r * haloFactor;
             const handleClick = (e: React.MouseEvent) => {
               e.stopPropagation();
-              if (marker.kind === "city") {
-                navigate({ to: "/cities/$slug", params: { slug: marker.city.slug } });
+              if (selected) {
+                navigate({ to: "/destinations/$slug", params: { slug: marker.dest.slug } });
               } else {
                 setModalDest(marker.dest);
               }
@@ -571,7 +567,7 @@ export function IndiaMap() {
 
           {hoveredMarker && !hoveredMarker.showLabel && (() => {
             const s = scale;
-            const name = hoveredMarker.kind === "destination" ? hoveredMarker.dest.name : hoveredMarker.city.name;
+            const name = hoveredMarker.dest.name;
             const tooltipBox = {
               x1: hoveredMarker.x + 8 * s,
               y1: hoveredMarker.y + 8 * s,
