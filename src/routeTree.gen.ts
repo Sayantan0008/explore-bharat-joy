@@ -16,7 +16,6 @@ import { Route as FoodsRouteImport } from './routes/foods'
 import { Route as FestivalsRouteImport } from './routes/festivals'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CitiesRouteImport } from './routes/cities'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StatesSlugRouteImport } from './routes/states_.$slug'
@@ -24,7 +23,6 @@ import { Route as InterestsSlugRouteImport } from './routes/interests.$slug'
 import { Route as FoodsSlugRouteImport } from './routes/foods_.$slug'
 import { Route as FestivalsSlugRouteImport } from './routes/festivals_.$slug'
 import { Route as DestinationsSlugRouteImport } from './routes/destinations_.$slug'
-import { Route as CitiesSlugRouteImport } from './routes/cities.$slug'
 
 const StatesRoute = StatesRouteImport.update({
   id: '/states',
@@ -59,11 +57,6 @@ const DestinationsRoute = DestinationsRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CitiesRoute = CitiesRouteImport.update({
-  id: '/cities',
-  path: '/cities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -101,16 +94,10 @@ const DestinationsSlugRoute = DestinationsSlugRouteImport.update({
   path: '/destinations/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CitiesSlugRoute = CitiesSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => CitiesRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/cities': typeof CitiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/festivals': typeof FestivalsRoute
@@ -118,7 +105,6 @@ export interface FileRoutesByFullPath {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRoute
-  '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/foods/$slug': typeof FoodsSlugRoute
@@ -128,7 +114,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/cities': typeof CitiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/festivals': typeof FestivalsRoute
@@ -136,7 +121,6 @@ export interface FileRoutesByTo {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRoute
-  '/cities/$slug': typeof CitiesSlugRoute
   '/destinations/$slug': typeof DestinationsSlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/foods/$slug': typeof FoodsSlugRoute
@@ -147,7 +131,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/cities': typeof CitiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/festivals': typeof FestivalsRoute
@@ -155,7 +138,6 @@ export interface FileRoutesById {
   '/search': typeof SearchRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/states': typeof StatesRoute
-  '/cities/$slug': typeof CitiesSlugRoute
   '/destinations_/$slug': typeof DestinationsSlugRoute
   '/festivals_/$slug': typeof FestivalsSlugRoute
   '/foods_/$slug': typeof FoodsSlugRoute
@@ -167,7 +149,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/cities'
     | '/contact'
     | '/destinations'
     | '/festivals'
@@ -175,7 +156,6 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/states'
-    | '/cities/$slug'
     | '/destinations/$slug'
     | '/festivals/$slug'
     | '/foods/$slug'
@@ -185,7 +165,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/cities'
     | '/contact'
     | '/destinations'
     | '/festivals'
@@ -193,7 +172,6 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/states'
-    | '/cities/$slug'
     | '/destinations/$slug'
     | '/festivals/$slug'
     | '/foods/$slug'
@@ -203,7 +181,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
-    | '/cities'
     | '/contact'
     | '/destinations'
     | '/festivals'
@@ -211,7 +188,6 @@ export interface FileRouteTypes {
     | '/search'
     | '/sitemap.xml'
     | '/states'
-    | '/cities/$slug'
     | '/destinations_/$slug'
     | '/festivals_/$slug'
     | '/foods_/$slug'
@@ -222,7 +198,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  CitiesRoute: typeof CitiesRouteWithChildren
   ContactRoute: typeof ContactRoute
   DestinationsRoute: typeof DestinationsRoute
   FestivalsRoute: typeof FestivalsRoute
@@ -288,13 +263,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cities': {
-      id: '/cities'
-      path: '/cities'
-      fullPath: '/cities'
-      preLoaderRoute: typeof CitiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -344,31 +312,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cities/$slug': {
-      id: '/cities/$slug'
-      path: '/$slug'
-      fullPath: '/cities/$slug'
-      preLoaderRoute: typeof CitiesSlugRouteImport
-      parentRoute: typeof CitiesRoute
-    }
   }
 }
-
-interface CitiesRouteChildren {
-  CitiesSlugRoute: typeof CitiesSlugRoute
-}
-
-const CitiesRouteChildren: CitiesRouteChildren = {
-  CitiesSlugRoute: CitiesSlugRoute,
-}
-
-const CitiesRouteWithChildren =
-  CitiesRoute._addFileChildren(CitiesRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  CitiesRoute: CitiesRouteWithChildren,
   ContactRoute: ContactRoute,
   DestinationsRoute: DestinationsRoute,
   FestivalsRoute: FestivalsRoute,
@@ -385,13 +334,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
