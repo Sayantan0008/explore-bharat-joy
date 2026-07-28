@@ -576,8 +576,6 @@ export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
                 )}
               </g>
             );
-              </g>
-            );
           })}
           </g>
 
