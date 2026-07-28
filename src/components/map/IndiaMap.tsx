@@ -249,7 +249,6 @@ export function IndiaMap() {
   const stateDestMarkers = useMemo(() => {
     if (!selected) return [];
     return getDestinationsByState(selected)
-      .filter((d) => d.category === "City")
       .map((d) => {
         const c = DESTINATION_COORDS[d.slug];
         if (!c) return null;
@@ -258,6 +257,7 @@ export function IndiaMap() {
       })
       .filter(Boolean) as MapMarker[];
   }, [selected]);
+
 
   // Major-city allowlist shown at the India-wide view; the rest reveal on state zoom.
   const MAJOR_CITY_SLUGS = new Set([
