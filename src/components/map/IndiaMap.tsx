@@ -196,10 +196,20 @@ export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
   };
 
   useEffect(() => {
-    animateTo(selectedGeo ? bboxFromPath(selectedGeo.d) : FULL_VIEW);
+    const base = selectedGeo ? bboxFromPath(selectedGeo.d) : FULL_VIEW;
+    const focusCoords = focusDest ? DESTINATION_COORDS[focusDest.slug] : undefined;
+    if (focusCoords && selectedGeo && selectedGeo.slug === focusDest?.stateSlug) {
+      // Centre the view on the focused destination, a touch tighter than the state bbox.
+      const p = projectLngLat(focusCoords.lng, focusCoords.lat);
+      const w = Math.max(120, base.w * 0.7);
+      const h = Math.max(120, base.h * 0.7);
+      animateTo({ x: p.x - w / 2, y: p.y - h / 2, w, h });
+    } else {
+      animateTo(base);
+    }
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGeo]);
+  }, [selectedGeo, focusDest]);
 
   // State taps zoom in (setSelected triggers the selectedGeo animation effect).
   // The explicit "Open {state} guide →" link in the SidePanel handles navigation.
