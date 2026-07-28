@@ -134,7 +134,7 @@ function getStateCoord(slug: string): { lng: number; lat: number } | null {
   return STATE_CAPITAL_COORDS[slug] ?? null;
 }
 
-export function IndiaMap() {
+export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
   const navigate = useNavigate();
   const allStates = useMemo(() => getAllStates(), []);
   const stateBySlug = useMemo(
@@ -144,7 +144,11 @@ export function IndiaMap() {
 
   const [mode, setMode] = useState<Mode>("states");
   const [hovered, setHovered] = useState<string | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
+  const focusDest = useMemo(
+    () => (focusSlug ? getAllDestinations().find((d) => d.slug === focusSlug) ?? null : null),
+    [focusSlug],
+  );
+  const [selected, setSelected] = useState<string | null>(focusDest?.stateSlug ?? null);
   const [view, setView] = useState<ViewBox>(FULL_VIEW);
   const [hoveredDest, setHoveredDest] = useState<string | null>(null);
   const [modalDest, setModalDest] = useState<Destination | null>(null);
@@ -192,10 +196,20 @@ export function IndiaMap() {
   };
 
   useEffect(() => {
-    animateTo(selectedGeo ? bboxFromPath(selectedGeo.d) : FULL_VIEW);
+    const base = selectedGeo ? bboxFromPath(selectedGeo.d) : FULL_VIEW;
+    const focusCoords = focusDest ? DESTINATION_COORDS[focusDest.slug] : undefined;
+    if (focusCoords && selectedGeo && selectedGeo.slug === focusDest?.stateSlug) {
+      // Centre the view on the focused destination, a touch tighter than the state bbox.
+      const p = projectLngLat(focusCoords.lng, focusCoords.lat);
+      const w = Math.max(120, base.w * 0.7);
+      const h = Math.max(120, base.h * 0.7);
+      animateTo({ x: p.x - w / 2, y: p.y - h / 2, w, h });
+    } else {
+      animateTo(base);
+    }
     return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGeo]);
+  }, [selectedGeo, focusDest]);
 
   // State taps zoom in (setSelected triggers the selectedGeo animation effect).
   // The explicit "Open {state} guide →" link in the SidePanel handles navigation.
@@ -303,6 +317,12 @@ export function IndiaMap() {
     }
 
     pool = declutterMarkers(pool, markerR * 3.6, 7);
+    // The focused destination always keeps its label — place it first.
+    if (focusSlug) {
+      pool = [...pool].sort((a, b) =>
+        a.dest.slug === focusSlug ? -1 : b.dest.slug === focusSlug ? 1 : 0,
+      );
+    }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
 
     const h = fs + 2 * svgPerCssPx;
@@ -490,8 +510,9 @@ export function IndiaMap() {
             const { x, y, label, showLabel, fs, lx, ly, anchor } = marker;
             const slugKey = marker.dest.slug;
             const reactKey = marker.dest.id;
+            const isFocus = focusSlug === slugKey;
             const isActive = hoveredDest === slugKey || modalDest?.slug === marker.dest.slug;
-            const r = isActive ? markerR * 1.18 : markerR;
+            const r = isFocus ? markerR * 1.45 : isActive ? markerR * 1.18 : markerR;
             const haloR = r * haloFactor;
             const handleClick = (e: React.MouseEvent) => {
               e.stopPropagation();
@@ -509,24 +530,38 @@ export function IndiaMap() {
                 onMouseLeave={() => setHoveredDest(null)}
                 onClick={handleClick}
               >
+                {isFocus && (
+                  <circle
+                    cx={x} cy={y} r={haloR * 1.5}
+                    fill="none"
+                    stroke="var(--accent)"
+                    strokeWidth={markerStroke * 1.4}
+                    opacity={0.9}
+                  >
+                    <animate attributeName="r" values={`${haloR};${haloR * 2.1};${haloR}`} dur="1.8s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.9;0.05;0.9" dur="1.8s" repeatCount="indefinite" />
+                  </circle>
+                )}
                 <circle
                   cx={x} cy={y} r={haloR}
-                  fill="color-mix(in oklab, var(--primary) 22%, transparent)"
+                  fill={isFocus
+                    ? "color-mix(in oklab, var(--accent) 35%, transparent)"
+                    : "color-mix(in oklab, var(--primary) 22%, transparent)"}
                   style={{ transition: "r 150ms ease" }}
                 />
                 <circle
                   cx={x} cy={y} r={r}
-                  fill="var(--primary)"
+                  fill={isFocus ? "var(--accent)" : "var(--primary)"}
                   stroke="#ffffff"
-                  strokeWidth={markerStroke}
+                  strokeWidth={isFocus ? markerStroke * 1.3 : markerStroke}
                   style={{ transition: "r 150ms ease" }}
                 />
                 {showLabel && (
                   <text
                     x={lx}
                     y={ly}
-                    fontSize={fs}
-                    fontWeight={isActive ? 700 : 600}
+                    fontSize={isFocus ? fs * 1.15 : fs}
+                    fontWeight={isActive || isFocus ? 700 : 600}
                     textAnchor={anchor}
                     className="pointer-events-none fill-foreground"
                     style={{

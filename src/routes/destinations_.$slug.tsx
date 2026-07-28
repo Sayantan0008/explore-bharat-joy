@@ -4,6 +4,7 @@ import type { InterestSlug } from "@/lib/constants";
 import { Container } from "@/components/layout/Container";
 import { SmartImage } from "@/components/media/SmartImage";
 import { DestinationCard } from "@/components/cards/Cards";
+import { IndiaMap } from "@/components/map/IndiaMap";
 import { getDestinationBySlug, getAllDestinations } from "@/content/destinations";
 import { getStateBySlug } from "@/content/states";
 
@@ -151,6 +152,11 @@ function DestinationDetail() {
             </div>
           </aside>
         </div>
+
+        <section className="mt-14">
+          <h2 className="mb-5 font-display text-2xl font-semibold">Where it is</h2>
+          <IndiaMap focusSlug={dest.slug} />
+        </section>
 
         {nearby.length > 0 && (
           <section className="mt-14">
