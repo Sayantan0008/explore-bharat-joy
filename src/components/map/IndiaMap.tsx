@@ -134,7 +134,7 @@ function getStateCoord(slug: string): { lng: number; lat: number } | null {
   return STATE_CAPITAL_COORDS[slug] ?? null;
 }
 
-export function IndiaMap() {
+export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
   const navigate = useNavigate();
   const allStates = useMemo(() => getAllStates(), []);
   const stateBySlug = useMemo(
@@ -144,7 +144,11 @@ export function IndiaMap() {
 
   const [mode, setMode] = useState<Mode>("states");
   const [hovered, setHovered] = useState<string | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
+  const focusDest = useMemo(
+    () => (focusSlug ? getAllDestinations().find((d) => d.slug === focusSlug) ?? null : null),
+    [focusSlug],
+  );
+  const [selected, setSelected] = useState<string | null>(focusDest?.stateSlug ?? null);
   const [view, setView] = useState<ViewBox>(FULL_VIEW);
   const [hoveredDest, setHoveredDest] = useState<string | null>(null);
   const [modalDest, setModalDest] = useState<Destination | null>(null);
