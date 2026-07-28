@@ -4,6 +4,7 @@ import type { InterestSlug } from "@/lib/constants";
 import { Container } from "@/components/layout/Container";
 import { SmartImage } from "@/components/media/SmartImage";
 import { DestinationCard } from "@/components/cards/Cards";
+import { IndiaMap } from "@/components/map/IndiaMap";
 import { getDestinationBySlug, getAllDestinations } from "@/content/destinations";
 import { getStateBySlug } from "@/content/states";
 
