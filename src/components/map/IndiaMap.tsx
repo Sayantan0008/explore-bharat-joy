@@ -317,6 +317,12 @@ export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
     }
 
     pool = declutterMarkers(pool, markerR * 3.6, 7);
+    // The focused destination always keeps its label — place it first.
+    if (focusSlug) {
+      pool = [...pool].sort((a, b) =>
+        a.dest.slug === focusSlug ? -1 : b.dest.slug === focusSlug ? 1 : 0,
+      );
+    }
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
 
     const h = fs + 2 * svgPerCssPx;
