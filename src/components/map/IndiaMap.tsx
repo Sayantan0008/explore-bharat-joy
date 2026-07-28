@@ -30,11 +30,14 @@ type Mode = "states" | "destinations";
 const CITY_VISIBILITY = {
   /** When scale >= this, only `MAJOR_CITY_SLUGS` are rendered. Below, all show. */
   majorOnlyAboveScale: 0.7,
-  /** Hard cap on markers at the full India view (destinations mode). */
+  /** Hard cap on markers at the full India view (states mode). */
   maxAtIndiaView: 14,
+  /** Hard cap on markers in destinations mode (all destinations). */
+  maxAtDestinationsMode: 200,
   /** Hard cap on markers once a state is selected (zoomed in). */
   maxAtStateView: 40,
 };
+
 
 /** Responsive target sizes (CSS pixels) for markers + labels. */
 const SIZE_BREAKPOINTS = [
