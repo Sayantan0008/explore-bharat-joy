@@ -286,17 +286,19 @@ export function IndiaMap() {
   // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
   const { visibleMarkers, placed } = (() => {
     let pool: MapMarker[] = [];
+    const toMarkers = (ms: { dest: Destination; x: number; y: number }[]) =>
+      ms.map((m) => ({ dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     if (selected) {
       pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
     } else if (mode === "destinations") {
-      const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
-      const filtered = useMajorOnly
-        ? allDestMarkers.filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
-        : allDestMarkers;
-      pool = filtered
-        .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
-        .map((m) => ({ dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
+      // Zoomed out: every destination we have coords for; labels self-declutter.
+      pool = toMarkers(allDestMarkers).slice(0, CITY_VISIBILITY.maxAtDestinationsMode);
+    } else {
+      // States mode, nothing selected: show the marquee cities as orientation pins.
+      pool = toMarkers(allDestMarkers.filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug)))
+        .slice(0, CITY_VISIBILITY.maxAtIndiaView);
     }
+
     pool = declutterMarkers(pool, markerR * 3.6, 7);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
 
