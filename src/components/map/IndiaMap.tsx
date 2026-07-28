@@ -510,8 +510,9 @@ export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
             const { x, y, label, showLabel, fs, lx, ly, anchor } = marker;
             const slugKey = marker.dest.slug;
             const reactKey = marker.dest.id;
+            const isFocus = focusSlug === slugKey;
             const isActive = hoveredDest === slugKey || modalDest?.slug === marker.dest.slug;
-            const r = isActive ? markerR * 1.18 : markerR;
+            const r = isFocus ? markerR * 1.45 : isActive ? markerR * 1.18 : markerR;
             const haloR = r * haloFactor;
             const handleClick = (e: React.MouseEvent) => {
               e.stopPropagation();
@@ -529,24 +530,38 @@ export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
                 onMouseLeave={() => setHoveredDest(null)}
                 onClick={handleClick}
               >
+                {isFocus && (
+                  <circle
+                    cx={x} cy={y} r={haloR * 1.5}
+                    fill="none"
+                    stroke="var(--accent)"
+                    strokeWidth={markerStroke * 1.4}
+                    opacity={0.9}
+                  >
+                    <animate attributeName="r" values={`${haloR};${haloR * 2.1};${haloR}`} dur="1.8s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.9;0.05;0.9" dur="1.8s" repeatCount="indefinite" />
+                  </circle>
+                )}
                 <circle
                   cx={x} cy={y} r={haloR}
-                  fill="color-mix(in oklab, var(--primary) 22%, transparent)"
+                  fill={isFocus
+                    ? "color-mix(in oklab, var(--accent) 35%, transparent)"
+                    : "color-mix(in oklab, var(--primary) 22%, transparent)"}
                   style={{ transition: "r 150ms ease" }}
                 />
                 <circle
                   cx={x} cy={y} r={r}
-                  fill="var(--primary)"
+                  fill={isFocus ? "var(--accent)" : "var(--primary)"}
                   stroke="#ffffff"
-                  strokeWidth={markerStroke}
+                  strokeWidth={isFocus ? markerStroke * 1.3 : markerStroke}
                   style={{ transition: "r 150ms ease" }}
                 />
                 {showLabel && (
                   <text
                     x={lx}
                     y={ly}
-                    fontSize={fs}
-                    fontWeight={isActive ? 700 : 600}
+                    fontSize={isFocus ? fs * 1.15 : fs}
+                    fontWeight={isActive || isFocus ? 700 : 600}
                     textAnchor={anchor}
                     className="pointer-events-none fill-foreground"
                     style={{
@@ -559,6 +574,8 @@ export function IndiaMap({ focusSlug }: { focusSlug?: string } = {}) {
                     {label}
                   </text>
                 )}
+              </g>
+            );
               </g>
             );
           })}
