@@ -30,11 +30,14 @@ type Mode = "states" | "destinations";
 const CITY_VISIBILITY = {
   /** When scale >= this, only `MAJOR_CITY_SLUGS` are rendered. Below, all show. */
   majorOnlyAboveScale: 0.7,
-  /** Hard cap on markers at the full India view (destinations mode). */
+  /** Hard cap on markers at the full India view (states mode). */
   maxAtIndiaView: 14,
+  /** Hard cap on markers in destinations mode (all destinations). */
+  maxAtDestinationsMode: 200,
   /** Hard cap on markers once a state is selected (zoomed in). */
   maxAtStateView: 40,
 };
+
 
 /** Responsive target sizes (CSS pixels) for markers + labels. */
 const SIZE_BREAKPOINTS = [
@@ -286,17 +289,19 @@ export function IndiaMap() {
   // Greedy label placement: prefer right; flip; truncate with ellipsis if neither fits.
   const { visibleMarkers, placed } = (() => {
     let pool: MapMarker[] = [];
+    const toMarkers = (ms: { dest: Destination; x: number; y: number }[]) =>
+      ms.map((m) => ({ dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
     if (selected) {
       pool = stateDestMarkers.slice(0, CITY_VISIBILITY.maxAtStateView);
     } else if (mode === "destinations") {
-      const useMajorOnly = scale >= CITY_VISIBILITY.majorOnlyAboveScale;
-      const filtered = useMajorOnly
-        ? allDestMarkers.filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug))
-        : allDestMarkers;
-      pool = filtered
-        .slice(0, useMajorOnly ? CITY_VISIBILITY.maxAtIndiaView : CITY_VISIBILITY.maxAtStateView)
-        .map((m) => ({ dest: m.dest, x: m.x, y: m.y, name: m.dest.name }));
+      // Zoomed out: every destination we have coords for; labels self-declutter.
+      pool = toMarkers(allDestMarkers).slice(0, CITY_VISIBILITY.maxAtDestinationsMode);
+    } else {
+      // States mode, nothing selected: show the marquee cities as orientation pins.
+      pool = toMarkers(allDestMarkers.filter((m) => MAJOR_CITY_SLUGS.has(m.dest.slug)))
+        .slice(0, CITY_VISIBILITY.maxAtIndiaView);
     }
+
     pool = declutterMarkers(pool, markerR * 3.6, 7);
     const placed: { x1: number; y1: number; x2: number; y2: number }[] = [];
 
