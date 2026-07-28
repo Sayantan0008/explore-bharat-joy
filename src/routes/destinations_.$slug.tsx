@@ -152,6 +152,11 @@ function DestinationDetail() {
           </aside>
         </div>
 
+        <section className="mt-14">
+          <h2 className="mb-5 font-display text-2xl font-semibold">Where it is</h2>
+          <IndiaMap focusSlug={dest.slug} />
+        </section>
+
         {nearby.length > 0 && (
           <section className="mt-14">
             <h2 className="mb-5 font-display text-2xl font-semibold">Nearby attractions</h2>
