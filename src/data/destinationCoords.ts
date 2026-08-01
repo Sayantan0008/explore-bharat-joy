@@ -78,6 +78,32 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "dwarka": { lng: 68.9678, lat: 22.2394 },
   "somnath": { lng: 70.4013, lat: 20.8880 },
   "vadodara": { lng: 73.1812, lat: 22.3072 },
+  // Assam
+  "guwahati": { lng: 91.7362, lat: 26.1445 },
+  "kaziranga": { lng: 93.1711, lat: 26.5775 },
+  "majuli": { lng: 94.1667, lat: 26.9500 },
+  "sivasagar": { lng: 94.6425, lat: 26.9826 },
+  "manas": { lng: 90.9500, lat: 26.7200 },
+  "kamakhya-temple": { lng: 91.7055, lat: 26.1664 },
+  // Bihar
+  "bodh-gaya": { lng: 84.9870, lat: 24.6961 },
+  "nalanda": { lng: 85.4436, lat: 25.1358 },
+  "rajgir": { lng: 85.4200, lat: 25.0280 },
+  "patna": { lng: 85.1376, lat: 25.5941 },
+  "vaishali": { lng: 85.1280, lat: 25.9920 },
+  // Haryana
+  "kurukshetra": { lng: 76.8783, lat: 29.9695 },
+  "sultanpur": { lng: 76.8930, lat: 28.4600 },
+  "morni-hills": { lng: 77.1000, lat: 30.6900 },
+  "pinjore": { lng: 76.9180, lat: 30.7960 },
+  "gurugram": { lng: 77.0266, lat: 28.4595 },
+  // Delhi
+  "red-fort": { lng: 77.2410, lat: 28.6562 },
+  "qutub-minar": { lng: 77.1855, lat: 28.5245 },
+  "humayuns-tomb": { lng: 77.2507, lat: 28.5933 },
+  "india-gate": { lng: 77.2295, lat: 28.6129 },
+  "lotus-temple": { lng: 77.2588, lat: 28.5535 },
+  "chandni-chowk": { lng: 77.2303, lat: 28.6506 },
 };
 
 // State-capital fallback coords used when a state has no destinations yet.
