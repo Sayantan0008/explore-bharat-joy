@@ -136,4 +136,48 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-saraswati-puja", slug: "saraswati-puja", name: "Saraswati Puja", stateSlug: "west-bengal", month: "February", type: "Religious", image: "",
     description: "Bengal's spring festival of learning — yellow saris, school-and-college courtyards, and the ceremonial first-writing rituals for small children.",
     significance: "Also informally called Bengal's Valentine's Day; a fixed date in the Bengali cultural calendar." },
+
+  // Assam
+  { id: "fest-bihu", slug: "bohag-bihu", name: "Bohag Bihu", stateSlug: "assam", month: "April", type: "Harvest", image: "", featured: true,
+    description: "Assam's new-year spring festival \u2014 seven days of husori singing, dhol drumming and Bihu dance in village fields.",
+    significance: "Marks the start of the agricultural year; celebrated by every community in the Brahmaputra valley regardless of faith." },
+  { id: "fest-ambubachi", slug: "ambubachi-mela", name: "Ambubachi Mela", stateSlug: "assam", month: "June", type: "Religious", image: "",
+    description: "A four-day tantric gathering at Kamakhya Temple when the shrine closes to mark the goddess's annual cycle.",
+    significance: "Draws hundreds of thousands of sadhus and pilgrims, making it one of eastern India's largest religious congregations." },
+  { id: "fest-magh-bihu", slug: "magh-bihu", name: "Magh Bihu", stateSlug: "assam", month: "January", type: "Harvest", image: "",
+    description: "The harvest feast of Assam \u2014 community bonfires, bamboo-and-thatch meji huts and a full night of pitha and cooked meats.",
+    significance: "Celebrates the end of the harvesting season with feasting, buffalo fights and traditional games." },
+
+  // Bihar
+  { id: "fest-chhath", slug: "chhath-puja", name: "Chhath Puja", stateSlug: "bihar", month: "November", type: "Religious", image: "", featured: true,
+    description: "A four-day sun festival where devotees stand waist-deep in rivers at sunset and sunrise to offer arghya.",
+    significance: "Bihar's most important festival, observed with a 36-hour waterless fast and considered one of the oldest surviving Vedic rituals." },
+  { id: "fest-buddha-purnima", slug: "buddha-purnima", name: "Buddha Purnima", stateSlug: "bihar", month: "May", type: "Religious", image: "",
+    description: "The Buddha's birth, enlightenment and death are marked on a single full-moon day at Bodh Gaya with processions and all-night chanting.",
+    significance: "Bodh Gaya becomes the focal point for Buddhist pilgrims from across Asia." },
+  { id: "fest-sonepur-mela", slug: "sonepur-mela", name: "Sonepur Cattle Fair", stateSlug: "bihar", month: "November", type: "Cultural", image: "",
+    description: "Asia's largest cattle fair, held on the Gandak-Ganges confluence for a month after Kartik Purnima.",
+    significance: "A centuries-old trading gathering of elephants, horses and livestock, now also a folk-theatre and crafts fair." },
+
+  // Haryana
+  { id: "fest-surajkund", slug: "surajkund-mela", name: "Surajkund Crafts Mela", stateSlug: "haryana", month: "February", type: "Cultural", image: "", featured: true,
+    description: "A two-week international crafts fair near Faridabad with artisan villages, folk stages and food from every Indian state.",
+    significance: "India's largest crafts fair, running since 1987 with a rotating theme state and partner nation." },
+  { id: "fest-gita-mahotsav", slug: "gita-mahotsav", name: "International Gita Mahotsav", stateSlug: "haryana", month: "December", type: "Religious", image: "",
+    description: "Kurukshetra's 18-day festival marking the day the Bhagavad Gita was spoken, with a mass deep-daan of lamps on Brahma Sarovar.",
+    significance: "Draws pilgrims, scholars and folk troupes to the Mahabharata battlefield each winter." },
+  { id: "fest-teej-haryana", slug: "haryana-teej", name: "Haryana Teej", stateSlug: "haryana", month: "August", type: "Cultural", image: "",
+    description: "The monsoon swing festival \u2014 women in green, henna, ragini singing and swings hung from banyan trees.",
+    significance: "A state-wide holiday in Haryana, celebrated with village fairs and folk dance competitions." },
+
+  // Delhi
+  { id: "fest-dussehra-delhi", slug: "delhi-ramlila", name: "Ramlila & Dussehra", stateSlug: "delhi", month: "October", type: "Religious", image: "", featured: true,
+    description: "Ten nights of open-air Ramayana theatre across the city, ending with towering effigies of Ravana burned at Ramlila Maidan.",
+    significance: "Delhi's Ramlila tradition dates to the Mughal era and is inscribed on UNESCO's intangible heritage list." },
+  { id: "fest-qutub-festival", slug: "qutub-festival", name: "Qutub Festival", stateSlug: "delhi", month: "November", type: "Cultural", image: "",
+    description: "Three nights of classical music and dance staged against the floodlit Qutub Minar.",
+    significance: "One of the capital's flagship heritage-site performance festivals, drawing leading Hindustani and Carnatic artists." },
+  { id: "fest-phoolwalon-ki-sair", slug: "phool-walon-ki-sair", name: "Phool Walon ki Sair", stateSlug: "delhi", month: "September", type: "Cultural", image: "",
+    description: "A Mehrauli procession of flower-fans offered at both the Yogmaya Temple and the dargah of Khwaja Bakhtiyar Kaki.",
+    significance: "A 200-year-old shared Hindu-Muslim tradition begun under the last Mughal emperors and revived after Independence." },
 ];

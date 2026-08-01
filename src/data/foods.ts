@@ -125,4 +125,52 @@ export const FOODS: Food[] = [
     description: "Skewered kebabs rolled inside a flaky egg-coated paratha with onions, chillies and lime — invented at Nizam's in Kolkata in the 1930s." },
   { id: "f-chingri-malai", slug: "chingri-malai-curry", name: "Chingri Malai Curry", stateSlug: "west-bengal", category: "Main", image: "", vegetarian: false,
     description: "Tiger prawns simmered in a delicate coconut-milk curry scented with green cardamom — the dish of a Bengali wedding lunch." },
+
+  // Assam
+  { id: "f-masor-tenga", slug: "masor-tenga", name: "Masor Tenga", stateSlug: "assam", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "A light, sour fish curry soured with tomato, elephant apple or lemon \u2014 the everyday Assamese lunch, eaten with plain rice." },
+  { id: "f-khar", slug: "khar", name: "Khar", stateSlug: "assam", category: "Main", image: "", vegetarian: true,
+    description: "The dish that opens an Assamese meal: raw papaya or pulses cooked with alkaline water filtered through sun-dried banana peel ash." },
+  { id: "f-duck-curry", slug: "duck-curry-assam", name: "Duck Curry with Ash Gourd", stateSlug: "assam", category: "Main", image: "", vegetarian: false,
+    description: "Slow-cooked duck with ash gourd and whole spices, a festive Assamese dish served at Bihu and weddings." },
+  { id: "f-pitha", slug: "pitha", name: "Pitha", stateSlug: "assam", category: "Snack", image: "", vegetarian: true,
+    description: "Rice-flour cakes \u2014 fried til pitha, steamed ketli pitha or roasted sunga pitha in bamboo \u2014 made in every home for Bhogali Bihu." },
+  { id: "f-assam-tea", slug: "assam-tea", name: "Assam Tea", stateSlug: "assam", category: "Drink", image: "", vegetarian: true,
+    description: "Strong, malty orthodox and CTC teas from the Brahmaputra valley \u2014 best drunk at an estate bungalow at first light." },
+
+  // Bihar
+  { id: "f-litti-chokha", slug: "litti-chokha", name: "Litti Chokha", stateSlug: "bihar", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Wheat balls stuffed with roasted sattu and spices, baked over cow-dung cakes or coals and served with mashed brinjal-tomato chokha and ghee." },
+  { id: "f-sattu-sharbat", slug: "sattu-sharbat", name: "Sattu Sharbat", stateSlug: "bihar", category: "Drink", image: "", vegetarian: true,
+    description: "Roasted gram flour whisked into water with lemon, black salt and roasted cumin \u2014 Bihar's summer coolant and protein staple." },
+  { id: "f-khaja", slug: "silao-khaja", name: "Silao Khaja", stateSlug: "bihar", category: "Sweet", image: "", vegetarian: true,
+    description: "A GI-tagged layered pastry from Silao near Nalanda \u2014 dozens of paper-thin flour sheets fried and soaked in sugar syrup." },
+  { id: "f-thekua", slug: "thekua", name: "Thekua", stateSlug: "bihar", category: "Sweet", image: "", vegetarian: true,
+    description: "A crisp jaggery-and-wheat biscuit pressed in wooden moulds, made in enormous batches as the prasad of Chhath Puja." },
+  { id: "f-dal-pitha", slug: "dal-pitha", name: "Dal Pitha", stateSlug: "bihar", category: "Snack", image: "", vegetarian: true,
+    description: "Steamed rice-flour dumplings filled with spiced chana dal \u2014 Bihar's answer to the momo, eaten with chutney." },
+
+  // Haryana
+  { id: "f-bajra-khichdi", slug: "bajra-khichdi", name: "Bajra Khichdi", stateSlug: "haryana", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Pearl millet cooked down with moong dal and finished with a spoon of white butter \u2014 the classic Haryanvi winter meal." },
+  { id: "f-kachri-sabzi", slug: "kachri-ki-sabzi", name: "Kachri ki Sabzi", stateSlug: "haryana", category: "Main", image: "", vegetarian: true,
+    description: "A tangy dry curry of wild desert cucumber, cooked with mustard oil and dried spices in the villages of southern Haryana." },
+  { id: "f-hara-cholia", slug: "hara-cholia", name: "Hara Cholia Pulao", stateSlug: "haryana", category: "Main", image: "", vegetarian: true,
+    description: "Fresh green chickpeas folded through rice with ghee and cumin \u2014 a short winter-season dish when cholia comes to market." },
+  { id: "f-malpua-haryana", slug: "malpua-haryana", name: "Malpua", stateSlug: "haryana", category: "Sweet", image: "", vegetarian: true,
+    description: "Thick fennel-scented pancakes fried in ghee and dunked in syrup, sold at every Haryanvi fair and wedding." },
+  { id: "f-lassi-haryana", slug: "haryanvi-lassi", name: "Haryanvi Lassi", stateSlug: "haryana", category: "Drink", image: "", vegetarian: true,
+    description: "A tall brass tumbler of churned buttermilk topped with white butter \u2014 served at highway dhabas along the Delhi\u2013Chandigarh road." },
+
+  // Delhi
+  { id: "f-butter-chicken", slug: "butter-chicken", name: "Butter Chicken", stateSlug: "delhi", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Tandoori chicken finished in a tomato, butter and cream gravy \u2014 invented at Moti Mahal in Daryaganj after Partition and now global shorthand for Indian food." },
+  { id: "f-chole-bhature", slug: "chole-bhature", name: "Chole Bhature", stateSlug: "delhi", category: "Breakfast", image: "", vegetarian: true,
+    description: "Spiced chickpeas with a balloon of deep-fried leavened bread \u2014 Delhi's heaviest and best-loved breakfast." },
+  { id: "f-paranthe-wali-gali", slug: "stuffed-paratha", name: "Chandni Chowk Paratha", stateSlug: "delhi", category: "Breakfast", image: "", vegetarian: true,
+    description: "Ghee-fried stuffed parathas \u2014 potato, paneer, rabri, even cashew \u2014 served with four chutneys in Paranthe Wali Gali since the 1870s." },
+  { id: "f-galouti", slug: "galouti-kebab-delhi", name: "Seekh & Galouti Kebabs", stateSlug: "delhi", category: "Snack", image: "", vegetarian: false,
+    description: "Charcoal-grilled minced-meat kebabs from the lanes around Jama Masjid, eaten with sheermal and green chutney." },
+  { id: "f-daulat-ki-chaat", slug: "daulat-ki-chaat", name: "Daulat ki Chaat", stateSlug: "delhi", category: "Sweet", image: "", vegetarian: true,
+    description: "A winter-only cloud of aerated sweet milk foam dusted with khoya and pistachio, sold in Old Delhi only between November and February." },
 ];
