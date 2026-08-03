@@ -271,6 +271,82 @@ const SHOWCASE: State[] = [
     culture:
       "Delhi's culture is layered Mughal, Punjabi and refugee-settlement energy: qawwali at Nizamuddin Dargah on Thursday nights, Ramlila grounds at Dussehra, langar at Bangla Sahib, and a food map that runs from Karim's kebabs to Chandni Chowk parathas and Bengali sweets in CR Park.",
   },
+  {
+    id: "st-madhya-pradesh",
+    slug: "madhya-pradesh",
+    name: "Madhya Pradesh",
+    capital: "Bhopal",
+    language: "Hindi",
+    population: "85.0 million",
+    area: "308,245 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "central",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Madhya Pradesh sits in the literal middle of India and holds an outsized share of its greatest hits. Khajuraho's Chandela temples carry the finest sculptural work in the subcontinent; Sanchi's Great Stupa is the oldest stone structure in India; and Gwalior, Mandu and Orchha preserve fort-and-palace landscapes that see a fraction of Rajasthan's crowds. The state is also India's tiger heartland \u2014 Bandhavgarh, Kanha and Pench between them shelter one of the densest big-cat populations anywhere \u2014 while the Narmada carves marble gorges at Bhedaghat and the lakes of Bhopal give the capital an unexpected calm.",
+    culture:
+      "Madhya Pradesh is a meeting ground of Bundelkhandi, Malwi, Nimadi and Gondi cultures with a large Adivasi population whose Gond and Bhil painting traditions now hang in galleries worldwide. Bhopal keeps a Nawabi Muslim inheritance of mosques, kebabs and Urdu poetry; Ujjain and Omkareshwar anchor the state in Shaivite pilgrimage, with the Simhastha Kumbh drawing millions every twelve years. Classical music runs deep too \u2014 Tansen was born near Gwalior, and the annual Tansen Samaroh is sung at his tomb.",
+  },
+  {
+    id: "st-punjab",
+    slug: "punjab",
+    name: "Punjab",
+    capital: "Chandigarh",
+    language: "Punjabi",
+    population: "30.1 million",
+    area: "50,362 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "north",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Punjab is the land of five rivers and the granary of India \u2014 flat wheat country, mustard fields in bloom, and tube-well canals running to the horizon. Amritsar's Golden Temple, floating gold on its sacred tank and feeding 100,000 people a day free of charge, is the emotional centre of the state and of the Sikh world. Around it lie the sobering memorial at Jallianwala Bagh, the theatrical Wagah border ceremony, the Mughal-era gardens of Kapurthala and Patiala's princely palaces. Chandigarh, the shared capital designed by Le Corbusier, offers a completely different Punjab: grid sectors, Brutalist concrete and the surreal Rock Garden.",
+    culture:
+      "Punjabi culture is loud, generous and rhythmic. Bhangra and giddha were harvest dances long before they were global exports; the dhol sets the tempo at every wedding. Sikhism shapes daily life through seva (service), langar (the free community kitchen) and gurdwaras open to everyone. The food \u2014 tandoori breads, sarson da saag, makki di roti, lassi in steel tumblers \u2014 travelled with the diaspora and became, for much of the world, what 'Indian food' means.",
+  },
+  {
+    id: "st-jharkhand",
+    slug: "jharkhand",
+    name: "Jharkhand",
+    capital: "Ranchi",
+    language: "Hindi, Santhali, Nagpuri",
+    population: "38.6 million",
+    area: "79,716 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "east",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Jharkhand \u2014 literally 'the land of forests' \u2014 was carved out of southern Bihar in 2000 and remains one of India's greenest and least-touristed states. The Chota Nagpur plateau drops away in waterfalls at Hundru, Dassam and Jonha; Netarhat catches sunrise over layered ridges; and Betla National Park protects sal forest, elephants and a pair of 16th-century Palamu forts swallowed by jungle. Deoghar's Baidyanath Dham draws millions of saffron-clad Kanwariyas each monsoon, while Jamshedpur, built by the Tatas in 1908, is India's original planned industrial city.",
+    culture:
+      "More than a quarter of Jharkhand's people are Adivasi \u2014 Santhal, Munda, Oraon, Ho \u2014 and their sacred groves, Sarhul spring festival and Chhau mask-dance traditions define the state's cultural life far more than any courtly history. Villages paint their mud walls in Sohrai and Khovar styles at harvest and wedding seasons, a tradition thousands of years old and now protected with a GI tag. Handloom tussar silk from Bhagaiya and bamboo craft are the everyday economy of the forest belt.",
+  },
+  {
+    id: "st-sikkim",
+    slug: "sikkim",
+    name: "Sikkim",
+    capital: "Gangtok",
+    language: "Nepali, Bhutia, Lepcha",
+    population: "0.69 million",
+    area: "7,096 km\u00b2",
+    bestTimeToVisit: "March \u2013 May, October \u2013 December",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Sikkim is a tiny Himalayan state living in the shadow of Khangchendzonga, the world's third-highest mountain, which Sikkimese consider a guardian deity rather than a summit to be conquered. A Buddhist kingdom until 1975, it keeps monasteries at Rumtek, Pemayangtse and Tashiding, alpine lakes like Tsomgo and Gurudongmar at 5,400 m, and the rhododendron-thick Yumthang valley in the north. It became India's first fully organic state in 2016, and its roads climb through terraced cardamom and orange orchards between cloud-line villages.",
+    culture:
+      "Sikkim blends Nepali, Bhutia and Lepcha communities with a strong Vajrayana Buddhist core \u2014 prayer flags on every ridge, masked Cham dances at Losoong and Pang Lhabsol, and monasteries that still run as schools. The Lepcha, the earliest inhabitants, hold Khangchendzonga as their ancestral origin. Sikkimese food leans Tibetan and Nepali: momos, thukpa, fermented greens and millet-based tongba sipped hot through a bamboo straw.",
+  },
 ];
 
 const STUBS: State[] = [
