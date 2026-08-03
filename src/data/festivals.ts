@@ -180,4 +180,48 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-phoolwalon-ki-sair", slug: "phool-walon-ki-sair", name: "Phool Walon ki Sair", stateSlug: "delhi", month: "September", type: "Cultural", image: "",
     description: "A Mehrauli procession of flower-fans offered at both the Yogmaya Temple and the dargah of Khwaja Bakhtiyar Kaki.",
     significance: "A 200-year-old shared Hindu-Muslim tradition begun under the last Mughal emperors and revived after Independence." },
+
+  // Madhya Pradesh
+  { id: "fest-khajuraho-dance", slug: "khajuraho-dance-festival", name: "Khajuraho Dance Festival", stateSlug: "madhya-pradesh", month: "February", type: "Cultural", image: "", featured: true,
+    description: "A week of classical Indian dance staged in the open air against the floodlit Western Group of temples.",
+    significance: "Brings Kathak, Bharatanatyam and Odissi back to the temple setting the sculptures themselves depict." },
+  { id: "fest-simhastha", slug: "simhastha-ujjain", name: "Simhastha Kumbh, Ujjain", stateSlug: "madhya-pradesh", month: "April", type: "Religious", image: "",
+    description: "One of the four Kumbh Melas, held on the Shipra river at Ujjain every twelve years and drawing tens of millions of pilgrims.",
+    significance: "Ujjain is one of the seven sacred cities of Hinduism, and the shahi snan bathing days are its greatest gathering." },
+  { id: "fest-tansen-samaroh", slug: "tansen-samaroh", name: "Tansen Samaroh", stateSlug: "madhya-pradesh", month: "December", type: "Cultural", image: "",
+    description: "Four days and nights of Hindustani classical music performed at the tomb of Tansen in Gwalior.",
+    significance: "Honours the 16th-century court musician of Akbar and the Gwalior gharana he is said to have founded." },
+
+  // Punjab
+  { id: "fest-baisakhi", slug: "baisakhi", name: "Baisakhi", stateSlug: "punjab", month: "April", type: "Harvest", image: "", featured: true,
+    description: "The spring harvest festival, marked by bhangra and giddha in the fields, gurdwara processions and village fairs.",
+    significance: "Also commemorates the founding of the Khalsa by Guru Gobind Singh at Anandpur Sahib in 1699." },
+  { id: "fest-hola-mohalla", slug: "hola-mohalla", name: "Hola Mohalla", stateSlug: "punjab", month: "March", type: "Cultural", image: "",
+    description: "Three days at Anandpur Sahib of Nihang horsemanship, mock battles, martial arts and vast open-air langars.",
+    significance: "Instituted by Guru Gobind Singh as a display of Sikh martial readiness held the day after Holi." },
+  { id: "fest-gurpurab", slug: "guru-nanak-gurpurab", name: "Guru Nanak Gurpurab", stateSlug: "punjab", month: "November", type: "Religious", image: "",
+    description: "The birth anniversary of Guru Nanak, marked by all-night kirtan, nagar kirtan processions and illuminated gurdwaras.",
+    significance: "The most widely observed Sikh festival of the year, centred on Amritsar and Sultanpur Lodhi." },
+
+  // Jharkhand
+  { id: "fest-sarhul", slug: "sarhul", name: "Sarhul", stateSlug: "jharkhand", month: "March", type: "Harvest", image: "", featured: true,
+    description: "The Adivasi new-year festival welcoming spring, when sal blossoms are offered in the sacred grove before any new sowing begins.",
+    significance: "Central to Santhal, Munda and Oraon belief, marking the union of the earth with the sun." },
+  { id: "fest-sohrai", slug: "sohrai", name: "Sohrai", stateSlug: "jharkhand", month: "November", type: "Harvest", image: "",
+    description: "A cattle-honouring harvest festival during which village women repaint their mud houses in ochre Sohrai murals.",
+    significance: "The wall-painting tradition is thousands of years old and now carries a Geographical Indication tag." },
+  { id: "fest-shravani-mela", slug: "shravani-mela", name: "Shravani Mela", stateSlug: "jharkhand", month: "July", type: "Religious", image: "",
+    description: "A month-long pilgrimage in which saffron-clad Kanwariyas walk 105 km from Sultanganj to pour Ganges water on the Baidyanath lingam.",
+    significance: "One of the largest annual foot pilgrimages in the world, centred on Deoghar through the month of Shravan." },
+
+  // Sikkim
+  { id: "fest-losoong", slug: "losoong", name: "Losoong", stateSlug: "sikkim", month: "December", type: "Cultural", image: "", featured: true,
+    description: "The Sikkimese new year, celebrated with masked Cham dances at Rumtek and Phodong and archery contests in the villages.",
+    significance: "Marks the end of the harvest year for the Bhutia community and drives out the previous year's misfortune." },
+  { id: "fest-pang-lhabsol", slug: "pang-lhabsol", name: "Pang Lhabsol", stateSlug: "sikkim", month: "September", type: "Religious", image: "",
+    description: "A festival honouring Khangchendzonga as guardian deity, with warrior Pangtoed Cham dances performed by monks.",
+    significance: "Commemorates the blood-brotherhood treaty between the Lepcha and Bhutia peoples witnessed by the mountain." },
+  { id: "fest-saga-dawa", slug: "saga-dawa", name: "Saga Dawa", stateSlug: "sikkim", month: "May", type: "Religious", image: "",
+    description: "The holiest Buddhist month in Sikkim, marked by scripture processions through Gangtok and butter lamps in every monastery.",
+    significance: "Observes the birth, enlightenment and parinirvana of the Buddha on a single full-moon day." },
 ];
