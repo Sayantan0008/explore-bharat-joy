@@ -173,4 +173,52 @@ export const FOODS: Food[] = [
     description: "Charcoal-grilled minced-meat kebabs from the lanes around Jama Masjid, eaten with sheermal and green chutney." },
   { id: "f-daulat-ki-chaat", slug: "daulat-ki-chaat", name: "Daulat ki Chaat", stateSlug: "delhi", category: "Sweet", image: "", vegetarian: true,
     description: "A winter-only cloud of aerated sweet milk foam dusted with khoya and pistachio, sold in Old Delhi only between November and February." },
+
+  // Madhya Pradesh
+  { id: "f-poha-jalebi", slug: "poha-jalebi", name: "Poha Jalebi", stateSlug: "madhya-pradesh", category: "Breakfast", image: "", vegetarian: true, featured: true,
+    description: "Indore's signature breakfast \u2014 steamed flattened rice with fennel, sev and pomegranate, eaten with a hot jalebi on the side." },
+  { id: "f-bhutte-ka-kees", slug: "bhutte-ka-kees", name: "Bhutte ka Kees", stateSlug: "madhya-pradesh", category: "Snack", image: "", vegetarian: true,
+    description: "Grated corn slow-cooked in milk with mustard seeds and green chilli, finished with coconut \u2014 a Malwa monsoon speciality." },
+  { id: "f-dal-bafla", slug: "dal-bafla", name: "Dal Bafla", stateSlug: "madhya-pradesh", category: "Main", image: "", vegetarian: true,
+    description: "Wheat dough balls boiled then roasted, dunked in ghee and served with tangy dal \u2014 the Malwa cousin of Rajasthan's dal baati." },
+  { id: "f-bhopali-gosht-korma", slug: "bhopali-gosht-korma", name: "Bhopali Gosht Korma", stateSlug: "madhya-pradesh", category: "Main", image: "", vegetarian: false,
+    description: "A slow-cooked mutton korma from Bhopal's Nawabi kitchens, rich with yoghurt, fried onion and whole spice, eaten with sheermal." },
+  { id: "f-mawa-bati", slug: "mawa-bati", name: "Mawa Bati", stateSlug: "madhya-pradesh", category: "Sweet", image: "", vegetarian: true,
+    description: "Khoya dumplings stuffed with dry fruit, fried and soaked in cardamom syrup \u2014 the classic sweet-shop treat of Indore and Ujjain." },
+
+  // Punjab
+  { id: "f-sarson-saag", slug: "sarson-da-saag", name: "Sarson da Saag & Makki di Roti", stateSlug: "punjab", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Slow-cooked mustard greens finished with white butter and eaten with cornmeal flatbread \u2014 Punjab's definitive winter meal." },
+  { id: "f-amritsari-kulcha", slug: "amritsari-kulcha", name: "Amritsari Kulcha", stateSlug: "punjab", category: "Breakfast", image: "", vegetarian: true,
+    description: "A crisp, ghee-lacquered stuffed bread baked in a tandoor and served with chole and a raw onion salad." },
+  { id: "f-amritsari-fish", slug: "amritsari-macchi", name: "Amritsari Macchi", stateSlug: "punjab", category: "Snack", image: "", vegetarian: false,
+    description: "River fish marinated in ajwain and gram flour, deep-fried till golden and dusted with chaat masala." },
+  { id: "f-lassi-punjab", slug: "punjabi-lassi", name: "Punjabi Lassi", stateSlug: "punjab", category: "Drink", image: "", vegetarian: true,
+    description: "A tall steel tumbler of sweet churned yoghurt topped with a slab of malai \u2014 closer to a meal than a drink." },
+  { id: "f-pinni", slug: "pinni", name: "Pinni", stateSlug: "punjab", category: "Sweet", image: "", vegetarian: true,
+    description: "Dense winter laddus of wheat flour, ghee, jaggery and almonds, made at home when the cold sets in." },
+
+  // Jharkhand
+  { id: "f-dhuska", slug: "dhuska", name: "Dhuska", stateSlug: "jharkhand", category: "Breakfast", image: "", vegetarian: true, featured: true,
+    description: "Deep-fried discs of ground rice and chana dal, crisp outside and soft within, served with ghugni or aloo curry." },
+  { id: "f-litti-jharkhand", slug: "jharkhandi-litti", name: "Litti Chokha", stateSlug: "jharkhand", category: "Main", image: "", vegetarian: true,
+    description: "Roasted wheat balls stuffed with spiced sattu, eaten with smoked mashed brinjal, tomato and potato chokha." },
+  { id: "f-rugra", slug: "rugra", name: "Rugra", stateSlug: "jharkhand", category: "Main", image: "", vegetarian: true,
+    description: "A wild monsoon mushroom foraged from sal forests and cooked simply with onion and garlic \u2014 a prized Adivasi delicacy." },
+  { id: "f-bamboo-shoot-curry", slug: "bamboo-shoot-curry-jharkhand", name: "Bamboo Shoot Curry", stateSlug: "jharkhand", category: "Main", image: "", vegetarian: true,
+    description: "Tender bamboo shoots cooked with mustard oil and local herbs, a staple of Santhal and Munda village kitchens." },
+  { id: "f-thekua-jharkhand", slug: "jharkhandi-thekua", name: "Thekua", stateSlug: "jharkhand", category: "Sweet", image: "", vegetarian: true,
+    description: "Crisp jaggery-and-wheat cookies pressed in wooden moulds and fried, made in every home for Chhath and Sarhul." },
+
+  // Sikkim
+  { id: "f-momo-sikkim", slug: "sikkimese-momo", name: "Momo", stateSlug: "sikkim", category: "Snack", image: "", vegetarian: false, featured: true,
+    description: "Steamed dumplings of pork, chicken or vegetables served with a fiery dalle-chilli chutney and clear soup." },
+  { id: "f-thukpa", slug: "thukpa", name: "Thukpa", stateSlug: "sikkim", category: "Main", image: "", vegetarian: false,
+    description: "A Tibetan-origin noodle soup with vegetables and meat, the standard warming meal on a cold Himalayan evening." },
+  { id: "f-gundruk", slug: "gundruk-sinki", name: "Gundruk & Sinki", stateSlug: "sikkim", category: "Main", image: "", vegetarian: true,
+    description: "Fermented leafy greens and radish, sun-dried and cooked into a sour soup \u2014 the backbone of Nepali-Sikkimese home cooking." },
+  { id: "f-phagshapa", slug: "phagshapa", name: "Phagshapa", stateSlug: "sikkim", category: "Main", image: "", vegetarian: false,
+    description: "Strips of pork fat stewed with radish and dried red chillies, a Bhutia festive dish served at Losar." },
+  { id: "f-tongba", slug: "tongba", name: "Tongba", stateSlug: "sikkim", category: "Drink", image: "", vegetarian: true,
+    description: "Fermented millet packed into a wooden vessel, topped with hot water and sipped through a bamboo straw \u2014 refilled until the flavour fades." },
 ];
