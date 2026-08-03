@@ -104,6 +104,34 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "india-gate": { lng: 77.2295, lat: 28.6129 },
   "lotus-temple": { lng: 77.2588, lat: 28.5535 },
   "chandni-chowk": { lng: 77.2303, lat: 28.6506 },
+  // Madhya Pradesh
+  "khajuraho": { lng: 79.9199, lat: 24.8318 },
+  "bandhavgarh": { lng: 81.0289, lat: 23.7181 },
+  "kanha": { lng: 80.6115, lat: 22.3345 },
+  "sanchi": { lng: 77.7398, lat: 23.4794 },
+  "bhopal": { lng: 77.4126, lat: 23.2599 },
+  "pachmarhi": { lng: 78.4336, lat: 22.4675 },
+  // Punjab
+  "amritsar": { lng: 74.8723, lat: 31.6340 },
+  "golden-temple": { lng: 74.8765, lat: 31.6200 },
+  "wagah-border": { lng: 74.5729, lat: 31.6047 },
+  "chandigarh-city": { lng: 76.7794, lat: 30.7333 },
+  "patiala": { lng: 76.3869, lat: 30.3398 },
+  "anandpur-sahib": { lng: 76.5025, lat: 31.2390 },
+  // Jharkhand
+  "ranchi": { lng: 85.3096, lat: 23.3441 },
+  "netarhat": { lng: 84.2669, lat: 23.4747 },
+  "betla": { lng: 84.1917, lat: 23.8833 },
+  "deoghar": { lng: 86.6997, lat: 24.4823 },
+  "hundru-falls": { lng: 85.6667, lat: 23.4497 },
+  "jamshedpur": { lng: 86.2029, lat: 22.8046 },
+  // Sikkim
+  "gangtok": { lng: 88.6065, lat: 27.3389 },
+  "tsomgo-lake": { lng: 88.7625, lat: 27.3747 },
+  "rumtek-monastery": { lng: 88.5614, lat: 27.2885 },
+  "pelling": { lng: 88.2167, lat: 27.2167 },
+  "yumthang-valley": { lng: 88.7028, lat: 27.8236 },
+  "yuksom": { lng: 88.2167, lat: 27.3667 },
 };
 
 // State-capital fallback coords used when a state has no destinations yet.
