@@ -224,4 +224,48 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-saga-dawa", slug: "saga-dawa", name: "Saga Dawa", stateSlug: "sikkim", month: "May", type: "Religious", image: "",
     description: "The holiest Buddhist month in Sikkim, marked by scripture processions through Gangtok and butter lamps in every monastery.",
     significance: "Observes the birth, enlightenment and parinirvana of the Buddha on a single full-moon day." },
+
+  // Uttarakhand
+  { id: "fest-kumbh-haridwar", slug: "haridwar-kumbh-mela", name: "Haridwar Kumbh Mela", stateSlug: "uttarakhand", month: "April", type: "Religious", image: "", featured: true,
+    description: "Once every twelve years, tens of millions of pilgrims bathe at Har Ki Pauri on the Ganga.",
+    significance: "Marks the point where, in myth, drops of the nectar of immortality fell to earth; the akhara processions of ascetics are its most striking sight." },
+  { id: "fest-nanda-devi-raj-jat", slug: "nanda-devi-raj-jat", name: "Nanda Devi Raj Jat", stateSlug: "uttarakhand", month: "September", type: "Religious", image: "",
+    description: "A 280 km walking pilgrimage across Garhwal held roughly once every twelve years.",
+    significance: "Escorts the goddess Nanda, daughter of the hills, to her husband's home at Homkund, and is regarded as the Himalayan Kumbh." },
+  { id: "fest-harela", slug: "harela", name: "Harela", stateSlug: "uttarakhand", month: "July", type: "Harvest", image: "",
+    description: "A Kumaoni green festival where sprouted grains are cut and worn, and saplings are planted across the hills.",
+    significance: "Welcomes the monsoon sowing season and has grown into the state's biggest tree-planting day." },
+
+  // Odisha
+  { id: "fest-rath-yatra", slug: "puri-rath-yatra", name: "Puri Rath Yatra", stateSlug: "odisha", month: "July", type: "Religious", image: "", featured: true,
+    description: "Three towering wooden chariots carrying Jagannath, Balabhadra and Subhadra are pulled along Puri's Grand Road by thousands of devotees.",
+    significance: "The one day of the year the deities leave the temple, making darshan open to everyone — the origin of the English word 'juggernaut'." },
+  { id: "fest-konark-dance", slug: "konark-dance-festival", name: "Konark Dance Festival", stateSlug: "odisha", month: "December", type: "Cultural", image: "",
+    description: "Five nights of Odissi, Bharatanatyam and Chhau performed on an open stage against the floodlit Sun Temple.",
+    significance: "Reconnects Odisha's classical dance with the temple sculpture the form was originally drawn from." },
+  { id: "fest-raja-parba", slug: "raja-parba", name: "Raja Parba", stateSlug: "odisha", month: "June", type: "Cultural", image: "",
+    description: "A three-day festival celebrating the earth's menstruation and the coming monsoon, with rope swings, pitha cakes and no ploughing.",
+    significance: "Honours womanhood and fertility; unmarried girls rest, dress up and swing while the land is left untouched." },
+
+  // Meghalaya
+  { id: "fest-shad-suk-mynsiem", slug: "shad-suk-mynsiem", name: "Shad Suk Mynsiem", stateSlug: "meghalaya", month: "April", type: "Cultural", image: "", featured: true,
+    description: "The Khasi thanksgiving dance in Shillong, where women in gold and coral circle slowly while men dance around them with swords and whisks.",
+    significance: "A 'dance of the joyful heart' offering thanks for the harvest and asking blessing for the sowing season." },
+  { id: "fest-wangala", slug: "wangala", name: "Wangala", stateSlug: "meghalaya", month: "November", type: "Harvest", image: "",
+    description: "The Garo hundred-drums festival, with lines of dancers in feathered headdresses moving to long oval drums.",
+    significance: "Marks the end of the harvest and thanks Misi Saljong, the sun god, for the crop." },
+  { id: "fest-behdienkhlam", slug: "behdienkhlam", name: "Behdienkhlam", stateSlug: "meghalaya", month: "July", type: "Religious", image: "",
+    description: "Jaintia men carry huge decorated rots through Jowai and wrestle a sacred log in a mud pool.",
+    significance: "Drives away plague and misfortune and prays for a good monsoon harvest." },
+
+  // Tripura
+  { id: "fest-kharchi-puja", slug: "kharchi-puja", name: "Kharchi Puja", stateSlug: "tripura", month: "July", type: "Religious", image: "", featured: true,
+    description: "A week-long festival at Old Agartala where fourteen royal deities are bathed in the Howrah river and worshipped together.",
+    significance: "Once a royal Manikya rite, it now draws Tripuri and Bengali devotees alike to cleanse the earth after the sowing." },
+  { id: "fest-garia-puja", slug: "garia-puja", name: "Garia Puja", stateSlug: "tripura", month: "April", type: "Cultural", image: "",
+    description: "Tripuri villages raise a bamboo pole deity, dance the garia and offer rice beer and fowl at the start of the agricultural year.",
+    significance: "Asks Garia, the god of livestock and prosperity, for a good crop and healthy herds." },
+  { id: "fest-neermahal-festival", slug: "neermahal-water-festival", name: "Neermahal Water Festival", stateSlug: "tripura", month: "August", type: "Cultural", image: "",
+    description: "Boat races, swimming contests and evening cultural shows on Rudrasagar Lake around the floating palace.",
+    significance: "Started in 1978 to celebrate the Manikya-era water palace and now Tripura's biggest tourism event." },
 ];

@@ -221,4 +221,52 @@ export const FOODS: Food[] = [
     description: "Strips of pork fat stewed with radish and dried red chillies, a Bhutia festive dish served at Losar." },
   { id: "f-tongba", slug: "tongba", name: "Tongba", stateSlug: "sikkim", category: "Drink", image: "", vegetarian: true,
     description: "Fermented millet packed into a wooden vessel, topped with hot water and sipped through a bamboo straw \u2014 refilled until the flavour fades." },
+
+  // Uttarakhand
+  { id: "f-kafuli", slug: "kafuli", name: "Kafuli", stateSlug: "uttarakhand", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Garhwal's everyday green curry — spinach and fenugreek slow-cooked and thickened with rice paste, eaten with hot rice and ghee." },
+  { id: "f-bhatt-ki-churkani", slug: "bhatt-ki-churkani", name: "Bhatt ki Churkani", stateSlug: "uttarakhand", category: "Main", image: "", vegetarian: true,
+    description: "Black soybeans roasted and simmered into a thick Kumaoni gravy — winter food from the hill terraces." },
+  { id: "f-aloo-ke-gutke", slug: "aloo-ke-gutke", name: "Aloo ke Gutke", stateSlug: "uttarakhand", category: "Snack", image: "", vegetarian: true,
+    description: "Boiled potatoes tossed with jakhiya seeds and red chilli, served with bhang-seed chutney at almost every Kumaoni meal." },
+  { id: "f-singori", slug: "singori", name: "Singori", stateSlug: "uttarakhand", category: "Sweet", image: "", vegetarian: true,
+    description: "Sweetened khoya wrapped in a cone of malu leaf, a speciality of Almora that takes its scent from the leaf itself." },
+  { id: "f-bal-mithai", slug: "bal-mithai", name: "Bal Mithai", stateSlug: "uttarakhand", category: "Sweet", image: "", vegetarian: true,
+    description: "Fudge of roasted khoya coated in white sugar balls — the sweet every visitor carries home from Almora." },
+
+  // Odisha
+  { id: "f-dalma", slug: "dalma", name: "Dalma", stateSlug: "odisha", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Lentils cooked with raw papaya, pumpkin and plantain, tempered with cumin and panch phoron — the everyday Odia one-pot." },
+  { id: "f-chhena-poda", slug: "chhena-poda", name: "Chhena Poda", stateSlug: "odisha", category: "Sweet", image: "", vegetarian: true,
+    description: "Fresh cheese and sugar baked until the crust caramelises black — Odisha's signature sweet, said to have been invented in Nayagarh." },
+  { id: "f-pakhala-bhata", slug: "pakhala-bhata", name: "Pakhala Bhata", stateSlug: "odisha", category: "Main", image: "", vegetarian: true,
+    description: "Rice fermented overnight in water and served cold with fried fish, badi and greens — summer survival food across the state." },
+  { id: "f-macha-besara", slug: "macha-besara", name: "Macha Besara", stateSlug: "odisha", category: "Main", image: "", vegetarian: false,
+    description: "River fish in a pungent mustard-paste gravy, sharp with garlic and green chilli." },
+  { id: "f-rasabali", slug: "rasabali", name: "Rasabali", stateSlug: "odisha", category: "Sweet", image: "", vegetarian: true,
+    description: "Discs of fried chhena soaked in thickened sweet milk, first offered at the Baladevjew temple in Kendrapara." },
+
+  // Meghalaya
+  { id: "f-jadoh", slug: "jadoh", name: "Jadoh", stateSlug: "meghalaya", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Khasi rice cooked in pork blood and fat with ginger and black pepper — the centrepiece of any jadoh stall in Shillong." },
+  { id: "f-dohneiiong", slug: "dohneiiong", name: "Doh Neiiong", stateSlug: "meghalaya", category: "Main", image: "", vegetarian: false,
+    description: "Pork slow-cooked with roasted black sesame paste, thick, nutty and mildly sweet." },
+  { id: "f-tungrymbai", slug: "tungrymbai", name: "Tungrymbai", stateSlug: "meghalaya", category: "Main", image: "", vegetarian: true,
+    description: "Fermented soybean pounded with sesame, ginger and chilli — pungent, protein-rich and deeply Khasi." },
+  { id: "f-pukhlein", slug: "pukhlein", name: "Pukhlein", stateSlug: "meghalaya", category: "Snack", image: "", vegetarian: true,
+    description: "Deep-fried rice-flour and jaggery cakes, crisp at the edge and chewy inside, sold at every hill market." },
+  { id: "f-nakham-bitchi", slug: "nakham-bitchi", name: "Nakham Bitchi", stateSlug: "meghalaya", category: "Main", image: "", vegetarian: false,
+    description: "A fiery Garo broth of dried fish and chillies, drunk alongside rice to clear the palate." },
+
+  // Tripura
+  { id: "f-mui-borok", slug: "mui-borok", name: "Mui Borok", stateSlug: "tripura", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "The Tripuri table itself — oil-free dishes built on berma, fermented dried fish, with rice and boiled greens." },
+  { id: "f-chakhwi", slug: "chakhwi", name: "Chakhwi", stateSlug: "tripura", category: "Main", image: "", vegetarian: false,
+    description: "Bamboo shoot boiled with pork or vegetables and berma, a sour-savoury stew eaten with rice." },
+  { id: "f-mosdeng-serma", slug: "mosdeng-serma", name: "Mosdeng Serma", stateSlug: "tripura", category: "Snack", image: "", vegetarian: true,
+    description: "A raw chutney of roasted tomato, dry chilli, coriander and onion, pounded fresh for every meal." },
+  { id: "f-wahan-mosdeng", slug: "wahan-mosdeng", name: "Wahan Mosdeng", stateSlug: "tripura", category: "Main", image: "", vegetarian: false,
+    description: "Boiled pork shredded and mixed with green chilli, coriander and lime — served at room temperature." },
+  { id: "f-awan-bangwi", slug: "awan-bangwi", name: "Awan Bangwi", stateSlug: "tripura", category: "Snack", image: "", vegetarian: true,
+    description: "Sticky rice steamed in lairu leaves, made for Garia puja and carried on long journeys." },
 ];

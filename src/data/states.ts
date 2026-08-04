@@ -347,6 +347,82 @@ const SHOWCASE: State[] = [
     culture:
       "Sikkim blends Nepali, Bhutia and Lepcha communities with a strong Vajrayana Buddhist core \u2014 prayer flags on every ridge, masked Cham dances at Losoong and Pang Lhabsol, and monasteries that still run as schools. The Lepcha, the earliest inhabitants, hold Khangchendzonga as their ancestral origin. Sikkimese food leans Tibetan and Nepali: momos, thukpa, fermented greens and millet-based tongba sipped hot through a bamboo straw.",
   },
+  {
+    id: "st-uttarakhand",
+    slug: "uttarakhand",
+    name: "Uttarakhand",
+    capital: "Dehradun",
+    language: "Hindi, Garhwali, Kumaoni",
+    population: "11.4 million",
+    area: "53,483 km²",
+    bestTimeToVisit: "March – June, September – November",
+    heroImage: "",
+    region: "north",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Uttarakhand is Devbhumi — the land of the gods — where the Ganga and Yamuna leave the glaciers and the Himalaya rise straight out of the Terai forest. The Char Dham circuit of Yamunotri, Gangotri, Kedarnath and Badrinath draws millions of pilgrims each summer, while Rishikesh has become the world's yoga and white-water capital. Nainital and Mussoorie keep their colonial hill-station manners, Jim Corbett protects India's oldest tiger reserve, and the Valley of Flowers turns fluorescent for a few short monsoon weeks. Roads are slow and switchbacked; the reward is a fresh 6,000-metre horizon at every bend.",
+    culture:
+      "Garhwali and Kumaoni communities share a Himalayan Hindu culture built around village temples, folk deities and the annual migration between winter and summer settlements. Aipan floor painting, Chholiya sword dance and Jagar spirit-singing survive in villages, while ringal bamboo craft and copperware are the traditional trades. The Kumbh at Haridwar every twelve years is one of the largest gatherings on earth, and the Nanda Devi Raj Jat pilgrimage is walked once a generation.",
+  },
+  {
+    id: "st-odisha",
+    slug: "odisha",
+    name: "Odisha",
+    capital: "Bhubaneswar",
+    language: "Odia",
+    population: "46.4 million",
+    area: "155,707 km²",
+    bestTimeToVisit: "October – March",
+    heroImage: "",
+    region: "east",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Odisha holds one of India's densest concentrations of temple architecture and one of its quietest coastlines. Bhubaneswar alone keeps hundreds of sandstone shrines from the Kalinga school; Konark's 13th-century Sun Temple is carved as a colossal stone chariot; and Puri's Jagannath Temple runs the country's most spectacular chariot festival. Inland, Chilika Lake — Asia's largest brackish lagoon — fills with flamingos and Irrawaddy dolphins, while Similipal's sal forests and the Adivasi markets of Koraput belong to a very different Odisha. Ashoka's rock edicts at Dhauli mark the battlefield that turned an emperor into a Buddhist.",
+    culture:
+      "Odia culture centres on Lord Jagannath, whose Puri temple shapes the ritual year and whose kitchen serves the largest temple meal in India. Odissi, one of the eight classical dance forms, grew from temple sculpture; pattachitra scroll painting, applique from Pipili, silver filigree from Cuttack and ikat weaving in Sambalpur are living crafts. Nearly a quarter of the state is Adivasi, with over sixty communities keeping distinct languages, weekly haats and dance traditions.",
+  },
+  {
+    id: "st-meghalaya",
+    slug: "meghalaya",
+    name: "Meghalaya",
+    capital: "Shillong",
+    language: "Khasi, Garo, English",
+    population: "3.4 million",
+    area: "22,429 km²",
+    bestTimeToVisit: "October – April",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Meghalaya means 'abode of clouds', and the name is earned: Mawsynram and Cherrapunji trade the title of wettest place on earth. The plateau breaks off in sheer cliffs above the Bangladesh plains, sending down Nohkalikai and Seven Sisters falls, and the Khasi villages below grow living root bridges from rubber-fig roots over generations. Shillong, the 'Scotland of the East', is India's most musical small city; Dawki's Umngot river runs glass-clear in winter; and Mawlynnong is famous as Asia's cleanest village. Limestone caves like Mawsmai and Siju run for kilometres under the hills.",
+    culture:
+      "The Khasi, Jaintia and Garo are matrilineal — property and clan name pass to the youngest daughter — which makes Meghalaya socially unlike almost anywhere else in India. Christianity, arrived with Welsh missionaries, coexists with older Niam Khasi belief, sacred groves and monolith fields. Guitar-driven rock and gospel choirs are a genuine local industry, bamboo and cane weaving is universal, and the archery-betting game of teer runs every afternoon in Shillong.",
+  },
+  {
+    id: "st-tripura",
+    slug: "tripura",
+    name: "Tripura",
+    capital: "Agartala",
+    language: "Bengali, Kokborok",
+    population: "4.1 million",
+    area: "10,486 km²",
+    bestTimeToVisit: "October – March",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Tripura is small, green and almost entirely surrounded by Bangladesh, which gives it a Bengali-Tripuri double culture found nowhere else. The Manikya kings ruled here for centuries and left the Indo-Saracenic Ujjayanta Palace in Agartala and the extraordinary water palace of Neermahal floating in Rudrasagar Lake. Unakoti's cliff face is covered in giant rock-cut Shiva reliefs of uncertain date, Chabimura's carvings look over the Gomati river from a jungle gorge, and the pineapple-and-rubber hills around Jampui are cool enough for orange orchards. Distances are short — most of the state is a comfortable day trip from the capital.",
+    culture:
+      "Nineteen indigenous communities, led by the Tripuri, share the state with a large Bengali population, and both Kokborok and Bengali are official. Risa and rignai handloom textiles are woven on backstrap looms in almost every hill village, bamboo craft is a state industry, and Garia and Ker puja mark the tribal ritual year. The Manikya court patronised Rabindranath Tagore, whose long association with Tripura is still a point of pride in Agartala.",
+  },
 ];
 
 const STUBS: State[] = [
@@ -355,13 +431,9 @@ const STUBS: State[] = [
   { name: "Arunachal Pradesh", capital: "Itanagar", region: "northeast" },
   { name: "Chhattisgarh", capital: "Raipur", region: "central" },
   { name: "Manipur", capital: "Imphal", region: "northeast" },
-  { name: "Meghalaya", capital: "Shillong", region: "northeast" },
   { name: "Mizoram", capital: "Aizawl", region: "northeast" },
   { name: "Nagaland", capital: "Kohima", region: "northeast" },
-  { name: "Odisha", capital: "Bhubaneswar", region: "east" },
   { name: "Telangana", capital: "Hyderabad", region: "south" },
-  { name: "Tripura", capital: "Agartala", region: "northeast" },
-  { name: "Uttarakhand", capital: "Dehradun", region: "north" },
 ].map<State>((s) => ({
   id: `st-${slugify(s.name)}`,
   slug: slugify(s.name),
