@@ -1874,7 +1874,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-loktak-lake", slug: "loktak-lake", name: "Loktak Lake", stateSlug: "manipur",
-    category: "Lake", interests: ["nature", "wildlife"],
+    category: "Lake", interests: ["adventure", "wildlife"],
     image: "", gallery: [],
     description:
       "The largest freshwater lake in northeast India, covered with phumdis \u2014 floating islands of matted vegetation \u2014 that fishermen live and work on. Seen from the Sendra viewpoint the lake looks like a field of green rings scattered across still water.",
@@ -1888,7 +1888,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-keibul-lamjao", slug: "keibul-lamjao", name: "Keibul Lamjao National Park", stateSlug: "manipur",
-    category: "National Park", interests: ["wildlife", "nature"],
+    category: "National Park", interests: ["wildlife", "adventure"],
     image: "", gallery: [],
     description:
       "The only floating national park in the world, laid over the phumdis of southern Loktak. It exists to protect the sangai, the endangered brow-antlered deer that walks on the spongy vegetation as if on land.",
@@ -1927,7 +1927,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-shirui-hills", slug: "shirui-hills", name: "Shirui Hills", stateSlug: "manipur",
-    category: "Hill Station", interests: ["mountains", "nature"],
+    category: "Hill Station", interests: ["mountains", "adventure"],
     image: "", gallery: [],
     description:
       "The Tangkhul Naga highlands above Ukhrul, home to the Shirui lily \u2014 a pale pink bloom that grows wild nowhere else on earth and flowers for a few weeks each summer on the ridge tops.",
@@ -1956,7 +1956,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-phawngpui", slug: "phawngpui", name: "Phawngpui (Blue Mountain)", stateSlug: "mizoram",
-    category: "National Park", interests: ["mountains", "wildlife", "nature"],
+    category: "National Park", interests: ["mountains", "wildlife", "adventure"],
     image: "", gallery: [],
     description:
       "At 2,157 m Phawngpui is Mizoram's highest peak and a national park, held sacred by the Mizo as the home of spirits. Its grassy summit drops away in the sheer Thlazuang Khaw cliff above the Chhimtuipui river.",
@@ -1970,7 +1970,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-vantawng-falls", slug: "vantawng-falls", name: "Vantawng Falls", stateSlug: "mizoram",
-    category: "Waterfall", interests: ["nature"],
+    category: "Heritage Site", interests: ["adventure"],
     image: "", gallery: [],
     description:
       "Mizoram's highest waterfall drops about 229 m in two glassy stages through dense bamboo forest near Thenzawl, viewed from a tower on the opposite slope.",
@@ -1996,7 +1996,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-champhai", slug: "champhai", name: "Champhai", stateSlug: "mizoram",
-    category: "City", interests: ["nature", "food", "heritage"],
+    category: "City", interests: ["adventure", "food", "heritage"],
     image: "", gallery: [],
     description:
       "The rice bowl of Mizoram, a broad green plain on the Myanmar border ringed by hills, known for its vineyards, the Rih Dil legend just across the frontier and Mizo origin sites at Kungawrhi Puk.",
@@ -2009,7 +2009,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-tamdil-lake", slug: "tamdil-lake", name: "Tamdil Lake", stateSlug: "mizoram",
-    category: "Lake", interests: ["nature"],
+    category: "Lake", interests: ["adventure"],
     image: "", gallery: [],
     description:
       "A quiet natural lake set in mustard fields and forest about 85 km from Aizawl, with a boating jetty, a small resort and a Mizo legend of a mustard plant that gave the lake its name.",
@@ -2052,7 +2052,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-dzukou-valley", slug: "dzukou-valley", name: "Dzukou Valley", stateSlug: "nagaland",
-    category: "Hill Station", interests: ["mountains", "adventure", "nature"],
+    category: "Hill Station", interests: ["mountains", "adventure"],
     image: "", gallery: [],
     description:
       "A rolling valley of tussock grass and dwarf bamboo at about 2,450 m on the Nagaland\u2013Manipur border, famous for the Dzukou lily that flowers across the slopes in the monsoon months.",
@@ -2065,7 +2065,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-khonoma", slug: "khonoma", name: "Khonoma", stateSlug: "nagaland",
-    category: "Heritage Site", interests: ["heritage", "nature"],
+    category: "Heritage Site", interests: ["heritage", "adventure"],
     image: "", gallery: [],
     description:
       "An Angami village 20 km from Kohima that fought the British for decades and later declared its forests a conservation area, becoming India's first green village. Its alder-managed terraces step down the whole valley.",
@@ -2106,7 +2106,7 @@ export const DESTINATIONS: Destination[] = [
   // TELANGANA
   {
     id: "d-hyderabad", slug: "hyderabad", name: "Hyderabad", stateSlug: "telangana",
-    category: "City", interests: ["heritage", "food", "shopping"],
+    category: "City", interests: ["heritage", "food"],
     image: "", gallery: [],
     description:
       "The Qutb Shahi and Nizami capital is now a two-sided city: the old quarter around Charminar with its pearl bazaars and Chowmahalla Palace, and the tech corridor of HITEC City to the west. In between sits Hussain Sagar lake and one of India's great food cultures.",
@@ -2134,7 +2134,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-charminar", slug: "charminar", name: "Charminar", stateSlug: "telangana",
-    category: "Heritage Site", interests: ["heritage", "shopping"],
+    category: "Heritage Site", interests: ["heritage", "food"],
     image: "", gallery: [],
     description:
       "Built in 1591 at the founding of Hyderabad, the four-minaret arch stands at the centre of the old city with Mecca Masjid beside it and the bangle stalls of Laad Bazaar radiating outwards.",
@@ -2147,7 +2147,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-ramoji-film-city", slug: "ramoji-film-city", name: "Ramoji Film City", stateSlug: "telangana",
-    category: "Heritage Site", interests: ["adventure", "shopping"],
+    category: "Heritage Site", interests: ["adventure", "food"],
     image: "", gallery: [],
     description:
       "The world's largest film studio complex by area, spread over 2,000 acres outside Hyderabad, running as a theme park of standing sets, gardens, live shows and studio tours.",
@@ -2173,7 +2173,7 @@ export const DESTINATIONS: Destination[] = [
   },
   {
     id: "d-nagarjuna-sagar", slug: "nagarjuna-sagar", name: "Nagarjuna Sagar", stateSlug: "telangana",
-    category: "Lake", interests: ["heritage", "nature"],
+    category: "Lake", interests: ["heritage", "adventure"],
     image: "", gallery: [],
     description:
       "One of the earliest and largest masonry dams in India, holding back the Krishna river. Its reservoir drowned the Buddhist site of Nagarjunakonda, whose excavated monuments were rebuilt on an island museum.",
