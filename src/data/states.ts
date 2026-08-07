@@ -423,6 +423,82 @@ const SHOWCASE: State[] = [
     culture:
       "Nineteen indigenous communities, led by the Tripuri, share the state with a large Bengali population, and both Kokborok and Bengali are official. Risa and rignai handloom textiles are woven on backstrap looms in almost every hill village, bamboo craft is a state industry, and Garia and Ker puja mark the tribal ritual year. The Manikya court patronised Rabindranath Tagore, whose long association with Tripura is still a point of pride in Agartala.",
   },
+  {
+    id: "st-manipur",
+    slug: "manipur",
+    name: "Manipur",
+    capital: "Imphal",
+    language: "Meiteilon (Manipuri)",
+    population: "3.1 million",
+    area: "22,327 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Manipur, the 'Jewelled Land', is an oval valley ringed by blue hills where Loktak Lake floats its extraordinary phumdi islands \u2014 circular rafts of matted vegetation that carry fishermen's huts and the world's only floating national park. Imphal keeps the ruined Kangla Fort at its heart and runs Ima Keithel, a market of thousands of stalls staffed entirely by women. Beyond the valley the Naga and Kuki hills rise towards Shirui, where the pink Shirui lily blooms nowhere else on earth, and Moirang guards the memory of the INA's first flag-raising on Indian soil.",
+    culture:
+      "Manipuri culture is unusually refined for its size: the graceful Ras Leela dance is one of India's eight classical forms, Thang-Ta is a living sword-and-spear martial art, and polo \u2014 sagol kangjei \u2014 was codified here before the British carried it abroad. Meitei Vaishnavism layers over older Sanamahi worship, and Lai Haraoba festivals re-enact creation with maibi priestesses. Handloom is near-universal, with phanek and innaphi wraps woven at home."
+  },
+  {
+    id: "st-mizoram",
+    slug: "mizoram",
+    name: "Mizoram",
+    capital: "Aizawl",
+    language: "Mizo",
+    population: "1.2 million",
+    area: "21,081 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Mizoram is a state of parallel north\u2013south ridges where villages sit on the crest lines and cloud fills the valleys below. Aizawl clings to a spur at 1,100 m, its churches, choirs and steep lanes giving it a rhythm quite unlike the plains. Phawngpui, the Blue Mountain, is the sacred high point of the Lushai hills; Vantawng plunges 229 m through bamboo forest; and the Champhai plain along the Myanmar border is the state's rice bowl and its vineyard country. Literacy is among India's highest and Sunday is genuinely quiet.",
+    culture:
+      "Mizo society is famously egalitarian, held together by tlawmngaihna \u2014 an ethic of selfless service to others. Christianity arrived with Welsh missionaries and shaped a powerful choral tradition, but older harvest rites survive in Chapchar Kut and the bamboo-pole dance Cheraw. Puanchei shawls are woven on loin looms, and community fund-raising nights of song are still the core of village life."
+  },
+  {
+    id: "st-nagaland",
+    slug: "nagaland",
+    name: "Nagaland",
+    capital: "Kohima",
+    language: "English, Nagamese",
+    population: "2.2 million",
+    area: "16,579 km\u00b2",
+    bestTimeToVisit: "October \u2013 April",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Nagaland is sixteen major tribes across a fold of steep hills, each with its own language, weave and festival calendar. Kohima holds the Commonwealth war cemetery where the 1944 battle turned back the Japanese advance, and every December the Hornbill Festival at Kisama gathers every tribe into one week of dance, log drums and rice beer. Khonoma is Asia's first green village, its terraces stepping down a whole valley; Dzukou's rolling grass valley flowers in summer; and Mokokchung is the cultural capital of the Ao hills.",
+    culture:
+      "Naga identity is tribal first \u2014 Angami, Ao, Sumi, Konyak, Lotha and others \u2014 with morung dormitories, shawl patterns and feasts of merit marking status and clan. Christianity is near-universal today and Sunday services fill the hills with harmony singing, while headhunting-era motifs survive in carving, jewellery and the tattooed faces of the last Konyak elders. Cane and bamboo work, wood carving and back-strap weaving remain everyday skills."
+  },
+  {
+    id: "st-telangana",
+    slug: "telangana",
+    name: "Telangana",
+    capital: "Hyderabad",
+    language: "Telugu, Urdu",
+    population: "38.5 million",
+    area: "112,077 km\u00b2",
+    bestTimeToVisit: "October \u2013 February",
+    heroImage: "",
+    region: "south",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Telangana, carved out as India's youngest large state in 2014, is the Deccan plateau at its most layered. Hyderabad pairs Qutb Shahi and Nizami heritage \u2014 Charminar, Golconda, the Qutb Shahi tombs and Chowmahalla \u2014 with the glass towers of HITEC City and a biryani culture all its own. North of the capital the Kakatiya legacy stands in Warangal's fort ruins and the recently restored Ramappa temple, a UNESCO site. Elsewhere there are the Nagarjuna Sagar reservoir and Buddhist relics, ikat looms at Pochampally, and the Godavari gorge at Bhadrachalam.",
+    culture:
+      "Telangana's culture mixes Deccani Muslim refinement with a strong village Telugu tradition. Bathukamma, the flower-stacking festival of women, and Bonalu, the monsoon goddess procession, are its two defining celebrations. Perini Sivatandavam, the Kakatiya warrior dance, has been revived from temple sculpture; Cheriyal scroll painting and Pochampally and Gadwal weaving remain protected crafts; and Hyderabadi Urdu poetry keeps its own mushaira circuit."
+  },
 ];
 
 const STUBS: State[] = [
@@ -430,10 +506,6 @@ const STUBS: State[] = [
   { name: "Andhra Pradesh", capital: "Amaravati", region: "south" },
   { name: "Arunachal Pradesh", capital: "Itanagar", region: "northeast" },
   { name: "Chhattisgarh", capital: "Raipur", region: "central" },
-  { name: "Manipur", capital: "Imphal", region: "northeast" },
-  { name: "Mizoram", capital: "Aizawl", region: "northeast" },
-  { name: "Nagaland", capital: "Kohima", region: "northeast" },
-  { name: "Telangana", capital: "Hyderabad", region: "south" },
 ].map<State>((s) => ({
   id: `st-${slugify(s.name)}`,
   slug: slugify(s.name),

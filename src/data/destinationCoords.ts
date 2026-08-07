@@ -160,6 +160,34 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "pelling": { lng: 88.2167, lat: 27.2167 },
   "yumthang-valley": { lng: 88.7028, lat: 27.8236 },
   "yuksom": { lng: 88.2167, lat: 27.3667 },
+  // Manipur
+  "imphal": { lng: 93.9368, lat: 24.8170 },
+  "loktak-lake": { lng: 93.8000, lat: 24.5237 },
+  "keibul-lamjao": { lng: 93.8167, lat: 24.4833 },
+  "kangla-fort": { lng: 93.9383, lat: 24.8083 },
+  "moirang": { lng: 93.7767, lat: 24.5000 },
+  "shirui-hills": { lng: 94.4000, lat: 25.1167 },
+  // Mizoram
+  "aizawl": { lng: 92.7176, lat: 23.7271 },
+  "phawngpui": { lng: 93.0333, lat: 22.6333 },
+  "vantawng-falls": { lng: 92.7833, lat: 23.3333 },
+  "reiek": { lng: 92.6000, lat: 23.7000 },
+  "champhai": { lng: 93.3295, lat: 23.4564 },
+  "tamdil-lake": { lng: 92.9600, lat: 23.7433 },
+  // Nagaland
+  "kohima": { lng: 94.1086, lat: 25.6701 },
+  "kisama-heritage-village": { lng: 94.1000, lat: 25.6000 },
+  "dzukou-valley": { lng: 94.0500, lat: 25.5667 },
+  "khonoma": { lng: 94.0167, lat: 25.6500 },
+  "mokokchung": { lng: 94.5150, lat: 26.3220 },
+  "japfu-peak": { lng: 94.0833, lat: 25.5833 },
+  // Telangana
+  "hyderabad": { lng: 78.4867, lat: 17.3850 },
+  "golconda-fort": { lng: 78.4011, lat: 17.3833 },
+  "charminar": { lng: 78.4747, lat: 17.3616 },
+  "ramoji-film-city": { lng: 78.6808, lat: 17.2543 },
+  "warangal": { lng: 79.5941, lat: 17.9689 },
+  "nagarjuna-sagar": { lng: 79.3122, lat: 16.5750 },
 };
 
 // State-capital fallback coords used when a state has no destinations yet.
