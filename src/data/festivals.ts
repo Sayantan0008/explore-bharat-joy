@@ -268,4 +268,48 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-neermahal-festival", slug: "neermahal-water-festival", name: "Neermahal Water Festival", stateSlug: "tripura", month: "August", type: "Cultural", image: "",
     description: "Boat races, swimming contests and evening cultural shows on Rudrasagar Lake around the floating palace.",
     significance: "Started in 1978 to celebrate the Manikya-era water palace and now Tripura's biggest tourism event." },
+
+  // Manipur
+  { id: "fest-lai-haraoba", slug: "lai-haraoba", name: "Lai Haraoba", stateSlug: "manipur", month: "May", type: "Religious", image: "", featured: true,
+    description: "A month-long ritual festival where maibi priestesses dance the story of creation before the village sylvan deities.",
+    significance: "Predates Vaishnavism in Manipur and preserves the older Sanamahi religious tradition of the Meitei." },
+  { id: "fest-yaoshang", slug: "yaoshang", name: "Yaoshang", stateSlug: "manipur", month: "March", type: "Cultural", image: "",
+    description: "Manipur's five-day Holi, combining colour play with the thabal chongba moonlight dance and sports meets in every locality.",
+    significance: "The state's biggest community celebration, when neighbourhoods raise funds and young people dance in circles all night." },
+  { id: "fest-sangai-festival", slug: "sangai-festival", name: "Sangai Festival", stateSlug: "manipur", month: "November", type: "Cultural", image: "",
+    description: "A ten-day state tourism festival of Manipuri dance, thang-ta bouts, indigenous sport and food across Imphal venues.",
+    significance: "Named after the state animal, it showcases the valley and hill cultures of Manipur together." },
+
+  // Mizoram
+  { id: "fest-chapchar-kut", slug: "chapchar-kut", name: "Chapchar Kut", stateSlug: "mizoram", month: "March", type: "Harvest", image: "", featured: true,
+    description: "The spring festival that follows the clearing of jhum fields, celebrated with the bamboo-pole dance Cheraw in Aizawl's stadium.",
+    significance: "Mizoram's oldest surviving festival, marking the pause between forest clearing and sowing." },
+  { id: "fest-mim-kut", slug: "mim-kut", name: "Mim Kut", stateSlug: "mizoram", month: "September", type: "Harvest", image: "",
+    description: "The maize harvest festival, when the first produce is offered in memory of family members who died during the year.",
+    significance: "Combines thanksgiving for the crop with a formal remembrance of the dead." },
+  { id: "fest-anthurium-festival", slug: "anthurium-festival", name: "Anthurium Festival", stateSlug: "mizoram", month: "September", type: "Cultural", image: "",
+    description: "A flower and culture festival held at Reiek village with Mizo dance, food stalls and adventure sport on the hill.",
+    significance: "Promotes Mizoram's anthurium growers and village tourism around the Reiek heritage site." },
+
+  // Nagaland
+  { id: "fest-hornbill", slug: "hornbill-festival", name: "Hornbill Festival", stateSlug: "nagaland", month: "December", type: "Cultural", image: "", featured: true,
+    description: "The 'festival of festivals' at Kisama, where all major Naga tribes gather for a week of dance, log drums, crafts and rice beer.",
+    significance: "Created in 2000 to bring the sixteen tribes together and keep morung traditions alive for younger generations." },
+  { id: "fest-moatsu", slug: "moatsu", name: "Moatsu Mong", stateSlug: "nagaland", month: "May", type: "Harvest", image: "",
+    description: "The Ao festival held after sowing, with communal feasts, songs and the sangpangtu bonfire in Mokokchung villages.",
+    significance: "Marks the end of the hardest field work and asks for a good growing season." },
+  { id: "fest-sekrenyi", slug: "sekrenyi", name: "Sekrenyi", stateSlug: "nagaland", month: "February", type: "Cultural", image: "",
+    description: "The Angami purification festival around Kohima, with ritual bathing at the village well and ten days of song and feasting.",
+    significance: "Cleanses body and spirit and formally admits young men into adult village life." },
+
+  // Telangana
+  { id: "fest-bathukamma", slug: "bathukamma", name: "Bathukamma", stateSlug: "telangana", month: "October", type: "Cultural", image: "", featured: true,
+    description: "Women stack seasonal flowers into conical towers, circle them singing for nine evenings, then float them on lakes and tanks.",
+    significance: "Telangana's state festival, honouring Gauri and the monsoon bloom, and a symbol of the statehood movement." },
+  { id: "fest-bonalu", slug: "bonalu", name: "Bonalu", stateSlug: "telangana", month: "July", type: "Religious", image: "",
+    description: "Women carry decorated pots of cooked rice to Mahankali temples across Hyderabad and Secunderabad in loud, drumming processions.",
+    significance: "A monsoon thanksgiving to the goddess for protection from epidemic disease, dating to a 19th-century plague." },
+  { id: "fest-sammakka-saralamma", slug: "sammakka-saralamma-jatara", name: "Sammakka Saralamma Jatara", stateSlug: "telangana", month: "February", type: "Religious", image: "",
+    description: "A biennial tribal gathering at Medaram in the Warangal forests that draws millions to honour two Koya warrior goddesses.",
+    significance: "The largest tribal congregation in the world, commemorating a Koya revolt against the Kakatiya rulers." },
 ];

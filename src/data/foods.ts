@@ -269,4 +269,52 @@ export const FOODS: Food[] = [
     description: "Boiled pork shredded and mixed with green chilli, coriander and lime — served at room temperature." },
   { id: "f-awan-bangwi", slug: "awan-bangwi", name: "Awan Bangwi", stateSlug: "tripura", category: "Snack", image: "", vegetarian: true,
     description: "Sticky rice steamed in lairu leaves, made for Garia puja and carried on long journeys." },
+
+  // Manipur
+  { id: "f-eromba", slug: "eromba", name: "Eromba", stateSlug: "manipur", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Boiled vegetables mashed with fermented fish (ngari) and roasted chilli \u2014 the pungent heart of every Meitei meal." },
+  { id: "f-chamthong", slug: "chamthong", name: "Chamthong", stateSlug: "manipur", category: "Main", image: "", vegetarian: true,
+    description: "A clean seasonal vegetable stew flavoured with maroi herbs, eaten with rice as the everyday Manipuri comfort dish." },
+  { id: "f-singju", slug: "singju", name: "Singju", stateSlug: "manipur", category: "Snack", image: "", vegetarian: true,
+    description: "A raw salad of shredded banana flower, cabbage and lotus stem tossed with chickpea flour and fiery chilli." },
+  { id: "f-chak-hao-kheer", slug: "chak-hao-kheer", name: "Chak Hao Kheer", stateSlug: "manipur", category: "Sweet", image: "", vegetarian: true,
+    description: "Black sticky rice simmered slowly in milk until it turns deep purple \u2014 Manipur's celebration dessert." },
+  { id: "f-nga-thongba", slug: "nga-thongba", name: "Nga Thongba", stateSlug: "manipur", category: "Main", image: "", vegetarian: false,
+    description: "Loktak lake fish cooked in a light, chilli-hot broth with ginger and local herbs." },
+
+  // Mizoram
+  { id: "f-bai", slug: "bai", name: "Bai", stateSlug: "mizoram", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "The Mizo staple \u2014 seasonal greens, bamboo shoot and pork bones boiled with soda and eaten with rice." },
+  { id: "f-vawksa-rep", slug: "vawksa-rep", name: "Vawksa Rep", stateSlug: "mizoram", category: "Main", image: "", vegetarian: false,
+    description: "Smoked pork slow-cooked with bamboo shoot and local chillies until the fat turns silky." },
+  { id: "f-misa-mach-poora", slug: "misa-mach-poora", name: "Misa Mach Poora", stateSlug: "mizoram", category: "Main", image: "", vegetarian: false,
+    description: "Grilled river prawns finished with mustard oil, lime and coriander \u2014 smoky and sharp." },
+  { id: "f-koat-pitha", slug: "koat-pitha", name: "Koat Pitha", stateSlug: "mizoram", category: "Snack", image: "", vegetarian: true,
+    description: "Fried rice-flour and banana dumplings sweetened with jaggery, sold at every Mizo tea stall." },
+  { id: "f-sanpiau", slug: "sanpiau", name: "Sanpiau", stateSlug: "mizoram", category: "Snack", image: "", vegetarian: true,
+    description: "A savoury rice porridge topped with coriander, black pepper, fish sauce and powdered rice \u2014 Aizawl's favourite street snack." },
+
+  // Nagaland
+  { id: "f-smoked-pork-axone", slug: "smoked-pork-axone", name: "Smoked Pork with Axone", stateSlug: "nagaland", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Fire-smoked pork stewed with fermented soybean \u2014 the most famous and most pungent dish in the Naga hills." },
+  { id: "f-anishi", slug: "anishi", name: "Anishi", stateSlug: "nagaland", category: "Main", image: "", vegetarian: false,
+    description: "Ao Naga fermented yam-leaf cakes dried over the hearth and cooked with pork and raja mircha." },
+  { id: "f-galho", slug: "galho", name: "Galho", stateSlug: "nagaland", category: "Main", image: "", vegetarian: true,
+    description: "A one-pot rice and greens porridge, the Naga answer to khichdi, often enriched with smoked meat." },
+  { id: "f-bamboo-shoot-fish", slug: "bamboo-shoot-fish", name: "Bamboo Shoot Fish", stateSlug: "nagaland", category: "Main", image: "", vegetarian: false,
+    description: "River fish simmered with sour fermented bamboo shoot and king chilli \u2014 hot, sour and unmistakably Naga." },
+  { id: "f-akhuni-chutney", slug: "akhuni-chutney", name: "Akhuni Chutney", stateSlug: "nagaland", category: "Snack", image: "", vegetarian: true,
+    description: "A pounded relish of fermented soybean, raja mircha and tomato served alongside almost every plate." },
+
+  // Telangana
+  { id: "f-hyderabadi-biryani", slug: "hyderabadi-biryani", name: "Hyderabadi Biryani", stateSlug: "telangana", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Kacchi-style mutton and basmati sealed under dough and slow-cooked on dum \u2014 the Nizami dish that defines the city." },
+  { id: "f-haleem", slug: "haleem", name: "Haleem", stateSlug: "telangana", category: "Main", image: "", vegetarian: false,
+    description: "Wheat, lentils and mutton pounded for hours into a rich paste, made in giant cauldrons through Ramzan." },
+  { id: "f-hyderabadi-double-ka-meetha", slug: "double-ka-meetha", name: "Double ka Meetha", stateSlug: "telangana", category: "Sweet", image: "", vegetarian: true,
+    description: "Fried bread soaked in saffron milk and sugar syrup, topped with nuts \u2014 the classic Hyderabadi wedding dessert." },
+  { id: "f-sarva-pindi", slug: "sarva-pindi", name: "Sarva Pindi", stateSlug: "telangana", category: "Snack", image: "", vegetarian: true,
+    description: "A crisp rice-flour and chana dal pancake pressed into a pan with peanuts, sesame and curry leaf \u2014 pure Telangana village food." },
+  { id: "f-pachi-pulusu", slug: "pachi-pulusu", name: "Pachi Pulusu", stateSlug: "telangana", category: "Main", image: "", vegetarian: true,
+    description: "An uncooked tamarind broth with raw onion, green chilli and jaggery, drunk cold with rice through the Deccan summer." },
 ];
