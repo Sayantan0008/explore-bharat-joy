@@ -312,4 +312,48 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-sammakka-saralamma", slug: "sammakka-saralamma-jatara", name: "Sammakka Saralamma Jatara", stateSlug: "telangana", month: "February", type: "Religious", image: "",
     description: "A biennial tribal gathering at Medaram in the Warangal forests that draws millions to honour two Koya warrior goddesses.",
     significance: "The largest tribal congregation in the world, commemorating a Koya revolt against the Kakatiya rulers." },
+
+  // Andhra Pradesh
+  { id: "fest-ap-sankranti", slug: "andhra-sankranti", name: "Sankranti", stateSlug: "andhra-pradesh", month: "January", type: "Harvest", image: "", featured: true,
+    description: "A four-day harvest festival of rangoli, bonfires and village games across coastal Andhra.",
+    significance: "Households draw muggu patterns at dawn, cattle are decorated for Kanuma, and families return to ancestral villages for the biggest feast of the year." },
+  { id: "fest-ap-brahmotsavam", slug: "tirumala-brahmotsavam", name: "Tirumala Brahmotsavam", stateSlug: "andhra-pradesh", month: "September", type: "Religious", image: "",
+    description: "A nine-day temple festival at Tirumala with the deity paraded on a different vahanam each day.",
+    significance: "The Garuda Seva procession alone draws lakhs of pilgrims, making it the largest gathering in the Tirupati calendar." },
+  { id: "fest-ap-ugadi", slug: "andhra-ugadi", name: "Ugadi", stateSlug: "andhra-pradesh", month: "March", type: "Religious", image: "",
+    description: "The Telugu new year, marked by the six-flavoured ugadi pachadi and panchanga readings.",
+    significance: "The pachadi's sweet, sour, bitter, salty, tangy and spicy notes stand for the mixed year ahead \u2014 a rare festival built around a single dish." },
+
+  // Arunachal Pradesh
+  { id: "fest-ar-losar", slug: "arunachal-losar", name: "Losar", stateSlug: "arunachal-pradesh", month: "February", type: "Religious", image: "", featured: true,
+    description: "The Monpa new year, celebrated for three days around Tawang with monastery rituals and masked dance.",
+    significance: "Homes are whitewashed and prayer flags renewed; monks perform cham dances to drive out the previous year's misfortune." },
+  { id: "fest-ar-nyokum", slug: "nyokum", name: "Nyokum Yullo", stateSlug: "arunachal-pradesh", month: "February", type: "Harvest", image: "",
+    description: "The Nyishi festival invoking the goddess Nyokum for a good harvest and community wellbeing.",
+    significance: "Priests chant through the night around a ritual altar of bamboo, with rice beer, dance and communal feasting for all clans." },
+  { id: "fest-ar-solung", slug: "solung", name: "Solung", stateSlug: "arunachal-pradesh", month: "September", type: "Harvest", image: "",
+    description: "The Adi harvest festival of the Siang valley, held after sowing and lasting several days.",
+    significance: "Ponung dances are performed by women in line formation while mithun are offered and the Taktor rite protects the standing crop." },
+
+  // Chhattisgarh
+  { id: "fest-cg-bastar-dussehra", slug: "bastar-dussehra", name: "Bastar Dussehra", stateSlug: "chhattisgarh", month: "October", type: "Cultural", image: "", featured: true,
+    description: "A 75-day festival in Jagdalpur dedicated to the goddess Danteshwari \u2014 the longest in India.",
+    significance: "Unlike the rest of the country it has nothing to do with Rama; hundreds of Adivasi villages send deities and pull an enormous wooden chariot through the town." },
+  { id: "fest-cg-madai", slug: "madai", name: "Madai", stateSlug: "chhattisgarh", month: "December", type: "Cultural", image: "",
+    description: "A rotating tribal fair held village by village across Bastar through the winter months.",
+    significance: "Clan deities travel to the host village in procession, followed by markets, drumming and night-long dancing." },
+  { id: "fest-cg-hareli", slug: "hareli", name: "Hareli", stateSlug: "chhattisgarh", month: "July", type: "Harvest", image: "",
+    description: "The first festival of the Chhattisgarhi year, marking the start of the sowing season.",
+    significance: "Farmers worship their ploughs and cattle, neem branches are fixed above doorways, and gedi stilt-walking contests fill the village lanes." },
+
+  // Andaman and Nicobar Islands
+  { id: "fest-an-island-tourism", slug: "island-tourism-festival", name: "Island Tourism Festival", stateSlug: "andaman-and-nicobar-islands", month: "January", type: "Cultural", image: "", featured: true,
+    description: "A ten-day festival in Port Blair with island crafts, food stalls and nightly performances.",
+    significance: "Settler communities from Bengal, Tamil Nadu, Kerala and Ranchi each stage their own dance and cuisine, making it the clearest window on island society." },
+  { id: "fest-an-subhash-mela", slug: "subhash-mela", name: "Subhash Mela", stateSlug: "andaman-and-nicobar-islands", month: "January", type: "Cultural", image: "",
+    description: "A fair marking Netaji Subhas Chandra Bose's birth anniversary and his 1943 flag-hoisting on the islands.",
+    significance: "Held at the Cellular Jail and Marina Park, it commemorates the Andamans as the first Indian territory claimed by the Azad Hind government." },
+  { id: "fest-an-durga-puja", slug: "andaman-durga-puja", name: "Durga Puja", stateSlug: "andaman-and-nicobar-islands", month: "October", type: "Religious", image: "",
+    description: "The islands' large Bengali settler community fills Port Blair with pandals for five days each autumn.",
+    significance: "Community pujas at Aberdeen Bazaar and Junglighat keep east-Bengal traditions alive a thousand kilometres out to sea." },
 ];

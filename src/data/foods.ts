@@ -317,4 +317,52 @@ export const FOODS: Food[] = [
     description: "A crisp rice-flour and chana dal pancake pressed into a pan with peanuts, sesame and curry leaf \u2014 pure Telangana village food." },
   { id: "f-pachi-pulusu", slug: "pachi-pulusu", name: "Pachi Pulusu", stateSlug: "telangana", category: "Main", image: "", vegetarian: true,
     description: "An uncooked tamarind broth with raw onion, green chilli and jaggery, drunk cold with rice through the Deccan summer." },
+
+  // Andhra Pradesh
+  { id: "f-ap-pulihora", slug: "pulihora", name: "Pulihora", stateSlug: "andhra-pradesh", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Tamarind rice tempered with mustard, curry leaf and peanuts \u2014 the standard temple prasadam and festival lunch across Andhra." },
+  { id: "f-ap-gongura-mutton", slug: "gongura-mutton", name: "Gongura Mamsam", stateSlug: "andhra-pradesh", category: "Main", image: "", vegetarian: false,
+    description: "Mutton slow-cooked with sour gongura (roselle) leaves and Guntur chillies \u2014 the state's signature non-vegetarian dish." },
+  { id: "f-ap-pesarattu", slug: "pesarattu", name: "Pesarattu", stateSlug: "andhra-pradesh", category: "Snack", image: "", vegetarian: true,
+    description: "A green-gram dosa served with ginger chutney and, in Kakinada style, a filling of upma." },
+  { id: "f-ap-tirupati-laddu", slug: "tirupati-laddu", name: "Tirupati Laddu", stateSlug: "andhra-pradesh", category: "Sweet", image: "", vegetarian: true,
+    description: "The GI-tagged besan laddu made in the Tirumala temple kitchen with ghee, cashew and cardamom, given to every pilgrim." },
+  { id: "f-ap-pootharekulu", slug: "pootharekulu", name: "Pootharekulu", stateSlug: "andhra-pradesh", category: "Sweet", image: "", vegetarian: true,
+    description: "Paper-thin rice-starch sheets layered with ghee and jaggery or sugar \u2014 a delicate speciality of Atreyapuram." },
+
+  // Arunachal Pradesh
+  { id: "f-ar-thukpa", slug: "thukpa", name: "Thukpa", stateSlug: "arunachal-pradesh", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "A Monpa noodle soup of hand-pulled noodles, vegetables and meat in a clear broth \u2014 the standard cold-weather meal in Tawang." },
+  { id: "f-ar-momo", slug: "arunachal-momos", name: "Momos", stateSlug: "arunachal-pradesh", category: "Snack", image: "", vegetarian: false,
+    description: "Steamed dumplings of pork or vegetables served with a fiery dalle-chilli dip, sold at every roadside stall in the western hills." },
+  { id: "f-ar-apong", slug: "apong", name: "Apong", stateSlug: "arunachal-pradesh", category: "Drink", image: "", vegetarian: true,
+    description: "Mildly alcoholic rice beer brewed at home by the Adi and Apatani and offered to guests as a matter of course." },
+  { id: "f-ar-pika-pila", slug: "pika-pila", name: "Pika Pila", stateSlug: "arunachal-pradesh", category: "Snack", image: "", vegetarian: false,
+    description: "An Apatani pickle of fermented bamboo shoot, pork fat and king chilli \u2014 pungent, sour and served in small quantities." },
+  { id: "f-ar-zan", slug: "zan", name: "Zan", stateSlug: "arunachal-pradesh", category: "Main", image: "", vegetarian: true,
+    description: "A Monpa porridge of millet or buckwheat flour cooked with leafy greens and eaten with fermented cheese or chilli." },
+
+  // Chhattisgarh
+  { id: "f-cg-chila", slug: "chila", name: "Chila", stateSlug: "chhattisgarh", category: "Snack", image: "", vegetarian: true, featured: true,
+    description: "A soft rice-flour pancake eaten at breakfast with green chutney \u2014 the everyday Chhattisgarhi staple." },
+  { id: "f-cg-farra", slug: "farra", name: "Farra", stateSlug: "chhattisgarh", category: "Snack", image: "", vegetarian: true,
+    description: "Steamed rice-flour rolls stuffed with spiced lentils, then tempered with mustard and curry leaves." },
+  { id: "f-cg-muthia", slug: "muthia", name: "Muthia", stateSlug: "chhattisgarh", category: "Snack", image: "", vegetarian: true,
+    description: "Hand-shaped rice dumplings steamed and tossed in a mustard tempering, a rainy-season favourite." },
+  { id: "f-cg-bafauri", slug: "bafauri", name: "Bafauri", stateSlug: "chhattisgarh", category: "Snack", image: "", vegetarian: true,
+    description: "Steamed chana-dal dumplings with coriander and green chilli \u2014 the state's lighter answer to a fried snack." },
+  { id: "f-cg-dehrori", slug: "dehrori", name: "Dehrori", stateSlug: "chhattisgarh", category: "Sweet", image: "", vegetarian: true,
+    description: "Fermented rice-and-curd balls fried and soaked in sugar syrup, made for Diwali and weddings." },
+
+  // Andaman and Nicobar Islands
+  { id: "f-an-fish-curry", slug: "andaman-fish-curry", name: "Andaman Fish Curry", stateSlug: "andaman-and-nicobar-islands", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Reef fish simmered in coconut milk with tamarind and curry leaf \u2014 the island kitchen in one bowl." },
+  { id: "f-an-grilled-lobster", slug: "grilled-lobster", name: "Grilled Lobster", stateSlug: "andaman-and-nicobar-islands", category: "Main", image: "", vegetarian: false,
+    description: "Locally caught lobster split, buttered and grilled over coals, served on the beach at Havelock and Neil." },
+  { id: "f-an-coconut-prawn", slug: "coconut-prawn-curry", name: "Coconut Prawn Curry", stateSlug: "andaman-and-nicobar-islands", category: "Main", image: "", vegetarian: false,
+    description: "Tiger prawns cooked in thick coconut gravy \u2014 a Bengali-settler recipe adapted to island produce." },
+  { id: "f-an-amritsari-fish", slug: "chilli-crab", name: "Chilli Crab", stateSlug: "andaman-and-nicobar-islands", category: "Main", image: "", vegetarian: false,
+    description: "Mud crab tossed in a hot, garlicky tomato-chilli masala, best eaten with hands at Aberdeen Bazaar." },
+  { id: "f-an-coconut-prawn-sweet", slug: "coconut-barfi", name: "Coconut Barfi", stateSlug: "andaman-and-nicobar-islands", category: "Sweet", image: "", vegetarian: true,
+    description: "Fresh island coconut cooked down with milk and sugar into a soft, fragrant fudge sold at Port Blair sweet shops." },
 ];
