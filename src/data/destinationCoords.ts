@@ -188,6 +188,34 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "ramoji-film-city": { lng: 78.6808, lat: 17.2543 },
   "warangal": { lng: 79.5941, lat: 17.9689 },
   "nagarjuna-sagar": { lng: 79.3122, lat: 16.5750 },
+  // Andhra Pradesh
+  "tirupati": { lng: 79.4192, lat: 13.6288 },
+  "visakhapatnam": { lng: 83.2185, lat: 17.6868 },
+  "araku-valley": { lng: 82.8784, lat: 18.3273 },
+  "gandikota": { lng: 78.2836, lat: 14.8138 },
+  "lepakshi": { lng: 77.6070, lat: 13.8055 },
+  "srisailam": { lng: 78.8683, lat: 16.0733 },
+  // Arunachal Pradesh
+  "tawang": { lng: 91.8594, lat: 27.5861 },
+  "sela-pass": { lng: 92.1050, lat: 27.5045 },
+  "ziro-valley": { lng: 93.8300, lat: 27.6300 },
+  "bomdila": { lng: 92.4160, lat: 27.2650 },
+  "namdapha-national-park": { lng: 96.4000, lat: 27.4900 },
+  "itanagar": { lng: 93.6053, lat: 27.0844 },
+  // Chhattisgarh
+  "chitrakote-falls": { lng: 81.7000, lat: 19.2000 },
+  "kanger-valley-national-park": { lng: 81.9500, lat: 18.8600 },
+  "jagdalpur": { lng: 82.0195, lat: 19.0748 },
+  "sirpur": { lng: 82.1800, lat: 21.3400 },
+  "mainpat": { lng: 83.3500, lat: 22.7500 },
+  "raipur": { lng: 81.6296, lat: 21.2514 },
+  // Andaman and Nicobar Islands
+  "radhanagar-beach": { lng: 92.9530, lat: 11.9830 },
+  "neil-island": { lng: 93.0500, lat: 11.8300 },
+  "cellular-jail": { lng: 92.7480, lat: 11.6750 },
+  "port-blair": { lng: 92.7265, lat: 11.6234 },
+  "ross-island": { lng: 92.7620, lat: 11.6750 },
+  "mahatma-gandhi-marine-national-park": { lng: 92.6170, lat: 11.5670 },
 };
 
 // State-capital fallback coords used when a state has no destinations yet.

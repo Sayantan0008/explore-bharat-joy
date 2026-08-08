@@ -499,14 +499,85 @@ const SHOWCASE: State[] = [
     culture:
       "Telangana's culture mixes Deccani Muslim refinement with a strong village Telugu tradition. Bathukamma, the flower-stacking festival of women, and Bonalu, the monsoon goddess procession, are its two defining celebrations. Perini Sivatandavam, the Kakatiya warrior dance, has been revived from temple sculpture; Cheriyal scroll painting and Pochampally and Gadwal weaving remain protected crafts; and Hyderabadi Urdu poetry keeps its own mushaira circuit."
   },
+  {
+    id: "st-andhra-pradesh",
+    slug: "andhra-pradesh",
+    name: "Andhra Pradesh",
+    capital: "Amaravati",
+    language: "Telugu",
+    population: "53.9 million",
+    area: "162,975 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "south",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Andhra Pradesh runs from the second-longest coastline in India up to the dry Rayalaseema plateau, and it holds one of the busiest pilgrim circuits on earth. Tirumala's hill temple at Tirupati receives tens of thousands of devotees a day; Srisailam guards a jyotirlinga above the Krishna gorge; and Lepakshi keeps the finest Vijayanagara murals in the south. On the coast, Visakhapatnam sets beaches and a working harbour against the Eastern Ghats, with the coffee slopes of Araku Valley and the million-year-old Borra Caves a train ride inland. Gandikota's sandstone canyon above the Penna river is the most dramatic landscape few travellers expect.",
+    culture:
+      "Telugu culture in Andhra is temple-centred and craft-rich: Kuchipudi classical dance was born in a Krishna-delta village of the same name, Kalamkari pen-work on cotton survives at Srikalahasti and Machilipatnam, and Kondapalli and Etikoppaka toys are turned from soft wood and coloured with vegetable dyes. Sankranti, the January harvest festival, brings rangoli, rooster fights and gongura-heavy feasts. The state's kitchen is the spiciest in the south \u2014 Guntur chillies, tamarind pulusu and Andhra-style biryani."
+  },
+  {
+    id: "st-arunachal-pradesh",
+    slug: "arunachal-pradesh",
+    name: "Arunachal Pradesh",
+    capital: "Itanagar",
+    language: "English, Nyishi, Adi, Monpa",
+    population: "1.6 million",
+    area: "83,743 km\u00b2",
+    bestTimeToVisit: "October \u2013 April",
+    heroImage: "",
+    region: "northeast",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Arunachal Pradesh is the land where the Indian sun rises first \u2014 a vast, thinly populated Himalayan state of snow passes, cloud forest and rivers that begin in Tibet. Tawang, reached over the 13,700 ft Sela Pass, holds the largest monastery in India and the birthplace of the sixth Dalai Lama. Ziro's paddy-and-fish valley is an Apatani cultural landscape on the UNESCO tentative list and hosts the country's best-loved indie music festival. Namdapha, in the far east, is the only park on earth with four big cats. Roads are slow and permits are required, which is precisely why the state still feels undiscovered.",
+    culture:
+      "Twenty-six major tribes and over a hundred sub-groups make Arunachal the most ethnically diverse state in India. Monpa Buddhism in the west \u2014 prayer flags, gompas, butter tea \u2014 gives way to Donyi-Polo sun-and-moon worship among the Adi, Apatani and Nyishi of the central belt, and to Tai Khamti Theravada Buddhism in the east. Festivals such as Losar, Nyokum and Solung mark the agricultural year with rice beer, log drums and communal feasting; cane-and-bamboo weaving and Apatani face tattoos belong to the same living tradition."
+  },
+  {
+    id: "st-chhattisgarh",
+    slug: "chhattisgarh",
+    name: "Chhattisgarh",
+    capital: "Raipur",
+    language: "Hindi, Chhattisgarhi",
+    population: "29.4 million",
+    area: "135,192 km\u00b2",
+    bestTimeToVisit: "October \u2013 March",
+    heroImage: "",
+    region: "central",
+    isUT: false,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Chhattisgarh is forest country \u2014 more than two-fifths of the state is under tree cover, and its rivers fall off the plateau in waterfalls that rival anything in India. Chitrakote, the 'Niagara of India', spreads 300 metres wide on the Indravati in monsoon; Tirathgarh drops in tiers inside Kanger Valley, where limestone caves hold blind cave fish and stalactite chambers. Bastar in the south is one of the strongest Adivasi cultural regions in the country, with weekly haats and a 75-day Dussehra unlike any other. In the north, Sirpur's 7th-century brick temples and Buddhist viharas sit quietly beside the Mahanadi.",
+    culture:
+      "Chhattisgarhi culture is Adivasi at its core \u2014 Gond, Muria, Halba and Baiga communities keep ghotul youth dormitories, mandai gatherings and drum-and-horn dances alive in Bastar. Dhokra lost-wax bronze casting, wrought-iron figurines from Kondagaon, bell-metal and terracotta are all working crafts sold at village markets rather than showrooms. Panthi and Raut Nacha dances belong to the plains, and Bastar Dussehra \u2014 dedicated to the goddess Danteshwari, not to Rama \u2014 is the longest festival in India."
+  },
+  {
+    id: "ut-andaman-and-nicobar-islands",
+    slug: "andaman-and-nicobar-islands",
+    name: "Andaman and Nicobar Islands",
+    capital: "Port Blair",
+    language: "Hindi, Bengali, English, Tamil",
+    population: "0.4 million",
+    area: "8,249 km\u00b2",
+    bestTimeToVisit: "November \u2013 April",
+    heroImage: "",
+    region: "south",
+    isUT: true,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "The Andaman and Nicobar Islands are an archipelago of 572 islands strung down the Bay of Bengal, closer to Myanmar and Sumatra than to the Indian mainland. Radhanagar on Swaraj Dweep (Havelock) is regularly named among Asia's best beaches; Shaheed Dweep (Neil) is smaller and slower, with natural coral bridges and shallow lagoons. The reefs off Mahatma Gandhi Marine National Park are the country's best diving and snorkelling. Port Blair carries a heavier history: the Cellular Jail held India's political prisoners in solitary cells, and its evening light-and-sound show is the emotional centre of any visit.",
+    culture:
+      "Island life mixes settler communities \u2014 Bengali, Tamil, Telugu, Ranchi Adivasi and Burmese descendants \u2014 with six indigenous peoples, including the Great Andamanese, Onge, Jarawa and the uncontacted Sentinelese, whose territories are legally protected and closed to visitors. The result is a seafood-and-coconut kitchen, a relaxed Hindi-Bengali lingua franca, and a calendar that runs on Subhash Mela, the Island Tourism Festival and the monsoon lull. Respecting tribal reserve boundaries and the coral-reef rules is part of travelling here."
+  },
 ];
 
-const STUBS: State[] = [
-  // Remaining 20 states
-  { name: "Andhra Pradesh", capital: "Amaravati", region: "south" },
-  { name: "Arunachal Pradesh", capital: "Itanagar", region: "northeast" },
-  { name: "Chhattisgarh", capital: "Raipur", region: "central" },
-].map<State>((s) => ({
+const STUBS: State[] = ([] as { name: string; capital: string; region: string }[]).map<State>((s) => ({
   id: `st-${slugify(s.name)}`,
   slug: slugify(s.name),
   name: s.name,
@@ -525,7 +596,6 @@ const STUBS: State[] = [
 }));
 
 const UTS: State[] = [
-  { name: "Andaman and Nicobar Islands", capital: "Port Blair", region: "south" },
   { name: "Chandigarh", capital: "Chandigarh", region: "north" },
   { name: "Dadra and Nagar Haveli and Daman and Diu", capital: "Daman", region: "west" },
   { name: "Jammu and Kashmir", capital: "Srinagar / Jammu", region: "north" },
