@@ -1946,8 +1946,7 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
       { name: "Winter", months: "November \u2013 February", weather: "Very cold in the west; snow closes higher roads.", activities: ["Namdapha birding", "Lower-valley travel"] },
       { name: "Spring", months: "March \u2013 May", weather: "Clear skies, rhododendron bloom in the high valleys.", activities: ["Tawang", "Sela Pass", "Trekking"], recommended: true },
       { name: "Monsoon", months: "June \u2013 September", weather: "Heavy rain and frequent landslides.", activities: ["Ziro Festival", "Green valley photography"] },
-      { name: "Autumn", months: "October \u2013 November", weather: "Crisp and dry with the best mountain views.", activities: ["Tawang circuit", "Village festivals"], recommended: true },
-    ],
+          ],
     travel: {
       airports: [
         { name: "Donyi Polo Airport, Hollongi (Itanagar)", code: "HGI", mapsQuery: "Donyi Polo Airport Hollongi" },
@@ -2014,8 +2013,7 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
       { name: "Winter", months: "November \u2013 February", weather: "Cool, dry and comfortable across the state.", activities: ["Caves", "Wildlife", "Bastar travel"], recommended: true },
       { name: "Summer", months: "March \u2013 June", weather: "Hot, often above 42\u00b0C on the plains.", activities: ["Mainpat plateau", "Early-morning safaris"] },
       { name: "Monsoon", months: "July \u2013 September", weather: "Heavy rain; waterfalls at full volume.", activities: ["Chitrakote in flood", "Hareli festival"] },
-      { name: "Autumn", months: "October", weather: "Rain eases, forests still green.", activities: ["Bastar Dussehra", "Photography"], recommended: true },
-    ],
+          ],
     travel: {
       airports: [
         { name: "Swami Vivekananda Airport, Raipur", code: "RPR", mapsQuery: "Swami Vivekananda Airport Raipur" },

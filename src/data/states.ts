@@ -577,9 +577,7 @@ const SHOWCASE: State[] = [
   },
 ];
 
-const STUBS: State[] = [
-  // Remaining 20 states
-].map<State>((s) => ({
+const STUBS: State[] = ([] as { name: string; capital: string; region: string }[]).map<State>((s) => ({
   id: `st-${slugify(s.name)}`,
   slug: slugify(s.name),
   name: s.name,
