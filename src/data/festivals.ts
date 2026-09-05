@@ -356,4 +356,37 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-an-durga-puja", slug: "andaman-durga-puja", name: "Durga Puja", stateSlug: "andaman-and-nicobar-islands", month: "October", type: "Religious", image: "",
     description: "The islands' large Bengali settler community fills Port Blair with pandals for five days each autumn.",
     significance: "Community pujas at Aberdeen Bazaar and Junglighat keep east-Bengal traditions alive a thousand kilometres out to sea." },
+  // Jammu and Kashmir
+  { id: "fest-jk-tulip", slug: "srinagar-tulip-festival", name: "Srinagar Tulip Festival", stateSlug: "jammu-and-kashmir", month: "April", type: "Cultural", image: "", featured: true,
+    description: "Asia's largest tulip garden opens to the public each spring on the slopes of the Zabarwan hills above Dal Lake.",
+    significance: "Over 1.5 million tulips in dozens of varieties bloom against a snow-peak backdrop, with Kashmiri craft stalls and music through the fortnight." },
+  { id: "fest-jk-eid-hazratbal", slug: "hazratbal-eid", name: "Eid at Hazratbal", stateSlug: "jammu-and-kashmir", month: "March – April", type: "Religious", image: "",
+    description: "The white marble Hazratbal shrine on Dal Lake draws vast congregations for Eid prayers and the display of the holy relic.",
+    significance: "The shrine holds a relic of the Prophet Muhammad; the Friday following Eid sees the valley's largest gathering, with shikaras ferrying worshippers across the lake." },
+  { id: "fest-jk-bahu-mela", slug: "bahu-fort-mela", name: "Bahu Fort Mela", stateSlug: "jammu-and-kashmir", month: "September – October", type: "Religious", image: "",
+    description: "A twice-yearly fair at the Bahu Fort temple of Kali in Jammu, held during the Navratras.",
+    significance: "Dogra families climb the fort for darshan of Bawe Wali Mata, and the terraced Bagh-e-Bahu below fills with food stalls and folk performances." },
+
+  // Ladakh
+  { id: "fest-la-hemis", slug: "hemis-festival", name: "Hemis Festival", stateSlug: "ladakh", month: "June – July", type: "Religious", image: "", featured: true,
+    description: "Ladakh's largest monastery festival, held at Hemis gompa for the birth anniversary of Guru Padmasambhava.",
+    significance: "Monks perform masked cham dances in brocade robes to drums and long horns, and a giant silk thangka is unfurled in the courtyard once every twelve years." },
+  { id: "fest-la-losar", slug: "ladakhi-losar", name: "Ladakhi Losar", stateSlug: "ladakh", month: "December", type: "Religious", image: "",
+    description: "The Ladakhi new year, kept two months ahead of the Tibetan Losar, with nine days of rituals and feasting.",
+    significance: "Families offer ibex figurines of dough, light lamps for ancestors and stage processions with fire torches to drive out the old year's ill fortune." },
+  { id: "fest-la-sindhu-darshan", slug: "sindhu-darshan", name: "Sindhu Darshan", stateSlug: "ladakh", month: "June", type: "Cultural", image: "",
+    description: "A three-day festival on the banks of the Indus near Leh celebrating the river and cultural unity.",
+    significance: "Water from rivers across India is poured into the Indus in a ceremony drawing pilgrims, artists and folk troupes from many states." },
+
+  // Lakshadweep
+  { id: "fest-ld-eid", slug: "lakshadweep-eid", name: "Eid al-Fitr", stateSlug: "lakshadweep", month: "March – April", type: "Religious", image: "", featured: true,
+    description: "The end of Ramadan is the islands' biggest celebration, with mosque prayers, new clothes and open-house feasting.",
+    significance: "Every island holds communal prayers at dawn, followed by visits between households and plates of bondi and tuna dishes shared with neighbours of all communities." },
+  { id: "fest-ld-ratheeb", slug: "ratheeb-festival", name: "Ratheeb at Andrott", stateSlug: "lakshadweep", month: "Rabi al-Awwal", type: "Religious", image: "",
+    description: "Devotional duff-drum recitals honouring Saint Ubaidullah, who brought Islam to the islands, at his Andrott shrine.",
+    significance: "Groups circle with hand drums through the night chanting ratheeb verses — the oldest living performance tradition of Lakshadweep." },
+  { id: "fest-ld-minicoy", slug: "minicoy-festival", name: "Minicoy Island Festival", stateSlug: "lakshadweep", month: "December", type: "Cultural", image: "",
+    description: "A winter festival on the southernmost island with lava dances, boat races and Mahl-language song.",
+    significance: "The festival showcases Minicoy's distinct Maldivian-linked culture — jahadhoni boat racing, tuna-cooking contests and the rhythmic lava dance." },
+];
 ];

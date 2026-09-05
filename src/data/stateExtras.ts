@@ -2101,80 +2101,144 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
       { q: "What are the top attractions?", a: "Radhanagar Beach, the Cellular Jail, Ross Island, Shaheed Dweep and the Mahatma Gandhi Marine National Park." },
     ],
   },
-};
-
-// Default extras used for stub states / UTs so the page never feels empty.
-function genericExtras(stateSlug: string, capital: string): StateExtras {
-  return {
+  "jammu-and-kashmir": {
     cities: [
       {
-        slug: slugify(capital),
-        name: capital,
-        stateSlug,
-        shortDescription: `Capital city and the easiest base to start exploring.`,
-        attractionsCount: 3,
-        famousFoods: ["Regional thali", "Street snacks"],
-        majorFestivals: ["Local harvest festival"],
+        slug: "srinagar", name: "Srinagar", stateSlug: "jammu-and-kashmir",
+        shortDescription: "The lake city — houseboats, Mughal gardens and old-city shrines.",
+        overview: "Srinagar, the summer capital, spreads around Dal and Nigeen lakes beneath the Zabarwan hills. Cedar houseboats, shikara ferries and the floating vegetable market define the water; on land, the Mughal Gardens and the wooden mosques of the old city carry five centuries of history.",
+        thingsToDo: ["Stay a night on a Dal Lake houseboat", "Dawn shikara ride to the floating market", "Walk Shalimar and Nishat gardens", "Old-city shrine and craft quarter tour"],
+        attractionsCount: 6, famousFoods: ["Rogan Josh", "Kahwa", "Gushtaba"],
+        majorFestivals: ["Srinagar Tulip Festival", "Eid at Hazratbal"],
+        nearbyAttractionSlugs: ["gulmarg", "sonamarg", "pahalgam"],
+        coords: { lat: 34.0837, lng: 74.7973 },
+      },
+      {
+        slug: "jammu-city", name: "Jammu", stateSlug: "jammu-and-kashmir",
+        shortDescription: "The City of Temples and base for Vaishno Devi.",
+        overview: "Jammu, the winter capital on the Tawi, is the railhead of the north and the gateway to the Vaishno Devi shrine at Katra. The Raghunath Temple complex, Bahu Fort and the Mubarak Mandi palace quarter anchor the old city.",
+        thingsToDo: ["Darshan at Raghunath Temple", "Sunset from Bahu Fort", "Dogra art at Amar Mahal", "Day trip to Katra for Vaishno Devi"],
+        attractionsCount: 5, famousFoods: ["Rajma Chawal", "Kalari Kulcha", "Sund Panjeeri"],
+        majorFestivals: ["Bahu Fort Mela", "Lohri"],
+        nearbyAttractionSlugs: ["vaishno-devi", "srinagar"],
+        coords: { lat: 32.7266, lng: 74.857 },
       },
     ],
-    experiences: GENERIC_EXPERIENCES,
+    experiences: [
+      { label: "Houseboat Stay", icon: "🛶", blurb: "Sleep on a cedar houseboat on Dal Lake, with shikara rides at dawn." },
+      { label: "Gondola & Skiing", icon: "🎿", blurb: "Ride one of the world's highest cable cars and ski Apharwat powder at Gulmarg." },
+      { label: "Vaishno Devi Yatra", icon: "🛕", blurb: "Walk the 13 km pilgrim path to the cave shrine above Katra." },
+      { label: "Craft Shopping", icon: "🧣", blurb: "Pashmina, papier-mâché, walnut woodwork and saffron from the source." },
+    ],
     seasons: [
-      { name: "Winter", months: "November – February", weather: "Cool and pleasant.", activities: ["Sightseeing", "Cultural tours"], recommended: true },
-      { name: "Spring", months: "March – April", weather: "Mild and dry.", activities: ["Festivals", "Photography"] },
-      { name: "Summer", months: "May – June", weather: "Hot in most areas.", activities: ["Higher altitude getaways"] },
-      { name: "Monsoon", months: "July – September", weather: "Rainy; lush landscapes.", activities: ["Waterfalls", "Green countryside"] },
+      { name: "Spring", months: "March – May", weather: "Blossom season, 10–23°C; tulips bloom in April.", activities: ["Tulip garden", "Mughal gardens", "Shikara rides"], recommended: true },
+      { name: "Summer", months: "June – August", weather: "Mild in the valley (15–30°C); hot in Jammu.", activities: ["Gulmarg & Pahalgam meadows", "Amarnath yatra", "Trekking"] },
+      { name: "Monsoon", months: "July – September", weather: "Light rain in the valley; humid in Jammu.", activities: ["Apple orchards", "Saffron fields of Pampore"] },
+      { name: "Winter", months: "December – February", weather: "Snow in the valley, -5–10°C.", activities: ["Gulmarg skiing", "Frozen Dal Lake views", "Vaishno Devi without crowds"] },
     ],
     travel: {
-      airports: [{ name: `${capital} Airport`, mapsQuery: `${capital} Airport` }],
-      railwayStations: [{ name: `${capital} Railway Station`, mapsQuery: `${capital} Railway Station` }],
-      roads: "Connected to neighbouring states by national highways and state-run buses.",
-      localTransport: ["Auto-rickshaws", "App taxis", "Local buses"],
+      airports: [
+        { name: "Sheikh ul-Alam International Airport, Srinagar", code: "SXR", mapsQuery: "Srinagar Airport" },
+        { name: "Jammu Airport (Satwari)", code: "IXJ", mapsQuery: "Jammu Airport" },
+      ],
+      railwayStations: [
+        { name: "Srinagar (Nowgam) Railway Station", mapsQuery: "Srinagar Railway Station" },
+        { name: "Jammu Tawi Railway Station", mapsQuery: "Jammu Tawi Railway Station" },
+        { name: "Shri Mata Vaishno Devi Katra", mapsQuery: "Katra Railway Station" },
+      ],
+      roads: "NH-44 runs Jammu–Srinagar through the Banihal tunnel; taxis and shared cabs connect Gulmarg, Pahalgam and Sonamarg from Srinagar.",
+      localTransport: ["Shared cabs", "Private taxis", "Shikaras on the lakes", "Autorickshaws in Jammu"],
     },
-    neighbors: [],
-    gallerySeeds: [`${stateSlug}-1`, `${stateSlug}-2`, `${stateSlug}-3`, `${stateSlug}-4`, `${stateSlug}-5`, `${stateSlug}-6`],
+    neighbors: ["ladakh", "himachal-pradesh", "punjab"],
+    gallerySeeds: ["jk-dal", "jk-gulmarg", "jk-pahalgam", "jk-mughal", "jk-katra", "jk-saffron"],
     faqs: [
-      { q: "How many days should I spend here?", a: "Plan 4–6 days for a relaxed first visit to the headline attractions." },
-      { q: "Is it family-friendly?", a: "Yes — most heritage and cultural sites are suitable for all ages." },
-      { q: "What is the best month to visit?", a: "October to March is generally the most comfortable season." },
-      { q: "What are the must-try foods?", a: "Look out for the local thali and signature regional snacks." },
-      { q: "What are the top attractions?", a: "Capital-city monuments, regional temples and natural landscapes." },
+      { q: "Is it safe to travel to Kashmir?", a: "Tourist areas — Srinagar, Gulmarg, Pahalgam, Sonamarg and the Vaishno Devi route — receive millions of visitors a year and are heavily policed. Check current advisories, keep ID handy and follow local guidance." },
+      { q: "Do I need a permit to visit?", a: "No permit is needed for Indian or foreign tourists in the main valley and Jammu. Only certain border areas near the LoC require permissions." },
+      { q: "When is the tulip garden open?", a: "The Indira Gandhi Memorial Tulip Garden opens for roughly three to four weeks in late March–April, depending on bloom." },
+      { q: "How do I reach Vaishno Devi?", a: "Trains run to Katra; from there the 13 km track to the shrine can be walked, ridden by pony or palki, or partly covered by helicopter to Sanjichhat." },
     ],
-  };
-}
+  },
+  "ladakh": {
+    cities: [
+      {
+        slug: "leh", name: "Leh", stateSlug: "ladakh",
+        shortDescription: "Silk Road old town beneath a hilltop palace at 3,500 m.",
+        overview: "Leh, the capital of Ladakh, is a former Silk Road caravan town set at 3,500 m in the upper Indus valley. The nine-storey Leh Palace towers over lanes of flat-roofed houses; Shanti Stupa and Tsemo gompa crown the hills; and the main bazaar mixes trekking shops, apricot sellers and prayer-flag stalls.",
+        thingsToDo: ["Acclimatise for two days on arrival", "Sunset at Shanti Stupa", "Old town and Leh Palace walk", "Day trips to Thiksey and Hemis"],
+        attractionsCount: 6, famousFoods: ["Skyu", "Butter Tea", "Chhutagi"],
+        majorFestivals: ["Hemis Festival", "Ladakhi Losar"],
+        nearbyAttractionSlugs: ["thiksey-monastery", "nubra-valley", "pangong-lake"],
+        coords: { lat: 34.1526, lng: 77.577 },
+      },
+    ],
+    experiences: [
+      { label: "Monastery Circuit", icon: "🛕", blurb: "Thiksey, Hemis, Diskit and Stakna — gompas stacked on crags across the Indus valley." },
+      { label: "High Passes", icon: "🏔", blurb: "Cross Khardung La and Chang La, among the highest motorable roads on earth." },
+      { label: "Lake Camps", icon: "🏕", blurb: "Night beside Pangong Tso or Tso Moriri under the darkest skies in India." },
+      { label: "Trekking & Chadar", icon: "🥾", blurb: "Markha valley treks in summer; the frozen-river Chadar trek in January–February." },
+    ],
+    seasons: [
+      { name: "Summer", months: "May – September", weather: "Days 15–25°C, cold nights; all passes open.", activities: ["Pangong & Nubra trips", "Monastery festivals", "Trekking"], recommended: true },
+      { name: "Winter", months: "November – March", weather: "-20 to 5°C; roads over passes closed.", activities: ["Chadar frozen-river trek", "Snow leopard spotting", "Losar celebrations"] },
+    ],
+    travel: {
+      airports: [
+        { name: "Kushok Bakula Rimpochee Airport, Leh", code: "IXL", mapsQuery: "Leh Airport" },
+      ],
+      railwayStations: [],
+      roads: "No railway — Leh is reached by air or by road from Manali (474 km, open June–October) and Srinagar (434 km, open roughly May–November) over high passes.",
+      localTransport: ["Rented taxis with local drivers", "Shared cabs", "Rental motorcycles", "Hotel-arranged tours"],
+    },
+    neighbors: ["jammu-and-kashmir", "himachal-pradesh"],
+    gallerySeeds: ["la-pangong", "la-thiksey", "la-nubra", "la-leh", "la-khardung", "la-moriri"],
+    faqs: [
+      { q: "How do I avoid altitude sickness?", a: "Fly into Leh and rest 24–48 hours before any excursion, hydrate constantly, avoid alcohol for the first days, and ascend to Pangong and Khardung La only after acclimatising." },
+      { q: "Do I need permits?", a: "Indian tourists need an inner-line permit for Nubra, Pangong and Tso Moriri, arranged online or through Leh hotels. Foreign nationals need a Protected Area Permit via a registered agent." },
+      { q: "When are the roads open?", a: "The Manali–Leh and Srinagar–Leh highways open roughly May/June to October/November. Flights to Leh run year-round." },
+      { q: "Is Ladakh suitable for families?", a: "Yes with children over about eight, provided acclimatisation is taken seriously. Avoid very high overnight camps with toddlers or elderly travellers with heart conditions." },
+    ],
+  },
+  "lakshadweep": {
+    cities: [
+      {
+        slug: "kavaratti", name: "Kavaratti", stateSlug: "lakshadweep",
+        shortDescription: "The administrative capital — mosques, aquarium and a water-sports lagoon.",
+        overview: "Kavaratti is the most developed of the islands and the seat of the administration. Its 52 mosques include the carved Ujra mosque; a marine aquarium displays reef life; and the west lagoon runs kayak, windsurf and glass-bottom boat trips year-round.",
+        thingsToDo: ["Glass-bottom boat over the reef", "Visit the marine aquarium", "See Ujra Mosque's carved ceiling", "Windsurf the west lagoon"],
+        attractionsCount: 4, famousFoods: ["Tuna Curry", "Batla Appam", "Bondi"],
+        majorFestivals: ["Eid al-Fitr", "Minicoy Island Festival"],
+        nearbyAttractionSlugs: ["agatti", "kadmat", "kalpeni"],
+        coords: { lat: 10.5667, lng: 72.6358 },
+      },
+    ],
+    experiences: [
+      { label: "Snorkelling & Diving", icon: "🤿", blurb: "Some of the Indian Ocean's healthiest coral reefs, at Kadmat, Bangaram and Agatti." },
+      { label: "Lagoon Kayaking", icon: "🛶", blurb: "Glassy shallow lagoons on every island, calm enough for beginners." },
+      { label: "Island Hopping", icon: "⛵", blurb: "Boat between Agatti, Bangaram and the Thinnakara sandbank in a day." },
+      { label: "Village Culture", icon: "🥥", blurb: "Duff-drum ratheeb performances, tuna harbours and coconut-grove lanes." },
+    ],
+    seasons: [
+      { name: "Winter", months: "October – March", weather: "Dry, 25–32°C; calm seas and best visibility.", activities: ["Diving & snorkelling", "Island hopping", "Beach stays"], recommended: true },
+      { name: "Summer", months: "April – May", weather: "Hot and humid, up to 35°C.", activities: ["Water sports", "Fewer visitors"] },
+      { name: "Monsoon", months: "June – September", weather: "Heavy rain and rough seas; ships often cancelled.", activities: ["Most resorts closed — travel not advised"] },
+    ],
+    travel: {
+      airports: [
+        { name: "Agatti Airport", code: "AGX", mapsQuery: "Agatti Airport" },
+      ],
+      railwayStations: [],
+      roads: "No railways or road links — reach Agatti by flight from Kochi, or take a passenger ship (12–20 hours) from Kochi to Kavaratti, Kalpeni or Minicoy. Inter-island travel is by boat and helicopter.",
+      localTransport: ["Bicycles and walking on-island", "Boats between islands", "Resort transfers from Agatti"],
+    },
+    neighbors: ["kerala"],
+    gallerySeeds: ["ld-bangaram", "ld-agatti", "ld-lagoon", "ld-kadmat", "ld-minicoy", "ld-reef"],
+    faqs: [
+      { q: "Do I need a permit for Lakshadweep?", a: "Yes — everyone, including Indian citizens, needs an entry permit. Tour operators and resorts arrange it as part of a package; independent permits are possible through the Lakshadweep administration." },
+      { q: "Which islands can tourists visit?", a: "Agatti, Bangaram, Kadmat, Kavaratti, Kalpeni and Minicoy are open to tourists. Others are restricted to protect island communities." },
+      { q: "Is alcohol available?", a: "Alcohol is prohibited across the islands except at the Bangaram resort, which holds a special licence." },
+      { q: "How do I get there?", a: "Fly Kochi to Agatti (about 90 minutes) or sail by ship from Kochi. From Agatti, boats connect to Bangaram, Kavaratti and Kadmat." },
+    ],
+  },
+};
 
-function slugify(s: string) {
-  return s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-}
-
-export function getStateExtras(stateSlug: string, capital: string): StateExtras {
-  return STATE_EXTRAS[stateSlug] ?? genericExtras(stateSlug, capital);
-}
-
-export function getCityBySlug(slug: string): CityInfo | undefined {
-  for (const extras of Object.values(STATE_EXTRAS)) {
-    const found = extras.cities.find((c) => c.slug === slug);
-    if (found) return found;
-  }
-  return undefined;
-}
-
-export function getAllCities(): CityInfo[] {
-  return Object.values(STATE_EXTRAS).flatMap((e) => e.cities);
-}
-
-export function getCityTravel(city: CityInfo): TravelInfo {
-  if (city.travel) return city.travel;
-  const stateExtras = STATE_EXTRAS[city.stateSlug];
-  if (stateExtras) return stateExtras.travel;
-  return {
-    airports: [{ name: `${city.name} Airport`, mapsQuery: `${city.name} Airport` }],
-    railwayStations: [{ name: `${city.name} Railway Station`, mapsQuery: `${city.name} Railway Station` }],
-    roads: "Connected by national highways and state-run buses.",
-    localTransport: ["Auto-rickshaws", "App taxis", "Local buses"],
-  };
-}
-
-export function getCityGallerySeeds(city: CityInfo): string[] {
-  if (city.gallerySeeds?.length) return city.gallerySeeds;
-  return Array.from({ length: 6 }, (_, i) => `${city.slug}-${i + 1}`);
-}
+};
