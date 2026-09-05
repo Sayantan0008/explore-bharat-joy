@@ -598,9 +598,6 @@ const STUBS: State[] = ([] as { name: string; capital: string; region: string }[
 const UTS: State[] = [
   { name: "Chandigarh", capital: "Chandigarh", region: "north" },
   { name: "Dadra and Nagar Haveli and Daman and Diu", capital: "Daman", region: "west" },
-  { name: "Jammu and Kashmir", capital: "Srinagar / Jammu", region: "north" },
-  { name: "Ladakh", capital: "Leh", region: "north" },
-  { name: "Lakshadweep", capital: "Kavaratti", region: "south" },
   { name: "Puducherry", capital: "Puducherry", region: "south" },
 ].map<State>((s) => ({
   id: `ut-${slugify(s.name)}`,
