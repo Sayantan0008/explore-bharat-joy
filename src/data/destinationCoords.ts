@@ -216,6 +216,27 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "port-blair": { lng: 92.7265, lat: 11.6234 },
   "ross-island": { lng: 92.7620, lat: 11.6750 },
   "mahatma-gandhi-marine-national-park": { lng: 92.6170, lat: 11.5670 },
+  // Jammu and Kashmir
+  "srinagar": { lng: 74.7973, lat: 34.0837 },
+  "gulmarg": { lng: 74.3805, lat: 34.0484 },
+  "pahalgam": { lng: 75.3208, lat: 34.0161 },
+  "vaishno-devi": { lng: 74.9360, lat: 33.0300 },
+  "sonamarg": { lng: 75.2937, lat: 34.3032 },
+  "jammu-city": { lng: 74.8570, lat: 32.7266 },
+  // Ladakh
+  "leh": { lng: 77.5770, lat: 34.1526 },
+  "pangong-lake": { lng: 78.9000, lat: 33.7590 },
+  "nubra-valley": { lng: 77.6000, lat: 34.6500 },
+  "thiksey-monastery": { lng: 77.6667, lat: 34.0667 },
+  "khardung-la": { lng: 77.6047, lat: 34.2788 },
+  "tso-moriri": { lng: 78.3167, lat: 32.9000 },
+  // Lakshadweep
+  "agatti": { lng: 72.1756, lat: 10.5672 },
+  "bangaram": { lng: 72.2900, lat: 10.9400 },
+  "kavaratti": { lng: 72.6358, lat: 10.5667 },
+  "kadmat": { lng: 72.7760, lat: 11.2300 },
+  "minicoy": { lng: 73.0500, lat: 8.2800 },
+  "kalpeni": { lng: 73.6400, lat: 10.0700 },
 };
 
 // State-capital fallback coords used when a state has no destinations yet.

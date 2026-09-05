@@ -365,4 +365,40 @@ export const FOODS: Food[] = [
     description: "Mud crab tossed in a hot, garlicky tomato-chilli masala, best eaten with hands at Aberdeen Bazaar." },
   { id: "f-an-coconut-prawn-sweet", slug: "coconut-barfi", name: "Coconut Barfi", stateSlug: "andaman-and-nicobar-islands", category: "Sweet", image: "", vegetarian: true,
     description: "Fresh island coconut cooked down with milk and sugar into a soft, fragrant fudge sold at Port Blair sweet shops." },
+
+  // Jammu and Kashmir
+  { id: "f-jk-rogan-josh", slug: "kashmiri-rogan-josh", name: "Rogan Josh", stateSlug: "jammu-and-kashmir", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Slow-braised lamb in a deep-red gravy of Kashmiri chillies, fennel and dry ginger — the signature dish of the wazwan feast." },
+  { id: "f-jk-yakhni", slug: "yakhni", name: "Yakhni", stateSlug: "jammu-and-kashmir", category: "Main", image: "", vegetarian: false,
+    description: "Lamb simmered in a mild yogurt gravy perfumed with cardamom, fennel and mint, served over rice." },
+  { id: "f-jk-dum-aloo", slug: "kashmiri-dum-aloo", name: "Kashmiri Dum Aloo", stateSlug: "jammu-and-kashmir", category: "Main", image: "", vegetarian: true,
+    description: "Baby potatoes fried, then slow-cooked in a yogurt-and-chilli gravy — the Pandit kitchen classic made without onion or garlic." },
+  { id: "f-jk-kahwa", slug: "kahwa", name: "Kahwa", stateSlug: "jammu-and-kashmir", category: "Drink", image: "", vegetarian: true,
+    description: "Green tea brewed with saffron, cinnamon and almonds, poured from a samovar — Kashmir's everyday warmer." },
+  { id: "f-jk-gushtaba", slug: "gushtaba", name: "Gushtaba", stateSlug: "jammu-and-kashmir", category: "Main", image: "", vegetarian: false,
+    description: "Hand-pounded mutton meatballs in a velvety yogurt gravy — the closing dish of a traditional wazwan, reserved for honoured guests." },
+
+  // Ladakh
+  { id: "f-la-skyu", slug: "skyu", name: "Skyu", stateSlug: "ladakh", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Hand-pinched wheat dough thumbprints stewed with root vegetables and greens — Ladakh's everyday cold-weather comfort food." },
+  { id: "f-la-thukpa", slug: "ladakhi-thukpa", name: "Ladakhi Thukpa", stateSlug: "ladakh", category: "Main", image: "", vegetarian: false,
+    description: "A hearty noodle soup with hand-pulled noodles, vegetables and mutton, eaten nightly through the long winter." },
+  { id: "f-la-butter-tea", slug: "butter-tea", name: "Butter Tea (Gur Gur Chai)", stateSlug: "ladakh", category: "Drink", image: "", vegetarian: true,
+    description: "Salt tea churned with yak butter in a wooden churn — an acquired taste that keeps the plateau warm." },
+  { id: "f-la-tingmo", slug: "tingmo", name: "Tingmo", stateSlug: "ladakh", category: "Snack", image: "", vegetarian: true,
+    description: "Soft steamed bread twisted into coils, served with vegetable stew or apricot-oil dips." },
+  { id: "f-la-chhutagi", slug: "chhutagi", name: "Chhutagi", stateSlug: "ladakh", category: "Main", image: "", vegetarian: true,
+    description: "Bow-tie shaped pasta cooked in a rich vegetable or meat broth — a festival dish of the Leh region." },
+
+  // Lakshadweep
+  { id: "f-ld-tuna-curry", slug: "lakshadweep-tuna-curry", name: "Tuna Curry", stateSlug: "lakshadweep", category: "Main", image: "", vegetarian: false, featured: true,
+    description: "Skipjack tuna simmered in coconut milk with curry leaf and island chillies — the daily dish of every Lakshadweep kitchen." },
+  { id: "f-ld-mas-huni", slug: "mas-breakfast", name: "Tuna-Coconut Mas", stateSlug: "lakshadweep", category: "Main", image: "", vegetarian: false,
+    description: "Smoked tuna flaked with grated coconut, onion and chilli, eaten with rice or roshi flatbread for breakfast." },
+  { id: "f-ld-octopus-fry", slug: "octopus-fry", name: "Octopus Fry", stateSlug: "lakshadweep", category: "Main", image: "", vegetarian: false,
+    description: "Tenderised octopus fried crisp with turmeric, curry leaves and black pepper — a speciality of Minicoy." },
+  { id: "f-ld-batla-appam", slug: "batla-appam", name: "Batla Appam", stateSlug: "lakshadweep", category: "Snack", image: "", vegetarian: true,
+    description: "Sweet fermented rice-and-coconut pancakes cooked in small moulds, served at tea time and on feast days." },
+  { id: "f-ld-bondi", slug: "bondi", name: "Bondi", stateSlug: "lakshadweep", category: "Sweet", image: "", vegetarian: true,
+    description: "Tiny crisp gram-flour pearls soaked in sugar syrup and scented with cardamom — the islands' festive sweet." },
 ];
