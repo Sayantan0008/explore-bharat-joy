@@ -575,6 +575,63 @@ const SHOWCASE: State[] = [
     culture:
       "Island life mixes settler communities \u2014 Bengali, Tamil, Telugu, Ranchi Adivasi and Burmese descendants \u2014 with six indigenous peoples, including the Great Andamanese, Onge, Jarawa and the uncontacted Sentinelese, whose territories are legally protected and closed to visitors. The result is a seafood-and-coconut kitchen, a relaxed Hindi-Bengali lingua franca, and a calendar that runs on Subhash Mela, the Island Tourism Festival and the monsoon lull. Respecting tribal reserve boundaries and the coral-reef rules is part of travelling here."
   },
+  {
+    id: "ut-jammu-and-kashmir",
+    slug: "jammu-and-kashmir",
+    name: "Jammu and Kashmir",
+    capital: "Srinagar / Jammu",
+    language: "Kashmiri, Dogri, Urdu, Hindi",
+    population: "12.3 million",
+    area: "42,241 km²",
+    bestTimeToVisit: "March – October",
+    heroImage: "",
+    region: "north",
+    isUT: true,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Jammu and Kashmir sits between the Pir Panjal and the Greater Himalaya, holding some of the most storied landscapes in Asia. Srinagar's Dal Lake carries cedar houseboats and shikaras past floating gardens; Gulmarg and Pahalgam are meadows ringed by snow; and Sonamarg is the gateway to the high glacier passes. South of the mountains, Jammu is the winter capital and the base for the Vaishno Devi shrine, one of the most-visited pilgrimages in the world. Kashmir's craft traditions — pashmina weaving, papier-mâché, walnut woodwork and saffron farming in Pampore — are as much a reason to visit as the scenery.",
+    culture:
+      "Kashmiri culture blends Sufi, Hindu Pandit and Central Asian influences into a distinct identity. The wazwan, a ceremonial multi-course meat feast, is the high point of Kashmiri hospitality; kahwa saffron tea is poured everywhere from houseboats to highway dhabas. Dogra Jammu has its own temple architecture and folk ballads, while the Kashmir valley keeps the shrines of Hazratbal and Shankaracharya, Sufi music, and hand-knotted carpets that take years to finish.",
+  },
+  {
+    id: "ut-ladakh",
+    slug: "ladakh",
+    name: "Ladakh",
+    capital: "Leh",
+    language: "Ladakhi, Tibetan, Hindi, English",
+    population: "0.3 million",
+    area: "59,146 km²",
+    bestTimeToVisit: "May – September",
+    heroImage: "",
+    region: "north",
+    isUT: true,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Ladakh is a high-altitude desert wedged between the Karakoram and the Great Himalaya — a land of ochre gorges, whitewashed gompas and lakes that shift colour through the day. Leh, the capital, is an old Silk Road town of flat-roofed houses beneath a hilltop palace. Beyond it lie Pangong Tso's impossible blues, the sand dunes and double-humped camels of Nubra Valley, and monasteries at Thiksey, Hemis and Diskit that look airlifted from Tibet. Roads cross some of the highest motorable passes on earth, including Khardung La; in winter the frozen Zanskar river becomes the Chadar trek.",
+    culture:
+      "Ladakhi culture is Tibetan Buddhist in character — prayer wheels at every gate, masked cham dances at the Hemis and Dosmoche festivals, and a calendar of monastery rituals that village life still turns around. Skyu and thukpa are the cold-weather staples, butter tea and apricot oil are everyday tastes, and the Changpa nomads of Changthang still move with their pashmina goats. Homestays in the Sham valley offer an unhurried window into it all.",
+  },
+  {
+    id: "ut-lakshadweep",
+    slug: "lakshadweep",
+    name: "Lakshadweep",
+    capital: "Kavaratti",
+    language: "Malayalam, Mahl (Dhivehi)",
+    population: "0.07 million",
+    area: "32 km²",
+    bestTimeToVisit: "October – May",
+    heroImage: "",
+    region: "south",
+    isUT: true,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Lakshadweep — 'a hundred thousand islands' — is a chain of 36 coral atolls, reefs and lagoons 200–400 km off the Kerala coast, of which only ten are inhabited. Agatti holds the airstrip; Bangaram is the classic uninhabited-island resort; Kadmat, Kalpeni and Kavaratti offer lagoons for kayaking, snorkelling and glass-bottom boats; and Minicoy, at the far south, speaks the Dhivehi-related Mahl language and keeps its own lighthouse and tuna-fishing traditions. Visitors need a permit, which keeps the islands uncrowded and the reefs among the healthiest in the Indian Ocean.",
+    culture:
+      "Island culture is shaped by the sea and by Islam, which arrived here in the 7th century — ratheeb duff-drum performances, oppana wedding dances and boat-race festivals mark the calendar. The kitchen runs on tuna, coconut and rice: mas breakfasts, tuna curries and sweet bondi. Almost everything is done by boat and on island time, and the coral-reef protection rules are taken seriously.",
+  },
 ];
 
 const STUBS: State[] = ([] as { name: string; capital: string; region: string }[]).map<State>((s) => ({
