@@ -1328,7 +1328,7 @@ export const DESTINATIONS: Destination[] = [
     nearbySlugs: ["amritsar", "golden-temple"],
   },
   {
-    id: "d-chandigarh-city", slug: "chandigarh-city", name: "Chandigarh", stateSlug: "punjab",
+    id: "d-chandigarh-city", slug: "chandigarh-city", name: "Chandigarh", stateSlug: "chandigarh",
     category: "City", interests: ["heritage", "food"],
     image: "", gallery: [],
     description:
