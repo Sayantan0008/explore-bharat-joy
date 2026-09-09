@@ -144,6 +144,12 @@ export const DESTINATION_COORDS: Record<string, { lng: number; lat: number }> = 
   "golden-temple": { lng: 74.8765, lat: 31.6200 },
   "wagah-border": { lng: 74.5729, lat: 31.6047 },
   "chandigarh-city": { lng: 76.7794, lat: 30.7333 },
+  // Chandigarh (UT)
+  "rock-garden": { lng: 76.8073, lat: 30.7526 },
+  "sukhna-lake": { lng: 76.8188, lat: 30.7421 },
+  "capitol-complex": { lng: 76.8030, lat: 30.7580 },
+  "rose-garden": { lng: 76.7824, lat: 30.7462 },
+  "government-museum-art-gallery": { lng: 76.7868, lat: 30.7489 },
   "patiala": { lng: 76.3869, lat: 30.3398 },
   "anandpur-sahib": { lng: 76.5025, lat: 31.2390 },
   // Jharkhand

@@ -632,6 +632,25 @@ const SHOWCASE: State[] = [
     culture:
       "Island culture is shaped by the sea and by Islam, which arrived here in the 7th century — ratheeb duff-drum performances, oppana wedding dances and boat-race festivals mark the calendar. The kitchen runs on tuna, coconut and rice: mas breakfasts, tuna curries and sweet bondi. Almost everything is done by boat and on island time, and the coral-reef protection rules are taken seriously.",
   },
+  {
+    id: "ut-chandigarh",
+    slug: "chandigarh",
+    name: "Chandigarh",
+    capital: "Chandigarh",
+    language: "Punjabi, Hindi, English",
+    population: "1.2 million",
+    area: "114 km²",
+    bestTimeToVisit: "September – March",
+    heroImage: "",
+    region: "north",
+    isUT: true,
+    status: "showcase",
+    stats: { attractions: 6, foods: 5, festivals: 3 },
+    overview:
+      "Chandigarh is India's first planned city and a union territory that serves as the shared capital of Punjab and Haryana. Designed in the 1950s by Le Corbusier, it is laid out as a grid of self-contained sectors threaded with green belts, and its Capitol Complex — the Secretariat, High Court and Open Hand Monument — is a UNESCO World Heritage Site. Beyond the modernist concrete, the city holds Nek Chand's extraordinary Rock Garden, built secretly from industrial waste over eighteen years, the still waters of Sukhna Lake against the Shivalik hills, and the Zakir Hussain Rose Garden, Asia's largest. Clean, ordered and prosperous, it is the gateway city for Himachal's hills.",
+    culture:
+      "Chandigarh's culture is cosmopolitan Punjabi — loud hospitality, big weddings and a serious appetite for food, from Sector 8 fine dining to roadside chole bhature. The city has a strong arts scene anchored by the Government Museum's Gandhara sculptures, the Chandigarh Architecture Museum and open-air theatre in the Leisure Valley. Baisakhi, the Rose Festival and the Chandigarh Carnival fill the calendar, and weekends revolve around Sukhna Lake's promenade and the Sector 17 plaza.",
+  },
 ];
 
 const STUBS: State[] = ([] as { name: string; capital: string; region: string }[]).map<State>((s) => ({
@@ -653,7 +672,6 @@ const STUBS: State[] = ([] as { name: string; capital: string; region: string }[
 }));
 
 const UTS: State[] = [
-  { name: "Chandigarh", capital: "Chandigarh", region: "north" },
   { name: "Dadra and Nagar Haveli and Daman and Diu", capital: "Daman", region: "west" },
   { name: "Puducherry", capital: "Puducherry", region: "south" },
 ].map<State>((s) => ({

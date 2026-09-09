@@ -401,4 +401,16 @@ export const FOODS: Food[] = [
     description: "Sweet fermented rice-and-coconut pancakes cooked in small moulds, served at tea time and on feast days." },
   { id: "f-ld-bondi", slug: "bondi", name: "Bondi", stateSlug: "lakshadweep", category: "Sweet", image: "", vegetarian: true,
     description: "Tiny crisp gram-flour pearls soaked in sugar syrup and scented with cardamom — the islands' festive sweet." },
+
+  // Chandigarh
+  { id: "f-ch-chole-bhature", slug: "chole-bhature", name: "Chole Bhature", stateSlug: "chandigarh", category: "Main", image: "", vegetarian: true, featured: true,
+    description: "Spiced chickpea curry with huge puffed fried bhature, pickled onions and green chilli — the city's beloved Sunday breakfast." },
+  { id: "f-ch-butter-chicken", slug: "butter-chicken", name: "Butter Chicken", stateSlug: "chandigarh", category: "Main", image: "", vegetarian: false,
+    description: "Tandoori chicken folded into a silky tomato-butter-cream gravy, scooped up with naan — the dish that put Punjabi dhaba cooking on the world map." },
+  { id: "f-ch-sarson-saag", slug: "sarson-da-saag", name: "Sarson da Saag & Makki di Roti", stateSlug: "chandigarh", category: "Main", image: "", vegetarian: true,
+    description: "Slow-cooked mustard greens tempered with ghee, served with cornmeal rotis, white butter and jaggery — the winter staple." },
+  { id: "f-ch-lassi", slug: "punjabi-lassi", name: "Punjabi Lassi", stateSlug: "chandigarh", category: "Drink", image: "", vegetarian: true,
+    description: "Thick churned yogurt, sweet or salted, served in a tall glass with a slab of malai cream on top." },
+  { id: "f-ch-kulfi-falooda", slug: "kulfi-falooda", name: "Kulfi Falooda", stateSlug: "chandigarh", category: "Sweet", image: "", vegetarian: true,
+    description: "Dense slow-reduced kulfi over vermicelli falooda noodles with rose syrup and basil seeds — the classic Sector 17 dessert." },
 ];
