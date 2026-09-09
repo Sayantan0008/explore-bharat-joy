@@ -2240,5 +2240,3 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
     ],
   },
 };
-
-};
