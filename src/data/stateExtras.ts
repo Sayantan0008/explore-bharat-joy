@@ -2241,6 +2241,41 @@ const STATE_EXTRAS: Record<string, StateExtras> = {
   },
 };
 
+function genericExtras(stateSlug: string, capital?: string): StateExtras {
+  const cityName = capital ?? "the capital";
+  return {
+    cities: capital
+      ? [{
+          slug: stateSlug,
+          name: capital,
+          stateSlug,
+          shortDescription: `${capital} — the main city and gateway to the region.`,
+          attractionsCount: 3,
+          famousFoods: [],
+          majorFestivals: [],
+        }]
+      : [],
+    experiences: GENERIC_EXPERIENCES,
+    seasons: [
+      { name: "Winter", months: "October – March", weather: "Cool and dry; the most comfortable travel window.", activities: ["Sightseeing", "City walks", "Food trails"], recommended: true },
+      { name: "Summer", months: "April – June", weather: "Warm to hot; travel early in the day.", activities: ["Hill escapes", "Morning sightseeing"] },
+      { name: "Monsoon", months: "July – September", weather: "Rainy and humid; lush landscapes.", activities: ["Waterfalls", "Greenery drives"] },
+    ],
+    travel: {
+      airports: [{ name: `${cityName} Airport`, mapsQuery: `${cityName} Airport` }],
+      railwayStations: [{ name: `${cityName} Railway Station`, mapsQuery: `${cityName} Railway Station` }],
+      roads: "Connected by national highways and state-run bus services.",
+      localTransport: ["Auto-rickshaws", "App taxis", "Local buses"],
+    },
+    neighbors: [],
+    gallerySeeds: Array.from({ length: 6 }, (_, i) => `${stateSlug}-${i + 1}`),
+    faqs: [
+      { q: "What is the best time to visit?", a: "The winter months from October to March are the most comfortable for travel across most of the region." },
+      { q: "How do I get around?", a: `${cityName} is the main hub, with auto-rickshaws, app taxis and local buses for getting around.` },
+    ],
+  };
+}
+
 export function getStateExtras(stateSlug: string, capital?: string): StateExtras {
   return STATE_EXTRAS[stateSlug] ?? genericExtras(stateSlug, capital);
 }
