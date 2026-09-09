@@ -388,4 +388,15 @@ export const FESTIVALS: Festival[] = [
   { id: "fest-ld-minicoy", slug: "minicoy-festival", name: "Minicoy Island Festival", stateSlug: "lakshadweep", month: "December", type: "Cultural", image: "",
     description: "A winter festival on the southernmost island with lava dances, boat races and Mahl-language song.",
     significance: "The festival showcases Minicoy's distinct Maldivian-linked culture — jahadhoni boat racing, tuna-cooking contests and the rhythmic lava dance." },
+
+  // Chandigarh
+  { id: "fest-ch-rose", slug: "rose-festival", name: "Rose Festival", stateSlug: "chandigarh", month: "February", type: "Cultural", image: "", featured: true,
+    description: "Three days each February when the Zakir Hussain Rose Garden fills with flower shows, music and food stalls amid 1,600 blooming rose varieties.",
+    significance: "Chandigarh's signature civic festival since the 1960s, it draws lakhs of visitors and crowns the city's own Rose Prince and Princess." },
+  { id: "fest-ch-carnival", slug: "chandigarh-carnival", name: "Chandigarh Carnival", stateSlug: "chandigarh", month: "November", type: "Cultural", image: "",
+    description: "A weekend carnival at the Leisure Valley with floats, street theatre, craft bazaars and performances by school and folk troupes.",
+    significance: "Held since the 1990s, the carnival is the city's showcase of neighbourhood talent and kicks off the winter cultural season." },
+  { id: "fest-ch-baisakhi", slug: "chandigarh-baisakhi", name: "Baisakhi", stateSlug: "chandigarh", month: "April", type: "Religious", image: "",
+    description: "The Punjabi harvest festival and founding day of the Khalsa, marked with gurdwara prayers, bhangra and giddha across the sectors.",
+    significance: "As joint capital of Punjab, Chandigarh celebrates Baisakhi at full tilt — nagar kirtan processions, langar at gurdwaras and evening melas." },
 ];
