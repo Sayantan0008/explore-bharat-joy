@@ -389,4 +389,3 @@ export const FESTIVALS: Festival[] = [
     description: "A winter festival on the southernmost island with lava dances, boat races and Mahl-language song.",
     significance: "The festival showcases Minicoy's distinct Maldivian-linked culture — jahadhoni boat racing, tuna-cooking contests and the rhythmic lava dance." },
 ];
-];
